@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>João Cenerelli | Técnico de Informática</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192x192.png" />
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <link rel="preload" href="fonts/BricolageGrotesque-Variable.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href="css/style.css?v=20261102-33" />
+  </head>
+  <body class="na-tela-boas-vindas">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="icone-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9" /></symbol>
+      <symbol id="icone-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" /></symbol>
+      <symbol id="icone-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" /></symbol>
+      <symbol id="icone-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" />
+      </symbol>
+      <symbol id="icone-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" /></symbol>
+      <symbol id="icone-google" viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" /></symbol>
+      <symbol id="icone-google-drive" viewBox="0 0 87.3 78">
+        <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da" />
+        <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0-1.2 4.5h27.5z" fill="#00ac47" />
+        <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.5l5.85 11.5z" fill="#ea4335" />
+        <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d" />
+        <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc" />
+        <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00" />
+      </symbol>
+      <symbol id="icone-caneta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19l7-7 3 3-7 7z" />
+        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z" />
+        <path d="M2 2l7.6 7.6" />
+        <circle cx="11" cy="11" r="2" />
+      </symbol>
+      <symbol id="icone-diagrama" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="2" width="6" height="5" rx="1" />
+        <rect x="2" y="17" width="6" height="5" rx="1" />
+        <rect x="16" y="17" width="6" height="5" rx="1" />
+        <path d="M12 7v4M5 17v-6h14v6" />
+      </symbol>
+      <symbol id="icone-idiomas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12M9 3v2M5 5c1 5 4 8 8 10M13 5c-1 5-4 8-8 10M13 21l4-10 4 10M14.5 17h5" /></symbol>
+      <symbol id="icone-documento" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <path d="M14 2v6h6M8 13h8M8 17h8M8 9h2" />
+      </symbol>
+      <symbol id="icone-javascript" viewBox="0 0 24 24">
+        <rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="1.6" />
+        <text x="12" y="17.5" text-anchor="middle" font-size="10.5" font-weight="800" font-family="Bricolage Grotesque,sans-serif" fill="currentColor">JS</text>
+      </symbol>
+      <symbol id="icone-banco-dados" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="5" rx="8" ry="3" />
+        <path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+      </symbol>
+      <symbol id="icone-nuvem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19a5 5 0 1 1 1-9.9A6 6 0 0 1 19.5 11 4 4 0 0 1 18 19z" /></symbol>
+      <symbol id="icone-globo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" />
+      </symbol>
+      <symbol id="icone-codigo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </symbol>
+      <symbol id="icone-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 17 10 11 4 5" />
+        <line x1="12" y1="19" x2="20" y2="19" />
+      </symbol>
+      <symbol id="icone-processador" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="2" />
+        <rect x="9" y="9" width="6" height="6" />
+        <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" />
+      </symbol>
+      <symbol id="icone-chaves" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1" /></symbol>
+      <symbol id="icone-notebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="12" rx="2" />
+        <path d="M2 20h20" />
+      </symbol>
+      <symbol id="icone-pasta-trabalho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" />
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+      </symbol>
+      <symbol id="icone-controle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 12h4M8 10v4" />
+        <path d="M15 13h.01M18 11h.01" />
+        <path d="M17.3 5H6.7a4 4 0 0 0-3.9 3.1L1.2 15.5a2.5 2.5 0 0 0 4.3 2.2L7 15h10l1.5 2.7a2.5 2.5 0 0 0 4.3-2.2l-1.6-7.4A4 4 0 0 0 17.3 5z" />
+      </symbol>
+      <symbol id="icone-microfone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8" />
+      </symbol>
+      <symbol id="icone-paleta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="13.5" cy="6.5" r=".6" />
+        <circle cx="17.5" cy="10.5" r=".6" />
+        <circle cx="8.5" cy="7.5" r=".6" />
+        <circle cx="6.5" cy="12.5" r=".6" />
+        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.7-1.6 1.6-1.6H16c3 0 5.5-2.5 5.5-5.5C21.5 6 17.4 2 12 2z" />
+      </symbol>
+    </svg>
+    <div id="boas-vindas" class="boas-vindas">
+      <div class="fundo-boas-vindas" aria-hidden="true">
+        <span class="bloco-flutuante sobre-fundo-escuro" style="--x:8%;--y:16%;--s:5.4rem;--d:0s;--anim:drift-a;--dur:6s;--depth:40">
+          <svg><use href="#icone-codigo" /></svg>
+        </span>
+        <span class="bloco-flutuante sobre-fundo-escuro" style="--x:80%;--y:14%;--s:5rem;--d:1.2s;--anim:drift-b;--dur:8s;--depth:30">
+          <svg><use href="#icone-terminal" /></svg>
+        </span>
+        <span class="bloco-flutuante sobre-fundo-escuro" style="--x:14%;--y:68%;--s:5.4rem;--d:0.6s;--anim:drift-c;--dur:7s;--depth:50">
+          <svg><use href="#icone-processador" /></svg>
+        </span>
+        <span class="bloco-flutuante sobre-fundo-escuro" style="--x:74%;--y:70%;--s:5rem;--d:1.8s;--anim:drift-a;--dur:9s;--depth:35">
+          <svg><use href="#icone-chaves" /></svg>
+        </span>
+        <span class="bloco-flutuante sobre-fundo-escuro" style="--x:46%;--y:6%;--s:4.2rem;--d:2.4s;--anim:drift-b;--dur:5.5s;--depth:20">
+          <svg><use href="#icone-caneta" /></svg>
+        </span>
+        <span class="bloco-flutuante sobre-fundo-escuro" style="--x:90%;--y:48%;--s:4.2rem;--d:0.3s;--anim:drift-c;--dur:7.5s;--depth:25">
+          <svg><use href="#icone-paleta" /></svg>
+        </span>
+        <span class="bloco-flutuante sobre-fundo-escuro" style="--x:5%;--y:42%;--s:4.2rem;--d:2s;--anim:drift-a;--dur:6.5s;--depth:45">
+          <svg><use href="#icone-banco-dados" /></svg>
+        </span>
+        <span class="bloco-flutuante sobre-fundo-escuro" style="--x:56%;--y:80%;--s:4.6rem;--d:1.4s;--anim:drift-b;--dur:8.5s;--depth:28">
+          <svg><use href="#icone-notebook" /></svg>
+        </span>
+      </div>
+      <button id="idioma-boas-vindas" class="botao-cabecalho idioma-boas-vindas" type="button" aria-label="Mudar idioma" data-i18n-aria="language.aria">
+        <svg class="icone-terra" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9.5" />
+          <path d="M2.5 12h19" />
+          <path d="M12 2.5c2.6 2.6 4 5.9 4 9.5s-1.4 6.9-4 9.5c-2.6-2.6-4-5.9-4-9.5s1.4-6.9 4-9.5z" />
+        </svg>
+        <span class="rotulo-idioma">
+          <span class="opcao-idioma" data-language="pt">PT</span>
+          /
+          <span class="opcao-idioma" data-language="en">EN</span>
+        </span>
+      </button>
+      <div class="cartao-boas-vindas">
+        <p class="chamada-inicial-boas-vindas" data-i18n="welcome.kicker">Bem-vindo(a) ao meu site</p>
+        <h1 class="titulo-boas-vindas" aria-label="João Cenerelli">
+          <span class="palavra-boas-vindas">
+            <span class="letra" aria-hidden="true" style="--i:0">J</span>
+            <span class="letra" aria-hidden="true" style="--i:1">o</span>
+            <span class="letra" aria-hidden="true" style="--i:2">ã</span>
+            <span class="letra" aria-hidden="true" style="--i:3">o</span>
+          </span>
+          <span class="palavra-boas-vindas">
+            <span class="letra" aria-hidden="true" style="--i:4">C</span>
+            <span class="letra" aria-hidden="true" style="--i:5">e</span>
+            <span class="letra" aria-hidden="true" style="--i:6">n</span>
+            <span class="letra" aria-hidden="true" style="--i:7">e</span>
+            <span class="letra" aria-hidden="true" style="--i:8">r</span>
+            <span class="letra" aria-hidden="true" style="--i:9">e</span>
+            <span class="letra" aria-hidden="true" style="--i:10">l</span>
+            <span class="letra" aria-hidden="true" style="--i:11">l</span>
+            <span class="letra" aria-hidden="true" style="--i:12">i</span>
+          </span>
+        </h1>
+        <p class="funcao-boas-vindas">
+          <span id="funcao-digitada-boas-vindas"></span>
+          <i class="indicador"></i>
+        </p>
+        <button id="continuar-boas-vindas" class="botao-boas-vindas" type="button">
+          <span data-i18n="welcome.continue">Continuar</span>
+          <svg><use href="#icone-seta" /></svg>
+        </button>
+        <p class="dica-boas-vindas" data-i18n="welcome.hint">Passe o mouse para explorar</p>
+      </div>
+    </div>
+    <div id="conteudo-site">
+      <div class="progresso-rolagem" id="progresso-rolagem"></div>
+      <header class="barra-navegacao" id="barra-navegacao">
+        <a class="marca" href="#inicio" data-goto="inicio">
+          <img class="foto-marca" src="assets/avatar.jpg" alt="Foto de João Cenerelli" data-i18n-alt="profile.alt" decoding="async" />
+          <span>João Cenerelli</span>
+        </a>
+        <nav class="links-navegacao" aria-label="Seções" data-i18n-aria="nav.aria">
+          <a href="#sobre" data-goto="sobre"><span data-i18n="nav.about">Sobre mim</span></a>
+          <a href="#trajetoria" data-goto="trajetoria"><span data-i18n="nav.journey">Trajetória</span></a>
+          <a href="#competencias" data-goto="competencias"><span data-i18n="nav.skills">Competências</span></a>
+          <a href="#servicos" data-goto="servicos"><span data-i18n="nav.services">Serviços</span></a>
+          <a href="#portfolio" data-goto="portfolio"><span data-i18n="nav.portfolios">Portfólios</span></a>
+          <a href="#avaliacoes" data-goto="avaliacoes"><span data-i18n="nav.reviews">Avaliações</span></a>
+          <a href="#contato" data-goto="contato"><span data-i18n="nav.contact">Contato</span></a>
+        </nav>
+        <div class="controles-navegacao">
+          <button id="alternar-tema" class="botao-cabecalho" type="button" aria-label="Alternar tema claro e escuro" data-i18n-aria="theme.aria">
+            <svg id="icone-tema" class="lampada" viewBox="0 0 24 24" aria-hidden="true">
+              <g class="raios-lampada"><path d="M12 .4v1.1M3.9 3.9l.8.8M20.1 3.9l-.8.8M.9 9.6H2M22 9.6h1.1" /></g>
+              <path class="vidro-lampada" d="M12 2.8a5.6 5.6 0 0 0-3.4 10c.6.5.9 1.1.9 1.8V16.5h5v-1.9c0-.7.3-1.3.9-1.8a5.6 5.6 0 0 0-3.4-10z" />
+              <path d="M9.5 19.3h5M10.6 21.8h2.8" />
+            </svg>
+          </button>
+          <button id="alternar-idioma" class="botao-cabecalho" type="button" aria-label="Mudar idioma" data-i18n-aria="language.aria">
+            <svg class="icone-terra" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.5" />
+              <path d="M2.5 12h19" />
+              <path d="M12 2.5c2.6 2.6 4 5.9 4 9.5s-1.4 6.9-4 9.5c-2.6-2.6-4-5.9-4-9.5s1.4-6.9 4-9.5z" />
+            </svg>
+            <span class="rotulo-idioma">
+              <span class="opcao-idioma" data-language="pt">PT</span>
+              /
+              <span class="opcao-idioma" data-language="en">EN</span>
+            </span>
+          </button>
+        </div>
+      </header>
+      <main>
+        <section id="inicio" class="tela inicio">
+          <div class="conteiner grade grade-inicio" id="conteudo-inicio">
+            <div class="texto-inicio revelar coluna-7">
+              <p class="rotulo-secao"><span data-i18n="profile.role">Técnico de Informática</span></p>
+              <h1>João Cenerelli</h1>
+              <p class="funcao-inicio">
+                <span id="funcao-digitada-inicio"></span>
+                <i class="indicador"></i>
+              </p>
+              <p class="introducao-inicio" data-i18n="hero.lead">Suporte e infraestrutura de TI, desenvolvimento web e identidades visuais, em um só lugar.</p>
+              <div class="acoes-inicio">
+                <a class="botao botao-principal" data-whatsapp href="https://wa.me/5551990103313?text=Ol%C3%A1%2C%20Jo%C3%A3o%21%20Encontrei%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20seus%20servi%C3%A7os." target="_blank" rel="noopener noreferrer">
+                  <svg><use href="#icone-whatsapp" /></svg>
+                  <span data-i18n="hero.cta1">Fale comigo</span>
+                </a>
+                <a class="botao botao-secundario" href="#servicos" data-goto="servicos">
+                  <span data-i18n="hero.cta2">Ver serviços</span>
+                  <svg><use href="#icone-seta" /></svg>
+                </a>
+              </div>
+            </div>
+            <div class="visual-inicio revelar coluna-5">
+              <img class="foto-inicio" src="assets/hero.jpg" alt="Foto de João Cenerelli" data-i18n-alt="profile.alt" fetchpriority="high" decoding="async" />
+              <span class="bloco-flutuante " aria-hidden="true" style="--x:-8%;--y:8%;--s:3.6rem;--d:0s;--anim:drift-a;--dur:6s;--depth:22" data-speed="0.14">
+                <svg><use href="#icone-codigo" /></svg>
+              </span>
+              <span class="bloco-flutuante " aria-hidden="true" style="--x:88%;--y:10%;--s:3.6rem;--d:1.2s;--anim:drift-b;--dur:8s;--depth:22" data-speed="-0.1">
+                <svg><use href="#icone-terminal" /></svg>
+              </span>
+              <span class="bloco-flutuante " aria-hidden="true" style="--x:-10%;--y:58%;--s:3.6rem;--d:0.6s;--anim:drift-c;--dur:7s;--depth:22" data-speed="-0.16">
+                <svg><use href="#icone-processador" /></svg>
+              </span>
+              <span class="bloco-flutuante " aria-hidden="true" style="--x:90%;--y:62%;--s:3.6rem;--d:1.8s;--anim:drift-a;--dur:9s;--depth:22" data-speed="0.12">
+                <svg><use href="#icone-chaves" /></svg>
+              </span>
+              <span class="bloco-flutuante " aria-hidden="true" style="--x:2%;--y:92%;--s:3.2rem;--d:0.3s;--anim:drift-b;--dur:7.5s;--depth:22" data-speed="0.18">
+                <svg><use href="#icone-caneta" /></svg>
+              </span>
+              <span class="bloco-flutuante bloco-notebook-inicio" data-tilt="5" aria-hidden="true" style="--x:74%;--y:70%;--s:3.6rem">
+                <svg><use href="#icone-notebook" /></svg>
+              </span>
+            </div>
+          </div>
+          <a class="dica-rolagem" href="#sobre" data-goto="sobre">
+            <span data-i18n="hero.scroll">Role para explorar</span>
+            <i></i>
+          </a>
+        </section>
+        <section id="sobre" class="tela secao">
+          <div class="conteiner">
+            <div class="grade grade-sobre">
+              <div class="sobre-conteudo revelar coluna-7">
+                <div class="cabecalho-secao cabecalho-secao-sobre">
+                  <p class="rotulo-secao">
+                    <span>01</span>
+                    <span data-i18n="nav.about">Sobre mim</span>
+                  </p>
+                  <h2 data-i18n="about.title">Venha me conhecer!</h2>
+                  <p class="subtitulo-secao" data-i18n="about.subtitle">Um pouco sobre quem eu sou e como eu trabalho.</p>
+                </div>
+                <h3 class="titulo-destaque-sobre" data-i18n="about.headline">Prazer, eu sou o João!</h3>
+                <p class="introducao-sobre" data-i18n="about.lead">Sou técnico de informática e estudante de Desenvolvimento de Sistemas, com estágio em uma empresa de TI corporativo, atuando com suporte, infraestrutura, nuvem e Power BI. Aos 20 anos, uno a bagagem prática de hardware, a lógica da programação, a sensibilidade do design e uma comunicação assertiva para criar soluções tecnológicas eficientes.</p>
+              </div>
+              <div class="visual-sobre revelar coluna-5">
+                <img class="foto-sobre" src="assets/about.jpg" alt="João Cenerelli sorrindo" data-i18n-alt="about.photo.alt" loading="lazy" decoding="async" />
+                <span class="bloco-flutuante " aria-hidden="true" style="--x:-2.4rem;--y:8%;--s:4rem;--d:0s;--anim:drift-a;--dur:6s;--depth:22" data-speed="0.1">
+                  <svg><use href="#icone-controle" /></svg>
+                </span>
+                <span class="bloco-flutuante " aria-hidden="true" style="--x:calc(100% - 3.2rem);--y:20%;--s:4rem;--d:0.8s;--anim:drift-b;--dur:7s;--depth:22" data-speed="-0.08">
+                  <svg><use href="#icone-notebook" /></svg>
+                </span>
+                <span class="bloco-flutuante " aria-hidden="true" style="--x:-2.4rem;--y:56%;--s:4rem;--d:1.6s;--anim:drift-c;--dur:6.5s;--depth:22" data-speed="-0.12">
+                  <svg><use href="#icone-paleta" /></svg>
+                </span>
+                <span class="bloco-flutuante " aria-hidden="true" style="--x:calc(100% - 3.2rem);--y:66%;--s:4rem;--d:2.4s;--anim:drift-a;--dur:8s;--depth:22" data-speed="0.09">
+                  <svg><use href="#icone-nuvem" /></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="trajetoria" class="tela rolagem-horizontal" data-hscroll>
+          <div class="fixo-rolagem-horizontal">
+            <div class="conteiner">
+              <div class="cabecalho-secao">
+                <p class="rotulo-secao">
+                  <span>02</span>
+                  <span data-i18n="nav.journey">Trajetória</span>
+                </p>
+                <h2 data-i18n="journey.title">Minha trajetória</h2>
+                <p class="subtitulo-secao" data-i18n="journey.subtitle">Os marcos que me trouxeram até aqui.</p>
+              </div>
+            </div>
+            <div class="janela-rolagem-horizontal">
+              <div class="trilho-rolagem-horizontal">
+                <article class="cartao-trajetoria" tabindex="0" data-tilt="3">
+                  <div class="topo-trajetoria">
+                    <span class="bloco-icone">
+                      <svg><use href="#icone-controle" /></svg>
+                    </span>
+                    <span class="indice-trajetoria">01</span>
+                  </div>
+                  <h3 data-i18n="about.m1.title">Aos 7 anos</h3>
+                  <p data-i18n="about.m1.text">Os videogames despertam meu interesse pela tecnologia. A rivalidade entre o meu Xbox 360 e o PlayStation 3 dos meus amigos me leva a pesquisar a fundo sobre hardware, benchmarks e arquitetura de sistemas.</p>
+                </article>
+                <article class="cartao-trajetoria" tabindex="0" data-tilt="3">
+                  <div class="topo-trajetoria">
+                    <span class="bloco-icone">
+                      <svg><use href="#icone-processador" /></svg>
+                    </span>
+                    <span class="indice-trajetoria">02</span>
+                  </div>
+                  <h3 data-i18n="about.m2.title">Hardware na prática</h3>
+                  <p data-i18n="about.m2.text">Aprendo a montar e formatar computadores por conta própria e transformo o aprendizado no meu serviço autônomo, a Cenerelli Informática.</p>
+                </article>
+                <article class="cartao-trajetoria" tabindex="0" data-tilt="3">
+                  <div class="topo-trajetoria">
+                    <span class="bloco-icone">
+                      <svg><use href="#icone-codigo" /></svg>
+                    </span>
+                    <span class="indice-trajetoria">03</span>
+                  </div>
+                  <h3 data-i18n="about.m3.title">Programação</h3>
+                  <p data-i18n="about.m3.text">Descubro a programação e entro no curso Técnico em Desenvolvimento de Sistemas do Senac.</p>
+                </article>
+                <article class="cartao-trajetoria" tabindex="0" data-tilt="3">
+                  <div class="topo-trajetoria">
+                    <span class="bloco-icone">
+                      <svg><use href="#icone-pasta-trabalho" /></svg>
+                    </span>
+                    <span class="indice-trajetoria">04</span>
+                  </div>
+                  <h3 data-i18n="about.m4.title">Estágio em TI</h3>
+                  <p data-i18n="about.m4.text">Para aplicar a teoria na prática, conquisto um estágio em uma empresa MSP de TI corporativo, onde atuo com suporte, infraestrutura, nuvem e dashboards em Power BI.</p>
+                </article>
+                <article class="cartao-trajetoria" tabindex="0" data-tilt="3">
+                  <div class="topo-trajetoria">
+                    <span class="bloco-icone">
+                      <svg><use href="#icone-paleta" /></svg>
+                    </span>
+                    <span class="indice-trajetoria">05</span>
+                  </div>
+                  <h3 data-i18n="about.m5.title">CenerelliDesigner</h3>
+                  <p data-i18n="about.m5.text">Em paralelo, exploro o lado criativo criando identidades visuais sob a marca CenerelliDesigner.</p>
+                </article>
+                <article class="cartao-trajetoria" tabindex="0" data-tilt="3">
+                  <div class="topo-trajetoria">
+                    <span class="bloco-icone">
+                      <svg><use href="#icone-microfone" /></svg>
+                    </span>
+                    <span class="indice-trajetoria">06</span>
+                  </div>
+                  <h3 data-i18n="about.m6.title">Desde os 16 anos</h3>
+                  <p data-i18n="about.m6.text">Desenvolvo soft skills de liderança, oratória e gestão de pessoas através da participação ativa em uma ordem juvenil.</p>
+                </article>
+              </div>
+            </div>
+            <div class="progresso-rolagem-horizontal"><i></i></div>
+          </div>
+        </section>
+        <section id="competencias" class="tela secao secao-alternada">
+          <div class="conteiner">
+            <div class="cabecalho-secao revelar">
+              <p class="rotulo-secao">
+                <span>03</span>
+                <span data-i18n="nav.skills">Competências</span>
+              </p>
+              <h2 data-i18n="skills.title">Minhas competências</h2>
+              <p class="subtitulo-secao" data-i18n="skills.subtitle">Conheça o que eu sei fazer e as ferramentas que uso</p>
+            </div>
+            <div class="lista-competencias revelar">
+              <div class="linha-competencia" tabindex="0" data-tilt="2">
+                <svg class="marca-dagua"><use href="#icone-documento" /></svg>
+                <div class="cabecalho-competencia">
+                  <span class="bloco-icone">
+                    <svg><use href="#icone-diagrama" /></svg>
+                  </span>
+                  <h3 data-i18n="skills.software.title">Projeto de software</h3>
+                </div>
+                <div class="corpo-competencia">
+                  <p data-i18n="skills.software.p1">Modelagem e documentação de sistemas: levantamento de requisitos funcionais e não funcionais, definição de regras de negócio e elaboração de diagramas UML e casos de uso.</p>
+                  <p data-i18n="skills.software.p2">Conteúdo estudado e concluído no curso Técnico em Desenvolvimento de Sistemas do Senac, que sigo cursando.</p>
+                </div>
+              </div>
+              <div class="linha-competencia" tabindex="0" data-tilt="2">
+                <svg class="marca-dagua"><use href="#icone-javascript" /></svg>
+                <div class="cabecalho-competencia">
+                  <span class="bloco-icone">
+                    <svg><use href="#icone-codigo" /></svg>
+                  </span>
+                  <h3 data-i18n="skills.web.title">Programação e desenvolvimento web</h3>
+                </div>
+                <div class="corpo-competencia">
+                  <p data-i18n="skills.web.p1">Desenvolvimento de sites e sistemas web com JavaScript, HTML e CSS, com versionamento de código em Git e GitHub e organização de projetos web.</p>
+                  <p data-i18n="skills.web.p2">Certificado de 200 horas em programação e desenvolvimento web, em aprofundamento no curso Técnico em Desenvolvimento de Sistemas do Senac.</p>
+                </div>
+              </div>
+              <div class="linha-competencia" tabindex="0" data-tilt="2">
+                <svg class="marca-dagua"><use href="#icone-banco-dados" /></svg>
+                <div class="cabecalho-competencia">
+                  <span class="bloco-icone">
+                    <svg><use href="#icone-banco-dados" /></svg>
+                  </span>
+                  <h3 data-i18n="skills.data.title">Dados e Power BI</h3>
+                </div>
+                <div class="corpo-competencia">
+                  <p data-i18n="skills.data.p1">Fundamentos de banco de dados e criação de dashboards em Power BI para análise de dados, aplicados na rotina do meu estágio.</p>
+                  <p data-i18n="skills.data.p2">Certificado em fundamentos de banco de dados pela Fundação Bradesco, com módulo de banco de dados em andamento no Senac e evolução contínua em análise de dados.</p>
+                </div>
+              </div>
+              <div class="linha-competencia" tabindex="0" data-tilt="2">
+                <svg class="marca-dagua"><use href="#icone-nuvem" /></svg>
+                <div class="cabecalho-competencia">
+                  <span class="bloco-icone">
+                    <svg><use href="#icone-nuvem" /></svg>
+                  </span>
+                  <h3 data-i18n="skills.cloud.title">AWS</h3>
+                </div>
+                <div class="corpo-competencia">
+                  <p data-i18n="skills.cloud.p1">Conceitos de computação em nuvem com Amazon Web Services, incluindo a organização da infraestrutura em zonas de disponibilidade e regiões.</p>
+                  <p data-i18n="skills.cloud.p2">Curso Amazon sobre computação em nuvem, em andamento.</p>
+                </div>
+              </div>
+              <div class="linha-competencia" tabindex="0" data-tilt="2">
+                <svg class="marca-dagua"><use href="#icone-globo" /></svg>
+                <div class="cabecalho-competencia">
+                  <span class="bloco-icone">
+                    <svg><use href="#icone-idiomas" /></svg>
+                  </span>
+                  <h3 data-i18n="skills.languages.title">Idiomas</h3>
+                </div>
+                <div class="corpo-competencia"><p data-i18n="skills.languages.p1">Inglês em nível avançado, com certificado TOEFL ITP, e espanhol em nível básico.</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="servicos" class="tela secao">
+          <div class="conteiner">
+            <div class="cabecalho-secao revelar">
+              <p class="rotulo-secao">
+                <span>04</span>
+                <span data-i18n="nav.services">Serviços</span>
+              </p>
+              <h2 data-i18n="services.title">Confira meus serviços de t.i</h2>
+              <p class="subtitulo-secao" data-i18n="services.subtitle">Veja meus serviços de manutenção de computadores</p>
+            </div>
+            <div class="grade grade-servicos">
+              <a class="cartao-link revelar grande coluna-5" data-tilt="4" href="https://drive.google.com/drive/folders/1i7R2FoVgpDLyHtwSXhsw_O9009cAZOEC" target="_blank" rel="noopener noreferrer">
+                <svg class="marca-dagua"><use href="#icone-google-drive" /></svg>
+                <span class="bloco-icone colorido">
+                  <svg><use href="#icone-google-drive" /></svg>
+                </span>
+                <div class="texto-cartao">
+                  <h3 data-i18n="drive.title">Confira meus serviços de t.i</h3>
+                  <p data-i18n="drive.subtitle">Catálogo no Google Drive</p>
+                </div>
+                <span class="chamada-acao">
+                  <span data-i18n="cta">Clique aqui</span>
+                  <svg><use href="#icone-seta" /></svg>
+                </span>
+              </a>
+              <div class="lista-servicos coluna-7">
+                <div class="selo-servico revelar" tabindex="0" data-tilt="2">
+                  <h4 data-i18n="svc.formatting.title">Formatação</h4>
+                  <p data-i18n="svc.formatting.text">Instalação limpa do Windows 10 ou 11 com drivers atualizados, atualizações de segurança, antivírus e programas essenciais para o seu dia a dia. Seus arquivos pessoais e documentos importantes podem ser salvos e restaurados com segurança através do serviço de backup.</p>
+                </div>
+                <div class="selo-servico revelar" tabindex="0" data-tilt="2">
+                  <h4 data-i18n="svc.optimization.title">Otimização</h4>
+                  <p data-i18n="svc.optimization.text">Limpeza completa de arquivos e programas desnecessários, ajuste da inicialização do sistema e revisão detalhada do hardware para o computador rodar mais leve e rápido. Inclui uma limpeza profunda no Windows, eliminando arquivos temporários e configurações ocultas pela Microsoft que acabam pesando no desempenho do sistema.</p>
+                </div>
+                <div class="selo-servico revelar" tabindex="0" data-tilt="2">
+                  <h4 data-i18n="svc.backup.title">Backup</h4>
+                  <p data-i18n="svc.backup.text">Cópia de segurança dos seus arquivos importantes em HD externo ou nuvem, para você não perder fotos e documentos.</p>
+                </div>
+                <div class="selo-servico revelar" tabindex="0" data-tilt="2">
+                  <h4 data-i18n="svc.activation.title">Ativação de Software</h4>
+                  <p data-i18n="svc.activation.text">Ativação do Windows e de programas, deixando o sistema regularizado e sem avisos de ativação.</p>
+                </div>
+                <div class="selo-servico revelar" tabindex="0" data-tilt="2">
+                  <h4 data-i18n="svc.office.title">Pacote Office</h4>
+                  <p data-i18n="svc.office.text">Instalação e configuração do Word, Excel e PowerPoint, com ajuda para começar a usar e manter tudo atualizado.</p>
+                </div>
+                <div class="selo-servico revelar" tabindex="0" data-tilt="2">
+                  <h4 data-i18n="svc.consulting.title">Consultoria</h4>
+                  <p data-i18n="svc.consulting.text">Suporte completo para tirar qualquer dúvida e resolver problemas no universo da T.I. Ajudo você a escolher as melhores peças de hardware (como memória, armazenamento e processador), indico os softwares que realmente valem a pena e oriento sobre qual computador comprar de acordo com a sua necessidade e orçamento. Além disso, ensino e auxilio em procedimentos como instalação de drivers, verificações de sistema e diversos outros processos técnicos do dia a dia.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="portfolio" class="tela secao secao-alternada">
+          <div class="conteiner">
+            <div class="cabecalho-secao revelar">
+              <p class="rotulo-secao">
+                <span>05</span>
+                <span data-i18n="nav.portfolios">Portfólios</span>
+              </p>
+              <h2 data-i18n="portfolios.title">Confira meus portfólios</h2>
+              <p class="subtitulo-secao" data-i18n="portfolios.subtitle">Veja meus projetos no GitHub e no Photoshop</p>
+            </div>
+            <div class="grade duas-colunas">
+              <a class="cartao-link revelar grande coluna-6" data-tilt="4" href="https://github.com/Cenerelli" target="_blank" rel="noopener noreferrer">
+                <svg class="marca-dagua"><use href="#icone-github" /></svg>
+                <span class="bloco-icone">
+                  <svg><use href="#icone-github" /></svg>
+                </span>
+                <div class="texto-cartao">
+                  <h3 data-i18n="github.title">GitHub</h3>
+                  <p>@Cenerelli</p>
+                </div>
+                <span class="chamada-acao">
+                  <span data-i18n="cta">Clique aqui</span>
+                  <svg><use href="#icone-seta" /></svg>
+                </span>
+              </a>
+              <a class="cartao-link revelar grande coluna-6" data-tilt="4" href="https://drive.google.com/file/d/15bEShk63D5YInFE-vJ1Mw2PuYTOEN6TF/view" target="_blank" rel="noopener noreferrer">
+                <svg class="marca-dagua"><use href="#icone-caneta" /></svg>
+                <span class="bloco-icone">
+                  <svg><use href="#icone-caneta" /></svg>
+                </span>
+                <div class="texto-cartao">
+                  <h3 data-i18n="designer.title">Portfólio como Designer</h3>
+                  <p data-i18n="designer.subtitle">Projetos no Photoshop</p>
+                </div>
+                <span class="chamada-acao">
+                  <span data-i18n="cta">Clique aqui</span>
+                  <svg><use href="#icone-seta" /></svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+        <section id="avaliacoes" class="tela secao">
+          <div class="conteiner">
+            <div class="cabecalho-secao revelar">
+              <p class="rotulo-secao">
+                <span>06</span>
+                <span data-i18n="nav.reviews">Avaliações</span>
+              </p>
+              <h2 data-i18n="reviews.title">Avalie meus serviços</h2>
+              <p class="subtitulo-secao" data-i18n="reviews.subtitle">Acesse minha página do Google e me dê seu feedback</p>
+            </div>
+            <div class="grade">
+              <div class="resumo-avaliacoes revelar coluna-12">
+                <span class="bloco-icone colorido">
+                  <svg><use href="#icone-google" /></svg>
+                </span>
+                <div class="informacao-cartao">
+                  <h3 data-i18n="reviews.summary">Avaliações no Google</h3>
+                  <p class="linha-avaliacao" data-i18n="reviews.invite">Veja o que os clientes dizem e conte como foi a sua experiência.</p>
+                </div>
+                <a class="botao botao-principal" href="https://www.google.com/maps/place//@-29.9160182,-51.1795255,13z/data=!3m1!4b1!4m3!3m2!1s0xb903e7d4a95fa53:0x90d0a6716f09ca8f!12e1?entry=ttu&amp;g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+                  <span data-i18n="reviews.rate">Avaliar no Google</span>
+                  <svg><use href="#icone-seta" /></svg>
+                </a>
+              </div>
+              <div class="incorporacao-avaliacoes revelar coluna-12" data-trustindex-src="https://cdn.trustindex.io/loader.js?9430207843fd8040c886fd40c10"></div>
+            </div>
+          </div>
+        </section>
+        <section id="contato" class="tela secao secao-alternada">
+          <div class="conteiner">
+            <div class="cabecalho-secao revelar">
+              <p class="rotulo-secao">
+                <span>07</span>
+                <span data-i18n="nav.contact">Contato</span>
+              </p>
+              <h2 data-i18n="contact.title">Vamos conversar?</h2>
+              <p class="subtitulo-secao" data-i18n="contact.subtitle">Escolha o canal de sua preferência e fale comigo.</p>
+            </div>
+            <div class="grade">
+              <div class="links-contato coluna-5">
+                <a class="cartao-link linha revelar" data-whatsapp data-tilt="3" href="https://wa.me/5551990103313?text=Ol%C3%A1%2C%20Jo%C3%A3o%21%20Encontrei%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20seus%20servi%C3%A7os." target="_blank" rel="noopener noreferrer">
+                  <span class="bloco-icone">
+                    <svg><use href="#icone-whatsapp" /></svg>
+                  </span>
+                  <div class="texto-cartao">
+                    <h3 data-i18n="whatsapp.title">Atendimento via WhatsApp</h3>
+                    <p>51 99010 3313</p>
+                  </div>
+                  <span class="chamada-acao">
+                    <svg><use href="#icone-seta" /></svg>
+                  </span>
+                </a>
+                <a class="cartao-link linha revelar" data-tilt="3" href="https://www.linkedin.com/in/joaocenerelli" target="_blank" rel="noopener noreferrer">
+                  <span class="bloco-icone">
+                    <svg><use href="#icone-linkedin" /></svg>
+                  </span>
+                  <div class="texto-cartao">
+                    <h3 data-i18n="linkedin.title">LinkedIn Profissional</h3>
+                    <p>@joaocenerelli</p>
+                  </div>
+                  <span class="chamada-acao">
+                    <svg><use href="#icone-seta" /></svg>
+                  </span>
+                </a>
+                <a class="cartao-link linha revelar" data-tilt="3" href="https://www.instagram.com/cenerellidesigner" target="_blank" rel="noopener noreferrer">
+                  <span class="bloco-icone">
+                    <svg><use href="#icone-instagram" /></svg>
+                  </span>
+                  <div class="texto-cartao">
+                    <h3 data-i18n="instagram.title">Instagram como Designer</h3>
+                    <p>@cenerellidesigner</p>
+                  </div>
+                  <span class="chamada-acao">
+                    <svg><use href="#icone-seta" /></svg>
+                  </span>
+                </a>
+              </div>
+              <form class="formulario-contato revelar coluna-7" id="formulario-contato" action="https://formsubmit.co/ajax/comercialcenerelli@gmail.com" method="POST" novalidate>
+                <h3 data-i18n="form.title">Envie uma mensagem</h3>
+                <div class="linha-formulario">
+                  <label class="campo">
+                    <span data-i18n="form.name">Nome</span>
+                    <input type="text" name="name" id="campo-nome" autocomplete="name" />
+                  </label>
+                  <label class="campo">
+                    <span data-i18n="form.email">E-mail</span>
+                    <input type="email" name="email" id="campo-email" autocomplete="email" />
+                  </label>
+                </div>
+                <label class="campo">
+                  <span data-i18n="form.subject">Assunto</span>
+                  <select name="subject" id="campo-assunto"></select>
+                </label>
+                <label class="campo">
+                  <span data-i18n="form.message">Mensagem</span>
+                  <textarea name="message" id="campo-mensagem" rows="5"></textarea>
+                </label>
+                <input type="hidden" name="_subject" value="Novo contato pelo site" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+                <div class="rodape-formulario">
+                  <p class="estado-formulario" id="estado-formulario" role="status"></p>
+                  <button class="botao botao-principal" type="submit">
+                    <span data-i18n="form.send">Enviar mensagem</span>
+                    <svg><use href="#icone-seta" /></svg>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="rodape">
+        <span class="texto-rodape" data-i18n="footer.by">Desenvolvido por</span>
+        João Cenerelli
+        <b>|</b>
+        JavaScript
+        <b>|</b>
+        ©
+        <span id="ano-atual">2026</span>
+      </footer>
+    </div>
+    <script src="js/texts.js?v=20261101-7"></script>
+    <script src="js/script.js?v=20261102-11"></script>
+  </body>
+</html>
