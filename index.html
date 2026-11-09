@@ -10,14 +10,15 @@
     <link rel="shortcut icon" href="assets/favicon.ico" />
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <link rel="preload" href="fonts/BricolageGrotesque-Variable.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="stylesheet" href="css/style.css?v=20261102-33" />
+    <link rel="stylesheet" href="css/style.css?v=20261104-1" />
   </head>
   <body class="na-tela-boas-vindas">
+    <!-- BIBLIOTECA DE SVG: os desenhos ficam aqui e sao reutilizados com <use>. -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-      <symbol id="icone-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9" /></symbol>
+      <symbol id="icone-seta" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 2.6)" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9" /></symbol>
       <symbol id="icone-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" /></symbol>
       <symbol id="icone-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" /></symbol>
-      <symbol id="icone-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <symbol id="icone-instagram" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 2)">
         <rect x="3" y="3" width="18" height="18" rx="5" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" />
@@ -32,68 +33,68 @@
         <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc" />
         <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00" />
       </symbol>
-      <symbol id="icone-caneta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-caneta" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 2)" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 19l7-7 3 3-7 7z" />
         <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z" />
         <path d="M2 2l7.6 7.6" />
         <circle cx="11" cy="11" r="2" />
       </symbol>
-      <symbol id="icone-diagrama" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-diagrama" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 2)" stroke-linecap="round" stroke-linejoin="round">
         <rect x="9" y="2" width="6" height="5" rx="1" />
         <rect x="2" y="17" width="6" height="5" rx="1" />
         <rect x="16" y="17" width="6" height="5" rx="1" />
         <path d="M12 7v4M5 17v-6h14v6" />
       </symbol>
-      <symbol id="icone-idiomas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12M9 3v2M5 5c1 5 4 8 8 10M13 5c-1 5-4 8-8 10M13 21l4-10 4 10M14.5 17h5" /></symbol>
-      <symbol id="icone-documento" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-idiomas" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 2)" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12M9 3v2M5 5c1 5 4 8 8 10M13 5c-1 5-4 8-8 10M13 21l4-10 4 10M14.5 17h5" /></symbol>
+      <symbol id="icone-documento" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 2)" stroke-linecap="round" stroke-linejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
         <path d="M14 2v6h6M8 13h8M8 17h8M8 9h2" />
       </symbol>
       <symbol id="icone-javascript" viewBox="0 0 24 24">
-        <rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="1.6" />
+        <rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.6)" />
         <text x="12" y="17.5" text-anchor="middle" font-size="10.5" font-weight="800" font-family="Bricolage Grotesque,sans-serif" fill="currentColor">JS</text>
       </symbol>
-      <symbol id="icone-banco-dados" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-banco-dados" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 2)" stroke-linecap="round" stroke-linejoin="round">
         <ellipse cx="12" cy="5" rx="8" ry="3" />
         <path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
       </symbol>
-      <symbol id="icone-nuvem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19a5 5 0 1 1 1-9.9A6 6 0 0 1 19.5 11 4 4 0 0 1 18 19z" /></symbol>
-      <symbol id="icone-globo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-nuvem" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 2)" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19a5 5 0 1 1 1-9.9A6 6 0 0 1 19.5 11 4 4 0 0 1 18 19z" /></symbol>
+      <symbol id="icone-globo" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 2)" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10" />
         <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" />
       </symbol>
-      <symbol id="icone-codigo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-codigo" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.8)" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
       </symbol>
-      <symbol id="icone-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-terminal" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.8)" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="4 17 10 11 4 5" />
         <line x1="12" y1="19" x2="20" y2="19" />
       </symbol>
-      <symbol id="icone-processador" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-processador" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.8)" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="4" width="16" height="16" rx="2" />
         <rect x="9" y="9" width="6" height="6" />
         <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" />
       </symbol>
-      <symbol id="icone-chaves" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1" /></symbol>
-      <symbol id="icone-notebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-chaves" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.8)" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1" /></symbol>
+      <symbol id="icone-notebook" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.8)" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="4" width="18" height="12" rx="2" />
         <path d="M2 20h20" />
       </symbol>
-      <symbol id="icone-pasta-trabalho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-pasta-trabalho" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.8)" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="7" width="20" height="14" rx="2" />
         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
       </symbol>
-      <symbol id="icone-controle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-controle" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.8)" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 12h4M8 10v4" />
         <path d="M15 13h.01M18 11h.01" />
         <path d="M17.3 5H6.7a4 4 0 0 0-3.9 3.1L1.2 15.5a2.5 2.5 0 0 0 4.3 2.2L7 15h10l1.5 2.7a2.5 2.5 0 0 0 4.3-2.2l-1.6-7.4A4 4 0 0 0 17.3 5z" />
       </symbol>
-      <symbol id="icone-microfone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-microfone" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.8)" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
         <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8" />
       </symbol>
-      <symbol id="icone-paleta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <symbol id="icone-paleta" viewBox="0 0 24 24" fill="none" stroke="var(--svg-stroke-color, currentColor)" stroke-width="var(--svg-stroke-width, 1.8)" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="13.5" cy="6.5" r=".6" />
         <circle cx="17.5" cy="10.5" r=".6" />
         <circle cx="8.5" cy="7.5" r=".6" />
@@ -101,6 +102,8 @@
         <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.7-1.6 1.6-1.6H16c3 0 5.5-2.5 5.5-5.5C21.5 6 17.4 2 12 2z" />
       </symbol>
     </svg>
+
+    <!-- TELA DE BOAS-VINDAS: exibida antes do conteudo principal. -->
     <div id="boas-vindas" class="boas-vindas">
       <div class="fundo-boas-vindas" aria-hidden="true">
         <span class="bloco-flutuante sobre-fundo-escuro" style="--x:8%;--y:16%;--s:5.4rem;--d:0s;--anim:drift-a;--dur:6s;--depth:40">
@@ -172,8 +175,12 @@
         <p class="dica-boas-vindas" data-i18n="welcome.hint">Passe o mouse para explorar</p>
       </div>
     </div>
+
+    <!-- CONTEUDO DO SITE -->
     <div id="conteudo-site">
       <div class="progresso-rolagem" id="progresso-rolagem"></div>
+
+      <!-- NAVEGACAO: marca, links das secoes e controles de tema/idioma. -->
       <header class="barra-navegacao" id="barra-navegacao">
         <a class="marca" href="#inicio" data-goto="inicio">
           <img class="foto-marca" src="assets/avatar.jpg" alt="Foto de João Cenerelli" data-i18n-alt="profile.alt" decoding="async" />
@@ -189,12 +196,12 @@
           <a href="#contato" data-goto="contato"><span data-i18n="nav.contact">Contato</span></a>
         </nav>
         <div class="controles-navegacao">
-          <button id="alternar-tema" class="botao-cabecalho" type="button" aria-label="Alternar tema claro e escuro" data-i18n-aria="theme.aria">
-            <svg id="icone-tema" class="lampada" viewBox="0 0 24 24" aria-hidden="true">
-              <g class="raios-lampada"><path d="M12 .4v1.1M3.9 3.9l.8.8M20.1 3.9l-.8.8M.9 9.6H2M22 9.6h1.1" /></g>
-              <path class="vidro-lampada" d="M12 2.8a5.6 5.6 0 0 0-3.4 10c.6.5.9 1.1.9 1.8V16.5h5v-1.9c0-.7.3-1.3.9-1.8a5.6 5.6 0 0 0-3.4-10z" />
-              <path d="M9.5 19.3h5M10.6 21.8h2.8" />
+          <button id="alternar-tema" class="botao-cabecalho" type="button" aria-label="Ativar modo HighTech" data-i18n-aria="theme.aria">
+            <svg id="icone-tema" class="icone-hightech" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="7" y="7" width="10" height="10" rx="1" />
+              <path d="M9.5 10h5M9.5 13h3M9 3v4m6-4v4M9 17v4m6-4v4M3 9h4m-4 6h4m10-6h4m-4 6h4" />
             </svg>
+            <span id="rotulo-tema">HighTech</span>
           </button>
           <button id="alternar-idioma" class="botao-cabecalho" type="button" aria-label="Mudar idioma" data-i18n-aria="language.aria">
             <svg class="icone-terra" viewBox="0 0 24 24" aria-hidden="true">
@@ -211,6 +218,7 @@
         </div>
       </header>
       <main>
+        <!-- INICIO / HERO: apresentacao, botoes, foto e icones flutuantes. -->
         <section id="inicio" class="tela inicio">
           <div class="conteiner grade grade-inicio" id="conteudo-inicio">
             <div class="texto-inicio revelar coluna-7">
@@ -234,24 +242,27 @@
             </div>
             <div class="visual-inicio revelar coluna-5">
               <img class="foto-inicio" src="assets/hero.jpg" alt="Foto de João Cenerelli" data-i18n-alt="profile.alt" fetchpriority="high" decoding="async" />
-              <span class="bloco-flutuante " aria-hidden="true" style="--x:-8%;--y:8%;--s:3.6rem;--d:0s;--anim:drift-a;--dur:6s;--depth:22" data-speed="0.14">
-                <svg><use href="#icone-codigo" /></svg>
-              </span>
-              <span class="bloco-flutuante " aria-hidden="true" style="--x:88%;--y:10%;--s:3.6rem;--d:1.2s;--anim:drift-b;--dur:8s;--depth:22" data-speed="-0.1">
-                <svg><use href="#icone-terminal" /></svg>
-              </span>
-              <span class="bloco-flutuante " aria-hidden="true" style="--x:-10%;--y:58%;--s:3.6rem;--d:0.6s;--anim:drift-c;--dur:7s;--depth:22" data-speed="-0.16">
-                <svg><use href="#icone-processador" /></svg>
-              </span>
-              <span class="bloco-flutuante " aria-hidden="true" style="--x:90%;--y:62%;--s:3.6rem;--d:1.8s;--anim:drift-a;--dur:9s;--depth:22" data-speed="0.12">
-                <svg><use href="#icone-chaves" /></svg>
-              </span>
-              <span class="bloco-flutuante " aria-hidden="true" style="--x:2%;--y:92%;--s:3.2rem;--d:0.3s;--anim:drift-b;--dur:7.5s;--depth:22" data-speed="0.18">
-                <svg><use href="#icone-caneta" /></svg>
-              </span>
-              <span class="bloco-flutuante bloco-notebook-inicio" data-tilt="5" aria-hidden="true" style="--x:74%;--y:70%;--s:3.6rem">
-                <svg><use href="#icone-notebook" /></svg>
-              </span>
+              <!-- ICONES FLUTUANTES DA HERO: edite posicao/animacao no CSS por classe. -->
+              <div class="icones-flutuantes-inicio" aria-hidden="true">
+                <span class="bloco-flutuante icone-inicio-codigo" data-parallax>
+                  <svg><use href="#icone-codigo" /></svg>
+                </span>
+                <span class="bloco-flutuante icone-inicio-terminal" data-parallax>
+                  <svg><use href="#icone-terminal" /></svg>
+                </span>
+                <span class="bloco-flutuante icone-inicio-processador" data-parallax>
+                  <svg><use href="#icone-processador" /></svg>
+                </span>
+                <span class="bloco-flutuante icone-inicio-chaves" data-parallax>
+                  <svg><use href="#icone-chaves" /></svg>
+                </span>
+                <span class="bloco-flutuante icone-inicio-caneta" data-parallax>
+                  <svg><use href="#icone-caneta" /></svg>
+                </span>
+                <span class="bloco-flutuante bloco-notebook-inicio icone-inicio-notebook" data-tilt="5">
+                  <svg><use href="#icone-notebook" /></svg>
+                </span>
+              </div>
             </div>
           </div>
           <a class="dica-rolagem" href="#sobre" data-goto="sobre">
@@ -259,6 +270,8 @@
             <i></i>
           </a>
         </section>
+
+        <!-- SOBRE: apresentacao pessoal e imagem. -->
         <section id="sobre" class="tela secao">
           <div class="conteiner">
             <div class="grade grade-sobre">
@@ -292,6 +305,8 @@
             </div>
           </div>
         </section>
+
+        <!-- TRAJETORIA: cartoes em rolagem horizontal. -->
         <section id="trajetoria" class="tela rolagem-horizontal" data-hscroll>
           <div class="fixo-rolagem-horizontal">
             <div class="conteiner">
@@ -371,6 +386,8 @@
             <div class="progresso-rolagem-horizontal"><i></i></div>
           </div>
         </section>
+
+        <!-- COMPETENCIAS: conhecimentos e ferramentas. -->
         <section id="competencias" class="tela secao secao-alternada">
           <div class="conteiner">
             <div class="cabecalho-secao revelar">
@@ -447,6 +464,8 @@
             </div>
           </div>
         </section>
+
+        <!-- SERVICOS: servicos oferecidos e detalhes. -->
         <section id="servicos" class="tela secao">
           <div class="conteiner">
             <div class="cabecalho-secao revelar">
@@ -501,6 +520,8 @@
             </div>
           </div>
         </section>
+
+        <!-- PORTFOLIO: links para trabalhos e perfis. -->
         <section id="portfolio" class="tela secao secao-alternada">
           <div class="conteiner">
             <div class="cabecalho-secao revelar">
@@ -543,6 +564,8 @@
             </div>
           </div>
         </section>
+
+        <!-- AVALIACOES: comentarios e nota do Google. -->
         <section id="avaliacoes" class="tela secao">
           <div class="conteiner">
             <div class="cabecalho-secao revelar">
@@ -570,6 +593,8 @@
             </div>
           </div>
         </section>
+
+        <!-- CONTATO: links e formulario de mensagem. -->
         <section id="contato" class="tela secao secao-alternada">
           <div class="conteiner">
             <div class="cabecalho-secao revelar">
@@ -655,6 +680,8 @@
           </div>
         </section>
       </main>
+
+      <!-- RODAPE: autoria e ano atualizado pelo JavaScript. -->
       <footer class="rodape">
         <span class="texto-rodape" data-i18n="footer.by">Desenvolvido por</span>
         João Cenerelli
@@ -665,7 +692,8 @@
         <span id="ano-atual">2026</span>
       </footer>
     </div>
-    <script src="js/texts.js?v=20261101-7"></script>
-    <script src="js/script.js?v=20261102-11"></script>
+    <!-- DADOS DE TRADUCAO e interacoes da pagina. -->
+    <script src="js/texts.js?v=20261104-1"></script>
+    <script src="js/script.js?v=20261104-1"></script>
   </body>
 </html>

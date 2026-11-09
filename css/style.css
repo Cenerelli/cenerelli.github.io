@@ -1,6 +1,14 @@
-/* =====================================================================
-   STYLE — portfolio visual system. Theme colors are defined near the end.
-   ===================================================================== */
+/* ==========================================================================
+   GUIA DE EDICAO
+   1. Temas e controles globais: :root (claro), [data-theme="dark"] e [data-theme="hightech"].
+   2. Cada bloco abaixo corresponde a uma parte do site, na ordem da pagina.
+   3. Icones flutuantes da hero: procure "ICONES SVG FLUTUANTES DA HERO".
+   4. Celular e tablet: procure "RESPONSIVIDADE".
+
+   Dica: use Ctrl+F com o nome da classe que aparece no index.html.
+   Para editar o contorno dos SVGs, procure --svg-stroke-width e
+   --svg-stroke-color.
+   ========================================================================== */
 @font-face {
   font-family: "Bricolage Grotesque";
   src: url("../fonts/BricolageGrotesque-Variable.ttf") format("truetype");
@@ -9,38 +17,199 @@
   font-display: swap;
 }
 :root {
-  --accent: #664930;
-  --accent-strong: #664930;
+  /* PALETA CLARA */
+  /* Fundo, textos e cores principais */
   --bg: #ffdbbb;
   --bg-alt: #fff3e8;
-  --card: #fff3e8;
+  --bg-gradient: radial-gradient(ellipse at 8% 12%, rgba(153, 126, 103, 0.12), transparent 31%), radial-gradient(ellipse at 91% 30%, rgba(204, 190, 177, 0.35), transparent 32%), radial-gradient(ellipse at 56% 88%, rgba(255, 255, 255, 0.28), transparent 35%), linear-gradient(145deg, #ffdbbb 0%, #f6e5d7 48%, #e8d8c8 100%);
   --text: #322d27;
   --muted: #664930;
+  --card: #fff3e8;
+  --card-top: #fff3e8;
+  --card-bottom: #f1dfcf;
   --hairline: rgba(102, 73, 48, 0.18);
   --glass: rgba(255, 243, 232, 0.88);
-  --shadow: 0 0.1rem 0.3rem rgba(68, 48, 32, 0.06), 0 1.2rem 3rem rgba(68, 48, 32, 0.12);
-  --radius: 0.8rem;
-  --radius-sm: 0.5rem; /* harmonic corners: not too round, not too square */
-  --cursor-fill: #322d27;
-  --cursor-outline: #fff3e8;
-  --bulb-fill: #bf8440;
-  --rays: 1;
+  --accent: #664930;
+  --accent-strong: #664930;
+  --accent-secondary: #7f7265;
+  --accent-tertiary: #997e67;
+  --accent-highlight: #ffdbbb;
+  --accent-gradient: linear-gradient(125deg, #997e67 0%, #7f6250 54%, #664930 100%);
+
+  /* Cartoes, icones internos e sombras */
+  --shadow: 0 0.5rem 1.6rem rgba(68, 48, 32, 0.12);
+  --card-ink: #322d27;
+  --card-icon-bg: #fff3e8;
+  --card-icon-text: #664930;
+  --card-shadow: 0 0.18rem 0 rgba(68, 48, 32, 0.14), 0 0.55rem 1rem rgba(68, 48, 32, 0.12), 0 1.1rem 1.8rem rgba(68, 48, 32, 0.09);
+  --card-shadow-hover: 0 0.3rem 0 rgba(68, 48, 32, 0.18), 0 1rem 1.6rem rgba(68, 48, 32, 0.16), 0 1.7rem 2.6rem rgba(68, 48, 32, 0.12);
+
+  /* Tela de boas-vindas */
+  --welcome-gradient: linear-gradient(125deg, #ffdbbb 0%, #f0dfd0 52%, #ccbeb1 100%);
+  --welcome-text: #664930;
+  --welcome-button-bg: #fff3e8;
+  --welcome-button-text: #664930;
+
+  /* Gradientes dos cartoes coloridos */
+  --card-sunrise: linear-gradient(135deg, #ffdbbb 0%, #f6d5b8 52%, #ecc9ab 100%);
+  --card-ocean: linear-gradient(135deg, #fff1e2 0%, #e9d8c9 48%, #ccbeb1 100%);
+  --card-orchid: linear-gradient(135deg, #f8e9dc 0%, #e6d3c2 52%, #ccbeb1 100%);
+  --card-citrus: linear-gradient(135deg, #ffdbbb 0%, #efd7c2 50%, #d7c6b7 100%);
+  --card-candy: linear-gradient(135deg, #f7e6d8 0%, #e5d2c1 50%, #cbbbab 100%);
+  --card-sky: linear-gradient(135deg, #fff3e8 0%, #eadbcd 50%, #d3c5b9 100%);
+
+  /* Cursor personalizado */
+  --cursor-fill: #087fc6;
+  --cursor-outline: #f6fdff;
+
+  /* Icones flutuantes da hero: edite aqui so o tema claro */
+  --hero-icon-background: rgba(255, 243, 232, 0.88);
+  --hero-icon-color: #664930;
+  --hero-icon-border: 0.06rem solid rgba(102, 73, 48, 0.18);
+  --hero-icon-shadow: 0 0.5rem 1.6rem rgba(68, 48, 32, 0.12);
+  --hero-icon-hover-background: #664930;
+  --hero-icon-hover-color: #fff;
+  --hero-icon-radius: 1.2rem;
+  --hero-icon-svg-size: 52%;
+
+  /* Contorno padrao dos desenhos SVG */
+  --svg-stroke-width: unset;
+  --svg-stroke-color: unset;
+
+  /* Bordas padrao dos elementos */
+  --card-border: 0 solid transparent;
+  --field-border: 0.06rem solid var(--hairline);
+  --primary-button-border: 0 solid transparent;
+  --secondary-button-border: 0.06rem solid var(--hairline);
+  --header-button-border: 0 solid transparent;
+  --welcome-button-border: 0 solid transparent;
+  --floating-icon-border: 0.06rem solid var(--hairline);
+  --navbar-border: 0.06rem solid var(--hairline);
+
+  /* Cantos arredondados */
+  --card-radius: 2rem 1rem 2rem 1rem;
+  --card-radius-mobile: 1.5rem 0.85rem 1.5rem 0.85rem;
+  --radius: 1.2rem;
+  --radius-sm: 0.8rem;
+
+  /* Espacamentos e velocidade das animacoes */
+  --gap: 1.2rem;
+  --pad: 1.8rem;
+  --section: 6rem;
+  --hover-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 [data-theme="dark"] {
-  --accent: #bf8440;
-  --accent-strong: #997e67;
+  /* PALETA ESCURA ORIGINAL */
+  /* Fundo, textos e cores principais */
   --bg: #322d27;
   --bg-alt: #292521;
-  --card: #3d3731;
+  --bg-gradient: radial-gradient(ellipse at 8% 12%, rgba(191, 132, 64, 0.2), transparent 31%), radial-gradient(ellipse at 91% 30%, rgba(127, 114, 101, 0.22), transparent 32%), radial-gradient(ellipse at 56% 88%, rgba(170, 170, 174, 0.1), transparent 35%), linear-gradient(145deg, #322d27 0%, #292521 48%, #3b342e 100%);
   --text: #e2e1eb;
   --muted: #aaaaae;
+  --card: #3d3731;
+  --card-top: #50453a;
+  --card-bottom: #342f2a;
   --hairline: rgba(226, 225, 235, 0.16);
   --glass: rgba(50, 45, 39, 0.9);
-  --shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.35), 0 1.2rem 3rem rgba(0, 0, 0, 0.4);
-  --cursor-fill: #e2e1eb;
-  --cursor-outline: #322d27;
-  --bulb-fill: transparent;
-  --rays: 0;
+  --accent: #bf8440;
+  --accent-strong: #a96f30;
+  --accent-secondary: #7f7265;
+  --accent-tertiary: #aaaaae;
+  --accent-highlight: #e2e1eb;
+  --accent-gradient: linear-gradient(125deg, #7f7265 0%, #664930 54%, #322d27 100%);
+
+  /* Cartoes, icones internos e sombras */
+  --shadow: 0 0.5rem 1.6rem rgba(0, 0, 0, 0.24);
+  --card-ink: #e2e1eb;
+  --card-icon-bg: #e2e1eb;
+  --card-icon-text: #322d27;
+  --card-shadow: 0 0.18rem 0 rgba(0, 0, 0, 0.2), 0 0.55rem 1rem rgba(0, 0, 0, 0.18), 0 1.1rem 1.8rem rgba(0, 0, 0, 0.14);
+  --card-shadow-hover: 0 0.3rem 0 rgba(0, 0, 0, 0.25), 0 1rem 1.6rem rgba(0, 0, 0, 0.22), 0 1.7rem 2.6rem rgba(0, 0, 0, 0.18);
+
+  /* Tela de boas-vindas */
+  --welcome-gradient: linear-gradient(125deg, #322d27 0%, #40372e 52%, #4e4031 100%);
+  --welcome-text: #e2e1eb;
+  --welcome-button-bg: #e2e1eb;
+  --welcome-button-text: #322d27;
+
+  /* Gradientes dos cartoes coloridos */
+  --card-sunrise: linear-gradient(135deg, #51463c 0%, #4a3c30 52%, #3b342e 100%);
+  --card-ocean: linear-gradient(135deg, #4c4743 0%, #484039 48%, #3b342e 100%);
+  --card-orchid: linear-gradient(135deg, #514943 0%, #4b4036 52%, #3b342e 100%);
+  --card-citrus: linear-gradient(135deg, #55483a 0%, #4c3e30 50%, #3b342e 100%);
+  --card-candy: linear-gradient(135deg, #514640 0%, #4a3e34 50%, #3b342e 100%);
+  --card-sky: linear-gradient(135deg, #4e4945 0%, #49433d 50%, #3b342e 100%);
+
+  /* Cursor personalizado */
+  --cursor-fill: #62c5ff;
+  --cursor-outline: #102b46;
+
+  /* Icones flutuantes da hero: edite aqui so o tema escuro */
+  --hero-icon-background: rgba(50, 45, 39, 0.9);
+  --hero-icon-color: #bf8440;
+  --hero-icon-border: 0.06rem solid rgba(226, 225, 235, 0.16);
+  --hero-icon-shadow: 0 0.5rem 1.6rem rgba(0, 0, 0, 0.24);
+  --hero-icon-hover-background: #a96f30;
+  --hero-icon-hover-color: #fff;
+  --hero-icon-radius: 1.2rem;
+  --hero-icon-svg-size: 52%;
+}
+[data-theme="hightech"] {
+  color-scheme: dark;
+  --bg: #071522;
+  --bg-alt: #0a1c2b;
+  --bg-gradient: radial-gradient(ellipse at 8% 12%, rgba(25, 150, 223, 0.18), transparent 31%), radial-gradient(ellipse at 91% 30%, rgba(31, 101, 153, 0.2), transparent 32%), radial-gradient(ellipse at 56% 88%, rgba(35, 91, 128, 0.12), transparent 35%), repeating-linear-gradient(0deg, rgba(138, 196, 238, 0.025) 0 1px, transparent 1px 5rem), repeating-linear-gradient(90deg, rgba(138, 196, 238, 0.025) 0 1px, transparent 1px 5rem), linear-gradient(145deg, #091a29 0%, #071522 48%, #0b2031 100%);
+  --text: #e8f4ff;
+  --muted: #a1b9cc;
+  --card: #10253a;
+  --card-top: #163149;
+  --card-bottom: #0d2134;
+  --hairline: rgba(151, 199, 232, 0.18);
+  --glass: rgba(7, 21, 34, 0.9);
+  --accent: #65c8ff;
+  --accent-strong: #1686c8;
+  --accent-secondary: #4f9ac6;
+  --accent-tertiary: #91b5cf;
+  --accent-highlight: #a8e5ff;
+  --accent-gradient: linear-gradient(125deg, #70d2ff 0%, #238fca 54%, #12699e 100%);
+  --shadow: 0 0.5rem 1.6rem rgba(0, 0, 0, 0.24);
+  --card-ink: #e8f4ff;
+  --card-icon-bg: #17344d;
+  --card-icon-text: #79d1ff;
+  --card-shadow: 0 0.18rem 0 rgba(0, 0, 0, 0.22), 0 0.55rem 1rem rgba(0, 0, 0, 0.2), 0 1.1rem 1.8rem rgba(0, 0, 0, 0.16);
+  --card-shadow-hover: 0 0.3rem 0 rgba(0, 0, 0, 0.26), 0 1rem 1.6rem rgba(0, 0, 0, 0.24), 0 1.7rem 2.6rem rgba(0, 0, 0, 0.2);
+  --welcome-gradient: linear-gradient(125deg, #071522 0%, #0b263d 52%, #123b58 100%);
+  --welcome-text: #e8f4ff;
+  --welcome-button-bg: #e8f4ff;
+  --welcome-button-text: #0a3150;
+  --card-sunrise: linear-gradient(135deg, #153a56 0%, #12324b 52%, #0d263b 100%);
+  --card-ocean: linear-gradient(135deg, #17344d 0%, #122d44 48%, #0c2235 100%);
+  --card-orchid: linear-gradient(135deg, #193851 0%, #153149 52%, #0e263a 100%);
+  --card-citrus: linear-gradient(135deg, #16405d 0%, #12344e 50%, #0d293e 100%);
+  --card-candy: linear-gradient(135deg, #18364f 0%, #142f46 50%, #0e263a 100%);
+  --card-sky: linear-gradient(135deg, #1a3b56 0%, #15334c 50%, #10283d 100%);
+  --cursor-fill: #62c5ff;
+  --cursor-outline: #102b46;
+  --hero-icon-background: rgba(7, 21, 34, 0.9);
+  --hero-icon-color: #65c8ff;
+  --hero-icon-border: 0.06rem solid rgba(151, 199, 232, 0.18);
+  --hero-icon-shadow: 0 0.5rem 1.6rem rgba(0, 0, 0, 0.24);
+  --hero-icon-hover-background: #1686c8;
+  --hero-icon-hover-color: #fff;
+  --hero-icon-radius: 0.65rem;
+  --hero-icon-svg-size: 52%;
+  --card-border: 0.06rem solid var(--hairline);
+  --field-border: 0.06rem solid var(--hairline);
+  --primary-button-border: 0.06rem solid rgba(129, 210, 255, 0.38);
+  --secondary-button-border: 0.06rem solid rgba(129, 210, 255, 0.3);
+  --header-button-border: 0.06rem solid rgba(129, 210, 255, 0.22);
+  --welcome-button-border: 0.06rem solid rgba(129, 210, 255, 0.45);
+  --floating-icon-border: 0.06rem solid rgba(129, 210, 255, 0.28);
+  --navbar-border: 0.06rem solid rgba(129, 210, 255, 0.2);
+  --card-radius: 0.7rem 0.2rem 0.7rem 0.2rem;
+  --card-radius-mobile: 0.6rem 0.2rem 0.6rem 0.2rem;
+  --radius: 0.65rem;
+  --radius-sm: 0.35rem;
 }
 * {
   box-sizing: border-box;
@@ -79,7 +248,7 @@ img {
   max-width: calc(100% - 8rem);
   margin: 0 auto;
 }
-/* ---------- Scroll-linked progress bar and navbar ---------- */
+/* ---------- Barra de progresso e navegacao fixa ---------- */
 .progresso-rolagem {
   position: fixed;
   top: 0;
@@ -105,7 +274,7 @@ img {
   background: var(--glass);
   -webkit-backdrop-filter: blur(1.4rem) saturate(1.6);
   backdrop-filter: blur(1.4rem) saturate(1.6);
-  border-bottom: 0.06rem solid var(--hairline);
+  border-bottom: var(--navbar-border);
   transition: background 0.4s;
 }
 .marca {
@@ -168,7 +337,7 @@ img {
   align-items: center;
   gap: 0.5rem;
   padding: 0.45rem 0.7rem;
-  border: 0;
+  border: var(--header-button-border);
   border-radius: var(--radius-sm);
   background: transparent;
   color: var(--text);
@@ -194,7 +363,7 @@ img {
 .opcao-idioma.ativo {
   opacity: 1;
 }
-/* ---------- Layout and hierarchy: eyebrow > title > subtitle > content ---------- */
+/* ---------- Estrutura e hierarquia dos titulos das secoes ---------- */
 .tela {
   position: relative;
 }
@@ -232,7 +401,7 @@ img {
   line-height: 1.5;
   color: var(--muted);
 }
-/* ---------- Hero section ---------- */
+/* ---------- Inicio / hero ---------- */
 .inicio {
   min-height: 100vh;
   display: flex;
@@ -301,6 +470,7 @@ img {
 }
 .botao-principal {
   background: var(--accent-strong);
+  border: var(--primary-button-border);
   color: #fff;
 }
 .botao-principal:hover {
@@ -309,7 +479,7 @@ img {
 }
 .botao-secundario {
   background: transparent;
-  border: 0.06rem solid var(--hairline);
+  border: var(--secondary-button-border);
   color: var(--text);
 }
 .botao-secundario:hover {
@@ -369,18 +539,19 @@ img {
     transform-origin: bottom;
   }
 }
-/* ---------- Floating icon tiles (SVG icons, parallax + hover state) ---------- */
+/* ---------- Estilo base compartilhado pelos icones flutuantes ---------- */
 .bloco-flutuante {
   position: absolute;
   left: var(--x);
   top: var(--y);
+  z-index: var(--depth, 1);
   display: grid;
   place-items: center;
   width: var(--s);
   height: var(--s);
   border-radius: var(--radius);
   background: var(--glass);
-  border: 0.06rem solid var(--hairline);
+  border: var(--floating-icon-border);
   color: var(--accent);
   box-shadow: var(--shadow);
   -webkit-backdrop-filter: blur(1rem);
@@ -433,7 +604,92 @@ img {
     transform: translate(-0.7rem, 1.4rem) rotate(-5deg);
   }
 }
-/* ---------- Cards: hover state turns the card into the accent color ---------- */
+
+/* ---------- ICONES SVG FLUTUANTES DA HERO ----------
+   Cada classe abaixo controla um icone: posicao, tamanho, profundidade,
+   animacao e paralaxe ficam reunidos aqui; cores ficam no inicio do arquivo.
+   Para mudar a forma do cartao, edite --hero-icon-radius no tema desejado.
+   Para trocar o desenho, altere o id do <use> correspondente no index.html.
+   -------------------------------------------------- */
+.icones-flutuantes-inicio {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.icones-flutuantes-inicio .bloco-flutuante {
+  background: var(--hero-icon-background);
+  border: var(--hero-icon-border);
+  border-radius: var(--hero-icon-radius);
+  color: var(--hero-icon-color);
+  box-shadow: var(--hero-icon-shadow);
+  pointer-events: auto;
+}
+.icones-flutuantes-inicio .bloco-flutuante svg {
+  width: var(--hero-icon-svg-size);
+  height: var(--hero-icon-svg-size);
+}
+.icones-flutuantes-inicio .bloco-flutuante:hover {
+  background: var(--hero-icon-hover-background);
+  color: var(--hero-icon-hover-color);
+}
+.icone-inicio-codigo {
+  --x: -8%;
+  --y: 8%;
+  --s: 3.6rem;
+  --d: 0s;
+  --anim: drift-a;
+  --dur: 6s;
+  --depth: 22;
+  --parallax-speed: 0.14;
+}
+.icone-inicio-terminal {
+  --x: 88%;
+  --y: 10%;
+  --s: 3.6rem;
+  --d: 1.2s;
+  --anim: drift-b;
+  --dur: 8s;
+  --depth: 22;
+  --parallax-speed: -0.1;
+}
+.icone-inicio-processador {
+  --x: -10%;
+  --y: 58%;
+  --s: 3.6rem;
+  --d: 0.6s;
+  --anim: drift-c;
+  --dur: 7s;
+  --depth: 22;
+  --parallax-speed: -0.16;
+}
+.icone-inicio-chaves {
+  --x: 90%;
+  --y: 62%;
+  --s: 3.6rem;
+  --d: 1.8s;
+  --anim: drift-a;
+  --dur: 9s;
+  --depth: 22;
+  --parallax-speed: 0.12;
+}
+.icone-inicio-caneta {
+  --x: 2%;
+  --y: 92%;
+  --s: 3.2rem;
+  --d: 0.3s;
+  --anim: drift-b;
+  --dur: 7.5s;
+  --depth: 22;
+  --parallax-speed: 0.18;
+}
+.icone-inicio-notebook {
+  --x: 74%;
+  --y: 70%;
+  --s: 3.6rem;
+  --depth: 22;
+}
+
+/* ---------- Cartoes e interacao de inclinacao ---------- */
 [data-tilt] {
   transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition:
@@ -586,7 +842,7 @@ img {
   gap: 1.2rem;
   height: 38rem;
 }
-/* ---------- About ---------- */
+/* ---------- Secao sobre ---------- */
 .grade-sobre {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -649,7 +905,7 @@ img {
   box-shadow: 0 0.3rem 1rem rgba(15, 23, 42, 0.22);
   z-index: 2;
 }
-/* ---------- Horizontal scroll (vertical scroll moves the cards sideways; height is set in script.js) ---------- */
+/* ---------- Trajetoria com rolagem horizontal ---------- */
 .rolagem-horizontal {
   position: relative;
   background: var(--bg-alt);
@@ -741,7 +997,7 @@ img {
   transform: scaleX(0.1);
   transform-origin: left;
 }
-/* ---------- Accordions (skills, services): the hovered row grows, the others shrink ---------- */
+/* ---------- Listas expansivas de competencias e servicos ---------- */
 .lista-competencias,
 .lista-servicos {
   display: flex;
@@ -858,8 +1114,8 @@ img {
   opacity: 1;
   margin-top: 0.7rem;
 }
-/* ---------- Review stars: SVG stars that grow and spin on hover ---------- */
-/* ---------- Footer ---------- */
+/* ---------- Estrelas das avaliacoes ---------- */
+/* ---------- Rodape ---------- */
 .rodape {
   padding: 1.8rem 0;
   text-align: center;
@@ -872,113 +1128,13 @@ img {
   opacity: 0.6;
   margin: 0 0.3rem;
 }
-/* ---------- Scroll-trigger: elements animate in when they reach the screen ---------- */
-/* ---------- Light bulb (theme button, SVG) ---------- */
-.lampada path,
-.lampada g {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.lampada .vidro-lampada {
-  fill: var(--bulb-fill);
-  fill-opacity: 1;
-}
-.lampada .raios-lampada {
-  opacity: var(--rays);
-  stroke: var(--accent-highlight);
-}
-.lampada.acendendo .vidro-lampada {
-  animation: bulb-on 0.75s linear;
-}
-.lampada.acendendo .raios-lampada {
-  animation: rays-on 0.75s linear;
-}
-.lampada.apagando .vidro-lampada {
-  animation: bulb-off 0.5s linear;
-}
-.lampada.apagando .raios-lampada {
-  animation: rays-off 0.5s linear;
-}
-@keyframes bulb-on {
-  0% {
-    fill-opacity: 0;
-  }
-  14% {
-    fill-opacity: 1;
-  }
-  28% {
-    fill-opacity: 0.1;
-  }
-  46% {
-    fill-opacity: 1;
-  }
-  58% {
-    fill-opacity: 0.2;
-  }
-  100% {
-    fill-opacity: 1;
-  }
-}
-@keyframes rays-on {
-  0% {
-    opacity: 0;
-  }
-  14% {
-    opacity: 1;
-  }
-  28% {
-    opacity: 0;
-  }
-  46% {
-    opacity: 1;
-  }
-  58% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes bulb-off {
-  0% {
-    fill: #ffd23f;
-    fill-opacity: 1;
-  }
-  20% {
-    fill-opacity: 0;
-  }
-  38% {
-    fill: #ffd23f;
-    fill-opacity: 1;
-  }
-  100% {
-    fill: #ffd23f;
-    fill-opacity: 0;
-  }
-}
-@keyframes rays-off {
-  0% {
-    opacity: 1;
-  }
-  20% {
-    opacity: 0;
-  }
-  38% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-/* ---------- Earth (language button, SVG) ---------- */
+/* ---------- Animacoes de entrada ao rolar a pagina ---------- */
+/* ---------- Botao e desenho da troca de idioma ---------- */
 .icone-terra circle,
 .icone-terra path {
   fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
+  stroke: var(--svg-stroke-color, currentColor);
+  stroke-width: var(--svg-stroke-width, 1.6);
   stroke-linecap: round;
 }
 .icone-terra.girando {
@@ -989,7 +1145,7 @@ img {
     transform: rotate(360deg);
   }
 }
-/* ---------- Smooth language switch: texts fade out, change, and fade back in ---------- */
+/* ---------- Transicao ao trocar o idioma ---------- */
 main,
 .links-navegacao,
 .texto-rodape,
@@ -1002,7 +1158,7 @@ html.trocando-idioma .texto-rodape,
 html.trocando-idioma .cartao-boas-vindas {
   opacity: 0;
 }
-/* ---------- Welcome screen ---------- */
+/* ---------- Tela de boas-vindas ---------- */
 .boas-vindas {
   position: fixed;
   inset: 0;
@@ -1165,7 +1321,7 @@ html.trocando-idioma .cartao-boas-vindas {
   font-size: 1rem;
   opacity: 0.7;
 }
-/* ---------- Custom cursor (created in js/script.js) ---------- */
+/* ---------- Cursor personalizado criado pelo JavaScript ---------- */
 html.ponteiro-personalizado,
 html.ponteiro-personalizado * {
   cursor: none !important;
@@ -1191,17 +1347,18 @@ html.ponteiro-personalizado * {
   height: 32px;
   transform-origin: 6px 6px;
   transition: transform 0.25s cubic-bezier(0.3, 1.4, 0.5, 1);
+  filter: drop-shadow(0 0 3px rgba(24, 157, 255, 0.7));
 }
 .seta-ponteiro .contorno {
   fill: var(--cursor-outline);
-  stroke: var(--cursor-outline);
-  stroke-width: 4.4;
+  stroke: var(--svg-stroke-color, var(--cursor-outline));
+  stroke-width: var(--svg-stroke-width, 4.4);
   stroke-linejoin: round;
 }
 .seta-ponteiro .corpo-vetor {
   fill: var(--cursor-fill);
-  stroke: var(--cursor-fill);
-  stroke-width: 2;
+  stroke: var(--svg-stroke-color, var(--cursor-fill));
+  stroke-width: var(--svg-stroke-width, 2);
   stroke-linejoin: round;
 }
 .ponteiro.com-ponteiro-sobre .seta-ponteiro {
@@ -1210,42 +1367,13 @@ html.ponteiro-personalizado * {
 .ponteiro.pressionado .seta-ponteiro {
   transform: scale(0.8);
 }
-.onda-clique {
-  position: fixed;
-  z-index: 9998;
-  pointer-events: none;
-  width: 48px;
-  height: 48px;
-  margin: -24px 0 0 -24px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  box-shadow:
-    0 0 0 1px rgba(70, 130, 255, 0.6),
-    inset 0 0 0 1px rgba(70, 130, 255, 0.35);
-  animation: ripple 0.5s ease-out forwards;
-}
-@keyframes ripple {
-  from {
-    opacity: 0.9;
-    transform: scale(0.2);
-  }
-  to {
-    opacity: 0;
-    transform: scale(1.5);
-  }
-}
 a:focus-visible,
 button:focus-visible {
   outline: 0.14rem solid var(--accent);
   outline-offset: 0.2rem;
 }
 
-/* ---------- 12-column grid, spacing tokens, reviews and contact form ---------- */
-:root {
-  --gap: 1.2rem;
-  --pad: 1.8rem;
-  --section: 6rem;
-}
+/* ---------- Grade geral, espacamentos, avaliacoes e formulario ---------- */
 .grade {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -1309,7 +1437,7 @@ button:focus-visible {
 .review-card {
   border-radius: var(--radius);
   background: var(--card);
-  border: 0.06rem solid var(--hairline);
+  border: var(--card-border);
   box-shadow: var(--shadow);
 }
 .formulario-contato {
@@ -1339,7 +1467,7 @@ button:focus-visible {
 .campo textarea {
   width: 100%;
   padding: 0.75rem 0.9rem;
-  border: 0.06rem solid var(--hairline);
+  border: var(--field-border);
   border-radius: var(--radius-sm);
   background: var(--bg);
   color: var(--text);
@@ -1385,7 +1513,7 @@ button:focus-visible {
   color: #d64545;
 }
 .formulario-contato .botao {
-  border: 0;
+  border: var(--primary-button-border);
   font-family: inherit;
 }
 .resumo-avaliacoes {
@@ -1413,80 +1541,6 @@ button:focus-visible {
   min-height: 16rem;
   border-radius: var(--radius);
   overflow: hidden;
-}
-:root {
-  --bg: #ffdbbb;
-  --bg-gradient: radial-gradient(ellipse at 8% 12%, rgba(153, 126, 103, 0.12), transparent 31%), radial-gradient(ellipse at 91% 30%, rgba(204, 190, 177, 0.35), transparent 32%), radial-gradient(ellipse at 56% 88%, rgba(255, 255, 255, 0.28), transparent 35%), linear-gradient(145deg, #ffdbbb 0%, #f6e5d7 48%, #e8d8c8 100%);
-  --text: #322d27;
-  --muted: #664930;
-  --card: #fff3e8;
-  --card-top: #fff3e8;
-  --card-bottom: #f1dfcf;
-  --hairline: rgba(102, 73, 48, 0.18);
-  --glass: rgba(255, 243, 232, 0.88);
-  --accent: #664930;
-  --accent-strong: #664930;
-  --accent-secondary: #7f7265;
-  --accent-tertiary: #997e67;
-  --accent-highlight: #ffdbbb;
-  --accent-gradient: linear-gradient(125deg, #997e67 0%, #7f6250 54%, #664930 100%);
-  --shadow: 0 0.5rem 1.6rem rgba(68, 48, 32, 0.12);
-  --card-ink: #322d27;
-  --card-icon-bg: #fff3e8;
-  --card-icon-text: #664930;
-  --card-shadow: 0 0.18rem 0 rgba(68, 48, 32, 0.14), 0 0.55rem 1rem rgba(68, 48, 32, 0.12), 0 1.1rem 1.8rem rgba(68, 48, 32, 0.09);
-  --card-shadow-hover: 0 0.3rem 0 rgba(68, 48, 32, 0.18), 0 1rem 1.6rem rgba(68, 48, 32, 0.16), 0 1.7rem 2.6rem rgba(68, 48, 32, 0.12);
-  --welcome-gradient: linear-gradient(125deg, #ffdbbb 0%, #f0dfd0 52%, #ccbeb1 100%);
-  --welcome-text: #664930;
-  --welcome-button-bg: #fff3e8;
-  --welcome-button-text: #664930;
-  --card-sunrise: linear-gradient(135deg, #ffdbbb 0%, #f6d5b8 52%, #ecc9ab 100%);
-  --card-ocean: linear-gradient(135deg, #fff1e2 0%, #e9d8c9 48%, #ccbeb1 100%);
-  --card-orchid: linear-gradient(135deg, #f8e9dc 0%, #e6d3c2 52%, #ccbeb1 100%);
-  --card-citrus: linear-gradient(135deg, #ffdbbb 0%, #efd7c2 50%, #d7c6b7 100%);
-  --card-candy: linear-gradient(135deg, #f7e6d8 0%, #e5d2c1 50%, #cbbbab 100%);
-  --card-sky: linear-gradient(135deg, #fff3e8 0%, #eadbcd 50%, #d3c5b9 100%);
-  --radius: 1.2rem;
-  --radius-sm: 0.8rem;
-  --hover-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --hover-duration: 0.85s;
-}
-[data-theme="dark"] {
-  --bg: #322d27;
-  --bg-gradient: radial-gradient(ellipse at 8% 12%, rgba(191, 132, 64, 0.2), transparent 31%), radial-gradient(ellipse at 91% 30%, rgba(127, 114, 101, 0.22), transparent 32%), radial-gradient(ellipse at 56% 88%, rgba(170, 170, 174, 0.1), transparent 35%), linear-gradient(145deg, #322d27 0%, #292521 48%, #3b342e 100%);
-  --text: #e2e1eb;
-  --muted: #aaaaae;
-  --card: #3d3731;
-  --card-top: #50453a;
-  --card-bottom: #342f2a;
-  --hairline: rgba(226, 225, 235, 0.16);
-  --glass: rgba(50, 45, 39, 0.9);
-  --accent: #bf8440;
-  --accent-strong: #a96f30;
-  --accent-secondary: #7f7265;
-  --accent-tertiary: #aaaaae;
-  --accent-highlight: #e2e1eb;
-  --accent-gradient: linear-gradient(125deg, #7f7265 0%, #664930 54%, #322d27 100%);
-  --shadow: 0 0.5rem 1.6rem rgba(0, 0, 0, 0.24);
-  --card-ink: #e2e1eb;
-  --card-icon-bg: #e2e1eb;
-  --card-icon-text: #322d27;
-  --card-shadow: 0 0.18rem 0 rgba(0, 0, 0, 0.2), 0 0.55rem 1rem rgba(0, 0, 0, 0.18), 0 1.1rem 1.8rem rgba(0, 0, 0, 0.14);
-  --card-shadow-hover: 0 0.3rem 0 rgba(0, 0, 0, 0.25), 0 1rem 1.6rem rgba(0, 0, 0, 0.22), 0 1.7rem 2.6rem rgba(0, 0, 0, 0.18);
-  --welcome-gradient: linear-gradient(125deg, #322d27 0%, #40372e 52%, #4e4031 100%);
-  --welcome-text: #e2e1eb;
-  --welcome-button-bg: #e2e1eb;
-  --welcome-button-text: #322d27;
-  --card-sunrise: linear-gradient(135deg, #51463c 0%, #4a3c30 52%, #3b342e 100%);
-  --card-ocean: linear-gradient(135deg, #4c4743 0%, #484039 48%, #3b342e 100%);
-  --card-orchid: linear-gradient(135deg, #514943 0%, #4b4036 52%, #3b342e 100%);
-  --card-citrus: linear-gradient(135deg, #55483a 0%, #4c3e30 50%, #3b342e 100%);
-  --card-candy: linear-gradient(135deg, #514640 0%, #4a3e34 50%, #3b342e 100%);
-  --card-sky: linear-gradient(135deg, #4e4945 0%, #49433d 50%, #3b342e 100%);
-  --cursor-fill: #e2e1eb;
-  --cursor-outline: #322d27;
-  --bulb-fill: transparent;
-  --rays: 0;
 }
 body {
   background: var(--bg);
@@ -1612,10 +1666,6 @@ body {
 .introducao-sobre .palavra.em-destaque {
   box-shadow: none;
 }
-.onda-clique {
-  border-color: var(--accent);
-  box-shadow: none;
-}
 .boas-vindas::before {
   content: none;
 }
@@ -1732,6 +1782,7 @@ body {
   transition-timing-function: var(--hover-ease);
 }
 
+/* ---------- RESPONSIVIDADE: tablet ---------- */
 @media (max-width: 900px) {
   .barra-navegacao {
     height: auto;
@@ -1786,6 +1837,7 @@ body {
     height: 38rem;
   }
 }
+/* ---------- RESPONSIVIDADE: celular ---------- */
 @media (max-width: 600px) {
   .barra-navegacao {
     padding: 0.5rem 0.85rem;
@@ -1983,6 +2035,7 @@ body {
     padding: 1rem 1.8rem;
   }
 }
+/* ---------- Ajustes para telas sem mouse ---------- */
 @media (hover: none) {
   .linha-competencia .corpo-competencia,
   .selo-servico p {
@@ -1996,14 +2049,14 @@ body {
     flex: 1 1 auto;
   }
 }
-/* ---------- Playful, colorful cards ---------- */
+/* ---------- Aparencia final dos cartoes coloridos ---------- */
 .cartao-link,
 .cartao-trajetoria,
 .linha-competencia,
 .selo-servico {
   isolation: isolate;
-  border: 0;
-  border-radius: 2rem 1rem 2rem 1rem;
+  border: var(--card-border);
+  border-radius: var(--card-radius);
   color: var(--card-ink);
   background-size: 180% 180%;
   box-shadow: var(--card-shadow);
@@ -2108,7 +2161,7 @@ body {
 .linha-competencia .bloco-icone {
   background: var(--card-icon-bg);
   color: var(--card-icon-text);
-  border: 0;
+  border: var(--welcome-button-border);
   box-shadow: 0 0.3rem 0.8rem rgba(50, 45, 39, 0.14);
   transition:
     transform 0.45s var(--hover-ease),
@@ -2213,8 +2266,8 @@ body {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  border-radius: 2rem 1rem 2rem 1rem;
-  border: 0;
+  border-radius: var(--card-radius);
+  border: var(--card-border);
   background: linear-gradient(135deg, var(--card-top), var(--card-bottom));
   box-shadow: var(--card-shadow);
 }
@@ -2225,7 +2278,7 @@ body {
 .formulario-contato,
 .resumo-avaliacoes,
 .review-card {
-  border: 0;
+  border: var(--card-border);
 }
 .cartao-link:hover,
 .cartao-link:focus-visible,
@@ -2242,7 +2295,7 @@ body {
 }
 .foto-inicio,
 .foto-sobre {
-  border-radius: 2rem 1rem 2rem 1rem;
+  border-radius: var(--card-radius);
 }
 .cartao-link.grande {
   min-height: 16rem;
@@ -2255,7 +2308,7 @@ body {
   .selo-servico,
   .formulario-contato,
   .resumo-avaliacoes {
-    border-radius: 1.5rem 0.85rem 1.5rem 0.85rem;
+    border-radius: var(--card-radius-mobile);
   }
   .linha-competencia .marca-dagua {
     display: none;
@@ -2283,4 +2336,256 @@ body {
 .selo-servico:hover,
 .selo-servico:focus-visible {
   translate: 0 0;
+}
+
+/* ---------- Modo HighTech: atmosfera, interface e fundo interativo ---------- */
+#hightech-canvas {
+  display: none;
+}
+[data-theme="hightech"] #hightech-canvas {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.85;
+}
+[data-theme="hightech"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.38;
+  background: linear-gradient(rgba(99, 185, 231, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 185, 231, 0.045) 1px, transparent 1px);
+  background-size: 4.5rem 4.5rem;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 86%);
+}
+[data-theme="hightech"] #conteudo-site {
+  position: relative;
+  z-index: 1;
+}
+[data-theme="hightech"] .botao-cabecalho {
+  border-color: var(--hairline);
+}
+.icone-hightech {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition:
+    transform 0.35s var(--hover-ease),
+    filter 0.35s;
+}
+[data-theme="hightech"] #alternar-tema {
+  color: #8bdcff;
+  border-color: rgba(139, 220, 255, 0.4);
+  background: rgba(22, 75, 108, 0.3);
+  box-shadow:
+    inset 0 0 0 1px rgba(139, 220, 255, 0.06),
+    0 0 1.2rem rgba(29, 151, 218, 0.12);
+}
+#alternar-tema:hover .icone-hightech {
+  transform: rotate(12deg);
+  filter: drop-shadow(0 0 5px rgba(101, 200, 255, 0.7));
+}
+#rotulo-tema {
+  white-space: nowrap;
+}
+[data-theme="hightech"] .barra-navegacao {
+  box-shadow:
+    0 0.5rem 2rem rgba(0, 0, 0, 0.18),
+    0 1px 0 rgba(101, 200, 255, 0.06);
+}
+[data-theme="hightech"] .links-navegacao a.ativo {
+  color: #a8e5ff;
+}
+[data-theme="hightech"] .inicio {
+  isolation: isolate;
+}
+[data-theme="hightech"] .grade-inicio,
+[data-theme="hightech"] .dica-rolagem {
+  z-index: 1;
+}
+[data-theme="hightech"] .inicio::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(34rem 28rem at 82% 48%, rgba(19, 130, 194, 0.16), transparent 72%), linear-gradient(115deg, transparent 0 58%, rgba(72, 179, 232, 0.035) 58.1% 58.2%, transparent 58.3%), linear-gradient(25deg, transparent 0 72%, rgba(72, 179, 232, 0.035) 72.1% 72.2%, transparent 72.3%);
+}
+[data-theme="hightech"] .inicio::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: max(-8rem, calc((100vw - 92rem) / 2 - 12rem));
+  width: min(46vw, 42rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(101, 200, 255, 0.12);
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg 284deg, rgba(101, 200, 255, 0.02) 300deg, rgba(101, 200, 255, 0.68) 338deg, rgba(101, 200, 255, 0.08) 354deg, transparent 360deg);
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 1px), #000 calc(100% - 1px));
+  mask: radial-gradient(closest-side, transparent calc(100% - 1px), #000 calc(100% - 1px));
+  box-shadow:
+    0 0 0 1.6rem rgba(101, 200, 255, 0.025),
+    0 0 0 4.3rem rgba(101, 200, 255, 0.018),
+    inset 0 0 4rem rgba(27, 133, 188, 0.08);
+  transform: translateY(-50%);
+  rotate: 0deg;
+  translate: 0 0;
+  animation:
+    hightech-circle-rotate 28s linear infinite,
+    hightech-circle-float 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes hightech-circle-rotate {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes hightech-circle-float {
+  50% {
+    translate: 0 -0.75rem;
+  }
+}
+[data-theme="hightech"] .rotulo-secao {
+  align-items: center;
+  color: #74cff8;
+}
+[data-theme="hightech"] .rotulo-secao::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: #75d7ff;
+  box-shadow: 0 0 0.7rem rgba(101, 200, 255, 0.9);
+}
+[data-theme="hightech"] .inicio h1,
+[data-theme="hightech"] .cabecalho-secao h2 {
+  background-image: linear-gradient(110deg, #f1f8ff 20%, #8bdcff 76%, #49aee0 100%);
+}
+[data-theme="hightech"] .visual-inicio,
+[data-theme="hightech"] .visual-sobre {
+  isolation: isolate;
+}
+[data-theme="hightech"] .foto-inicio,
+[data-theme="hightech"] .foto-sobre {
+  border: 1px solid rgba(126, 212, 255, 0.32);
+  box-shadow:
+    0 1.4rem 4rem rgba(0, 0, 0, 0.34),
+    0 0 2.2rem rgba(33, 144, 201, 0.16);
+  filter: saturate(0.82) contrast(1.04);
+}
+[data-theme="hightech"] .visual-inicio::before,
+[data-theme="hightech"] .visual-sobre::before {
+  content: "";
+  position: absolute;
+  inset: -0.65rem;
+  z-index: -1;
+  border: 1px solid rgba(101, 200, 255, 0.32);
+  clip-path: polygon(0 0, 18% 0, 18% 1px, 1px 1px, 1px 18%, 0 18%, 0 0, 100% 0, 100% 18%, calc(100% - 1px) 18%, calc(100% - 1px) 1px, 82% 1px, 82% 0, 100% 0, 100% 100%, 82% 100%, 82% calc(100% - 1px), calc(100% - 1px) calc(100% - 1px), calc(100% - 1px) 82%, 100% 82%, 100% 100%, 0 100%, 0 82%, 1px 82%, 1px calc(100% - 1px), 18% calc(100% - 1px), 18% 100%, 0 100%);
+  pointer-events: none;
+}
+[data-theme="hightech"] .bloco-flutuante,
+[data-theme="hightech"] .icones-flutuantes-inicio .bloco-flutuante {
+  backdrop-filter: blur(1rem) saturate(1.4);
+  box-shadow:
+    inset 0 0 1.2rem rgba(57, 169, 222, 0.08),
+    0 0.7rem 2rem rgba(0, 0, 0, 0.24),
+    0 0 1.2rem rgba(57, 169, 222, 0.12);
+}
+[data-theme="hightech"] .bloco-flutuante.sobre-fundo-escuro {
+  background: rgba(20, 70, 99, 0.42);
+  border-color: rgba(120, 214, 255, 0.38);
+  color: #9de3ff;
+}
+[data-theme="hightech"] .bloco-flutuante.sobre-fundo-escuro:hover {
+  background: #d7f4ff;
+  color: #0c466a;
+}
+[data-theme="hightech"] .dica-rolagem i {
+  background: linear-gradient(#68cfff, transparent);
+  box-shadow: 0 0 0.8rem rgba(101, 200, 255, 0.35);
+}
+[data-theme="hightech"] .botao-principal {
+  color: #061827;
+  box-shadow:
+    0 0.5rem 1.5rem rgba(17, 135, 195, 0.2),
+    inset 0 1px rgba(255, 255, 255, 0.36);
+}
+[data-theme="hightech"] .botao-secundario:hover {
+  background: rgba(60, 157, 208, 0.14);
+}
+[data-theme="hightech"] .cartao-link,
+[data-theme="hightech"] .cartao-trajetoria,
+[data-theme="hightech"] .linha-competencia,
+[data-theme="hightech"] .selo-servico,
+[data-theme="hightech"] .formulario-contato,
+[data-theme="hightech"] .resumo-avaliacoes {
+  backdrop-filter: blur(0.6rem);
+}
+[data-theme="hightech"] .cartao-trajetoria {
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="hightech"] .cartao-link::before,
+[data-theme="hightech"] .cartao-trajetoria::before,
+[data-theme="hightech"] .linha-competencia::before,
+[data-theme="hightech"] .selo-servico::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.7;
+  background:
+    linear-gradient(90deg, #71d5ff, transparent 35%) top left / 38% 1px no-repeat,
+    linear-gradient(180deg, #71d5ff, transparent 40%) top left / 1px 32% no-repeat,
+    linear-gradient(270deg, #71d5ff, transparent 35%) bottom right / 38% 1px no-repeat,
+    linear-gradient(0deg, #71d5ff, transparent 40%) bottom right / 1px 32% no-repeat;
+}
+[data-theme="hightech"] .cartao-link::after,
+[data-theme="hightech"] .cartao-trajetoria::after,
+[data-theme="hightech"] .linha-competencia::after,
+[data-theme="hightech"] .selo-servico::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(110deg, transparent 38%, rgba(118, 211, 255, 0.12) 50%, transparent 62%);
+  transform: translateX(-100%);
+  transition:
+    transform 0.75s ease,
+    opacity 0.2s;
+}
+[data-theme="hightech"] .cartao-link:hover::after,
+[data-theme="hightech"] .cartao-link:focus-visible::after,
+[data-theme="hightech"] .cartao-trajetoria:hover::after,
+[data-theme="hightech"] .cartao-trajetoria:focus-visible::after,
+[data-theme="hightech"] .linha-competencia:hover::after,
+[data-theme="hightech"] .linha-competencia:focus-visible::after,
+[data-theme="hightech"] .selo-servico:hover::after,
+[data-theme="hightech"] .selo-servico:focus-visible::after {
+  opacity: 1;
+  transform: translateX(100%);
+}
+[data-theme="hightech"] .formulario-contato,
+[data-theme="hightech"] .resumo-avaliacoes {
+  background-image: linear-gradient(135deg, rgba(18, 54, 80, 0.92), rgba(8, 29, 46, 0.94)), var(--bg-gradient);
+}
+[data-theme="hightech"] .campo input:focus,
+[data-theme="hightech"] .campo select:focus,
+[data-theme="hightech"] .campo textarea:focus {
+  box-shadow:
+    0 0 0 0.16rem rgba(77, 183, 238, 0.16),
+    0 0 1rem rgba(77, 183, 238, 0.08);
+}
+[data-theme="hightech"] ::selection {
+  background: #3ca9e0;
+  color: #061827;
 }

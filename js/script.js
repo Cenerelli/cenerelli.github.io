@@ -1,15 +1,19 @@
-/* Site interactions and page state. */
+/* ==========================================================================
+   INTERACOES DA PAGINA
+   Organizacao: dados e elementos > textos > recursos da pagina > inicializacao.
+   Para mudar textos, veja texts.js; para layout e cores, veja css/style.css.
+   ========================================================================== */
 
-/* ---------- Data (arrays) ---------- */
+/* ---------- Lista de secoes e textos alternados ---------- */
 const sectionIds = ["inicio", "sobre", "trajetoria", "competencias", "servicos", "portfolio", "avaliacoes", "contato"];
 const roleKeys = ["welcome.role1", "welcome.role2", "welcome.role3"];
 
-/* ---------- State ---------- */
+/* ---------- Estado atual da pagina ---------- */
 let language = "pt";
 let welcomeActive = true;
 let isSwitchingLanguage = false;
 
-/* ---------- Page elements ---------- */
+/* ---------- Elementos principais do HTML ---------- */
 const root = document.documentElement;
 const site = document.getElementById("conteudo-site");
 const navbar = document.getElementById("barra-navegacao");
@@ -19,8 +23,9 @@ const scrollHint = document.querySelector(".dica-rolagem");
 const progressBar = document.getElementById("progresso-rolagem");
 const navLinks = document.querySelectorAll(".links-navegacao a");
 const revealItems = document.querySelectorAll(".revelar");
-const parallaxItems = document.querySelectorAll("[data-speed]");
-const bulb = document.getElementById("icone-tema");
+const parallaxItems = document.querySelectorAll("[data-parallax], [data-speed]");
+const themeButton = document.getElementById("alternar-tema");
+const themeLabel = document.getElementById("rotulo-tema");
 const earthIcons = document.querySelectorAll(".icone-terra");
 const welcome = document.getElementById("boas-vindas");
 const welcomeButton = document.getElementById("continuar-boas-vindas");
@@ -30,8 +35,15 @@ const hSticky = document.querySelector(".fixo-rolagem-horizontal");
 const hViewport = document.querySelector(".janela-rolagem-horizontal");
 const hTrack = document.querySelector(".trilho-rolagem-horizontal");
 const hBar = document.querySelector(".progresso-rolagem-horizontal i");
+let highTechCanvas = null;
+let highTechContext = null;
+let highTechNodes = [];
+let highTechFrame = 0;
+let highTechActive = false;
+let highTechLastFrame = 0;
+let highTechPointer = { x: 0, y: 0, active: false };
 
-/* ---------- Small helpers ---------- */
+/* ---------- Funcoes auxiliares reutilizadas ---------- */
 function listen(nodeList, eventName, handler) {
   let i = 0;
   while (i < nodeList.length) {
@@ -79,7 +91,7 @@ function preventGestureZoom(event) {
   }
 }
 
-/* ---------- Texts and language (PT / EN) ---------- */
+/* ---------- Textos e troca de idioma (portugues / ingles) ---------- */
 function getText(key, forcedLanguage) {
   let chosen = language;
   if (forcedLanguage !== undefined) {
@@ -137,6 +149,7 @@ function applyTexts() {
     labels[i].setAttribute("aria-label", getText(labels[i].getAttribute("data-i18n-aria")));
     i = i + 1;
   }
+  updateThemeButton();
   i = 0;
   while (i < options.length) {
     if (options[i].getAttribute("data-language") === language) {
@@ -200,7 +213,7 @@ function onEarthEnd(event) {
   event.currentTarget.classList.remove("girando");
 }
 
-/* ---------- Typewriter: each row is [element, role index, characters, mode, run id] ---------- */
+/* ---------- Texto digitado: cargo animado nas telas de boas-vindas e inicio ---------- */
 const typers = [
   [document.getElementById("funcao-digitada-boas-vindas"), 0, 0, "typing", 0],
   [document.getElementById("funcao-digitada-inicio"), 0, 0, "typing", 0],
@@ -258,26 +271,168 @@ function restartTypers() {
   }
 }
 
-/* ---------- Light / dark theme (SVG light bulb) ---------- */
-function onThemeClick() {
-  bulb.classList.remove("acendendo");
-  bulb.classList.remove("apagando");
-  bulb.getBoundingClientRect(); // restarts the animation
-  if (root.getAttribute("data-theme") === "dark") {
-    root.setAttribute("data-theme", "light");
-    bulb.classList.add("acendendo");
-  } else {
-    root.setAttribute("data-theme", "dark");
-    bulb.classList.add("apagando");
+/* ---------- Alternancia entre os temas Dark e HighTech ---------- */
+function updateThemeButton() {
+  const isHighTech = root.getAttribute("data-theme") === "hightech";
+  themeLabel.textContent = getText(isHighTech ? "theme.dark" : "theme.hightech");
+  themeButton.setAttribute("aria-label", getText(isHighTech ? "theme.dark.aria" : "theme.aria"));
+  themeButton.setAttribute("aria-pressed", isHighTech ? "true" : "false");
+}
+
+function resizeHighTechCanvas() {
+  const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  highTechCanvas.width = Math.round(width * ratio);
+  highTechCanvas.height = Math.round(height * ratio);
+  highTechCanvas.style.width = width + "px";
+  highTechCanvas.style.height = height + "px";
+  highTechContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+  const count = Math.max(28, Math.min(95, Math.round((width * height) / 25000)));
+  highTechNodes = [];
+  let i = 0;
+  while (i < count) {
+    highTechNodes.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      phase: Math.random() * Math.PI * 2,
+    });
+    i = i + 1;
   }
 }
 
-function onBulbEnd() {
-  bulb.classList.remove("acendendo");
-  bulb.classList.remove("apagando");
+function drawHighTechBackground(timestamp) {
+  if (highTechActive === false) {
+    return;
+  }
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const elapsed = highTechLastFrame === 0 ? 1 : Math.min((timestamp - highTechLastFrame) / 16.67, 2);
+  highTechLastFrame = timestamp;
+  highTechContext.clearRect(0, 0, width, height);
+  const points = [];
+  let i = 0;
+  while (i < highTechNodes.length) {
+    const node = highTechNodes[i];
+    node.x += node.vx * elapsed;
+    node.y += node.vy * elapsed;
+    if (node.x < -20 || node.x > width + 20) {
+      node.vx *= -1;
+    }
+    if (node.y < -20 || node.y > height + 20) {
+      node.vy *= -1;
+    }
+    let x = node.x;
+    let y = node.y;
+    if (highTechPointer.active) {
+      const dx = highTechPointer.x - x;
+      const dy = highTechPointer.y - y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 190 && distance > 0) {
+        const influence = (1 - distance / 190) * 0.16;
+        x -= dx * influence;
+        y -= dy * influence;
+      }
+    }
+    points.push({ x: x, y: y, phase: node.phase });
+    i = i + 1;
+  }
+
+  highTechContext.lineWidth = 0.7;
+  highTechContext.setLineDash([2, 8]);
+  highTechContext.lineDashOffset = -timestamp * 0.012;
+  i = 0;
+  while (i < points.length) {
+    let j = i + 1;
+    while (j < points.length) {
+      const dx = points[i].x - points[j].x;
+      const dy = points[i].y - points[j].y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 155) {
+        const pointerDistance = highTechPointer.active ? Math.hypot(points[i].x - highTechPointer.x, points[i].y - highTechPointer.y) : 1000;
+        const glow = pointerDistance < 190 ? 0.24 : 0;
+        highTechContext.strokeStyle = "rgba(89, 190, 245, " + (0.055 + (1 - distance / 155) * 0.1 + glow) + ")";
+        highTechContext.beginPath();
+        highTechContext.moveTo(points[i].x, points[i].y);
+        highTechContext.lineTo(points[j].x, points[j].y);
+        highTechContext.stroke();
+      }
+      j = j + 1;
+    }
+    i = i + 1;
+  }
+  highTechContext.setLineDash([]);
+
+  i = 0;
+  while (i < points.length) {
+    const point = points[i];
+    const pointerDistance = highTechPointer.active ? Math.hypot(point.x - highTechPointer.x, point.y - highTechPointer.y) : 1000;
+    const radius = pointerDistance < 150 ? 1.7 : 1.1 + (Math.sin(timestamp * 0.001 + point.phase) + 1) * 0.35;
+    highTechContext.beginPath();
+    highTechContext.arc(point.x, point.y, radius, 0, Math.PI * 2);
+    highTechContext.fillStyle = pointerDistance < 150 ? "rgba(143, 222, 255, 0.95)" : "rgba(91, 177, 224, 0.5)";
+    highTechContext.shadowColor = "rgba(75, 186, 246, 0.8)";
+    highTechContext.shadowBlur = pointerDistance < 150 ? 12 : 5;
+    highTechContext.fill();
+    i = i + 1;
+  }
+  highTechContext.shadowBlur = 0;
+
+  highTechFrame = requestAnimationFrame(drawHighTechBackground);
 }
 
-/* ---------- Smooth scrolling to a section ---------- */
+function onHighTechPointerMove(event) {
+  if (event.pointerType !== "mouse") {
+    return;
+  }
+  highTechPointer.x = event.clientX;
+  highTechPointer.y = event.clientY;
+  highTechPointer.active = true;
+}
+
+function onHighTechPointerLeave() {
+  highTechPointer.active = false;
+}
+
+function setHighTechBackground(active) {
+  highTechActive = active;
+  if (active) {
+    if (highTechCanvas === null) {
+      highTechCanvas = document.createElement("canvas");
+      highTechCanvas.id = "hightech-canvas";
+      highTechCanvas.setAttribute("aria-hidden", "true");
+      highTechContext = highTechCanvas.getContext("2d");
+      if (highTechContext === null) {
+        throw new Error("Não foi possível inicializar o fundo interativo HighTech.");
+      }
+      document.body.insertBefore(highTechCanvas, document.body.firstChild);
+    }
+    highTechLastFrame = 0;
+    resizeHighTechCanvas();
+    document.addEventListener("pointermove", onHighTechPointerMove);
+    document.documentElement.addEventListener("pointerleave", onHighTechPointerLeave);
+    window.addEventListener("resize", resizeHighTechCanvas);
+    highTechFrame = requestAnimationFrame(drawHighTechBackground);
+  } else {
+    cancelAnimationFrame(highTechFrame);
+    document.removeEventListener("pointermove", onHighTechPointerMove);
+    document.documentElement.removeEventListener("pointerleave", onHighTechPointerLeave);
+    window.removeEventListener("resize", resizeHighTechCanvas);
+    highTechPointer.active = false;
+  }
+}
+
+function onThemeClick() {
+  const isHighTech = root.getAttribute("data-theme") !== "hightech";
+  root.setAttribute("data-theme", isHighTech ? "hightech" : "dark");
+  setHighTechBackground(isHighTech);
+  updateThemeButton();
+}
+
+/* ---------- Rolagem suave ate uma secao ---------- */
 let smoothing = false;
 let smoothFrom = 0;
 let smoothTo = 0;
@@ -336,7 +491,7 @@ function stopSmooth() {
   smoothing = false; // the user takes over the scroll
 }
 
-/* ---------- Scroll effects: progress bar, hero (scroll-linked), reveal (scroll-trigger), parallax, horizontal scroll ---------- */
+/* ---------- Efeitos de rolagem: progresso, entrada, paralaxe e trajetoria ---------- */
 let scrollTicking = false;
 let hMaxX = 0;
 let revealObserver = null;
@@ -374,7 +529,11 @@ function updateParallax() {
   let i = 0;
   while (i < parallaxItems.length) {
     const reference = parallaxItems[i].parentElement.getBoundingClientRect();
-    const speed = parseFloat(parallaxItems[i].getAttribute("data-speed"));
+    let speedValue = getComputedStyle(parallaxItems[i]).getPropertyValue("--parallax-speed");
+    if (speedValue === "") {
+      speedValue = parallaxItems[i].getAttribute("data-speed");
+    }
+    const speed = parseFloat(speedValue);
     const offset = (reference.top + reference.height / 2 - window.innerHeight / 2) * speed;
     parallaxItems[i].style.translate = "0 " + offset.toFixed(1) + "px";
     i = i + 1;
@@ -509,7 +668,7 @@ function setupReviewsWidget() {
   }
 }
 
-/* ---------- 3D tilt on hover that follows the mouse position ---------- */
+/* ---------- Inclinacao 3D dos cartoes ao mover o mouse ---------- */
 let tiltTarget = null;
 
 function resetTilt(element) {
@@ -546,7 +705,7 @@ function onPageLeave() {
   }
 }
 
-/* ---------- About me intro: magnifier effect on the words near the mouse ---------- */
+/* ---------- Sobre: destaque das palavras perto do mouse ---------- */
 let lensFrame = 0;
 let lensX = 0;
 let lensY = 0;
@@ -616,7 +775,7 @@ function onLeadLeave() {
   }
 }
 
-/* ---------- Contact form (sent by email through FormSubmit) ---------- */
+/* ---------- Formulario de contato enviado pelo FormSubmit ---------- */
 const subjectKeys = ["form.subject.1", "form.subject.2", "form.subject.3", "form.subject.4"];
 
 function fillSubjects() {
@@ -688,7 +847,7 @@ function onFormSubmit(event) {
   }
 }
 
-/* ---------- Keyboard: Enter on the welcome screen ---------- */
+/* ---------- Teclado: tecla Enter na tela de boas-vindas ---------- */
 function onKeyDown(event) {
   switch (event.key) {
     case "Enter":
@@ -703,7 +862,7 @@ function onKeyDown(event) {
   }
 }
 
-/* ---------- Welcome screen: shown on every page load ---------- */
+/* ---------- Tela de boas-vindas ---------- */
 function onWelcomeMove(event) {
   welcome.style.setProperty("--px", ((event.clientX / window.innerWidth - 0.5) * 2).toFixed(3)); // parallax of the floating icons
   welcome.style.setProperty("--py", ((event.clientY / window.innerHeight - 0.5) * 2).toFixed(3));
@@ -738,7 +897,7 @@ function onWelcomeEnd(event) {
   }
 }
 
-/* ---------- Custom cursor: smooth arrow that grows on hover and shows a thin ring on click (mouse only) ---------- */
+/* ---------- Cursor personalizado para mouse ---------- */
 const ARROW = "M6 6L28 14L18 18L14 28Z";
 const TIP = 6; // the tip of the arrow is the click point
 const SMOOTHING = 0.5; // base follow speed per frame: lower = smoother, higher = more responsive
@@ -810,21 +969,11 @@ function onCursorOver(event) {
   }
 }
 
-function onCursorEndRipple(event) {
-  event.currentTarget.remove();
-}
-
 function onCursorDown(event) {
   if (event.pointerType !== "mouse") {
     return;
   }
   cursor.classList.add("pressionado");
-  const ripple = document.createElement("span");
-  ripple.className = "onda-clique";
-  ripple.style.left = event.clientX + "px";
-  ripple.style.top = event.clientY + "px";
-  document.body.appendChild(ripple);
-  ripple.addEventListener("animationend", onCursorEndRipple);
 }
 
 function onCursorUp() {
@@ -852,7 +1001,7 @@ function startCursor() {
   root.addEventListener("mouseleave", onCursorHide);
 }
 
-/* ---------- Start ---------- */
+/* ---------- Inicializacao: eventos e recursos da pagina ---------- */
 if (navigator.language.indexOf("pt") === 0) {
   language = "pt";
 } else {
@@ -866,7 +1015,6 @@ document.getElementById("formulario-contato").addEventListener("submit", onFormS
 listen(earthIcons, "animationend", onEarthEnd);
 listen(document.querySelectorAll("#alternar-idioma, #idioma-boas-vindas"), "click", onLanguageClick);
 document.getElementById("alternar-tema").addEventListener("click", onThemeClick);
-bulb.addEventListener("animationend", onBulbEnd);
 lead.addEventListener("pointermove", onLeadMove);
 lead.addEventListener("pointerleave", onLeadLeave);
 welcome.addEventListener("pointermove", onWelcomeMove);

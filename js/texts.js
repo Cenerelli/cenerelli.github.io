@@ -1,6 +1,7 @@
 /* ============================================================
-   SITE TEXTS. Each row is: [ key, Portuguese text, English text ].
-   Edit the texts here; the keys are used by data-i18n in index.html.
+   TEXTOS DO SITE. Cada linha segue o formato:
+   [chave, texto em portugues, texto em ingles].
+   As chaves sao ligadas aos elementos data-i18n do index.html.
    ============================================================ */
 const texts = [
   ["page.title", "João Cenerelli | Técnico de Informática", "João Cenerelli | IT Technician"],
@@ -11,7 +12,10 @@ const texts = [
   ["nav.skills", "Competências", "Skills"],
   ["nav.services", "Serviços", "Services"],
   ["nav.reviews", "Avaliações", "Reviews"],
-  ["theme.aria", "Alternar tema claro e escuro", "Switch light and dark theme"],
+  ["theme.aria", "Ativar modo HighTech", "Enable HighTech mode"],
+  ["theme.dark.aria", "Voltar ao modo Dark", "Return to Dark mode"],
+  ["theme.hightech", "HighTech", "HighTech"],
+  ["theme.dark", "Dark", "Dark"],
   ["language.aria", "Mudar idioma", "Change language"],
   ["about.title", "Venha me conhecer!", "Come meet me!"],
   ["about.subtitle", "Um pouco sobre quem eu sou e como eu trabalho.", "A little about who I am and how I work."],
@@ -48,7 +52,7 @@ const texts = [
   ["skills.data.title", "Dados e Power BI", "Data and Power BI"],
   ["skills.software.p1", "Modelagem e documentação de sistemas: levantamento de requisitos funcionais e não funcionais, definição de regras de negócio e elaboração de diagramas UML e casos de uso.", "Modeling and documentation of systems: gathering functional and non-functional requirements, defining business rules and building UML diagrams and use cases."],
   ["skills.software.p2", "Conteúdo estudado e concluído no curso Técnico em Desenvolvimento de Sistemas do Senac, que sigo cursando.", "Content studied and completed in the Systems Development Technician course at Senac, which I am still attending."],
-  ["skills.web.p1", "Desenvolvimento de sites e sistemas web com JavaScript, HTML e CSS, com versionamento de código em Git e GitHub e organização de projetos web.", "Development of websites and web systems with JavaScript, HTML and CSS, using Git and GitHub for version control and organizing web projects."],
+  ["skills.web.p1", "Desenvolvimento de sites e sistemas web com JavaScript, Node.js, HTML e CSS, com versionamento de código em Git e GitHub e organização de projetos web.", "Development of websites and web systems with JavaScript, Node.js, HTML and CSS, using Git and GitHub for version control and organizing web projects."],
   ["skills.web.p2", "Certificado de 200 horas em Programação Web pelo Instituto Federal (EAD), em aprofundamento no curso Técnico em Desenvolvimento de Sistemas do Senac.", "200-hour Web Programming certificate from the Federal Institute (online), now going deeper in the Systems Development Technician course at Senac."],
   ["skills.data.p1", "Fundamentos de banco de dados e criação de dashboards em Power BI para análise de dados, aplicados na rotina do meu estágio.", "Database fundamentals and Power BI dashboards for data analysis, applied in my day-to-day internship work."],
   ["skills.data.p2", "Certificado em fundamentos de banco de dados pela Fundação Bradesco, com módulo de banco de dados em andamento no Senac e evolução contínua em análise de dados.", "Certificate in database fundamentals from Fundação Bradesco, with a database module in progress at Senac and continuous growth in data analysis."],
@@ -59,7 +63,7 @@ const texts = [
   ["svc.consulting.text", "Suporte completo para tirar qualquer dúvida e resolver problemas no universo da T.I. Ajudo você a escolher as melhores peças de hardware (como memória, armazenamento e processador), indico os softwares que realmente valem a pena e oriento sobre qual computador comprar de acordo com a sua necessidade e orçamento. Além disso, ensino e auxilio em procedimentos como instalação de drivers, verificações de sistema e diversos outros processos técnicos do dia a dia.", "Full support to answer any question and solve problems in the world of IT. I help you choose the best hardware parts (such as memory, storage and processor), recommend the software that is really worth it and advise on which computer to buy according to your needs and budget. I also teach and assist with procedures such as driver installation, system checks and many other everyday technical processes."],
   ["about.headline", "Prazer, eu sou o João!", "Nice to meet you, I am João!"],
   ["about.lead", "Sou técnico de informática e estudante de Desenvolvimento de Sistemas, com estágio em uma empresa de TI corporativo, atuando com suporte, infraestrutura, nuvem e Power BI. Aos 20 anos, uno a bagagem prática de hardware, a lógica da programação, a sensibilidade do design e uma comunicação assertiva para criar soluções tecnológicas eficientes.", "I am an IT technician and Systems Development student, interning at a corporate IT company, working with support, infrastructure, cloud and Power BI. At 20, I combine hands-on hardware experience, programming logic, design sensitivity and assertive communication to build efficient technology solutions."],
-  ["about.m1.title", "Aos 7 anos", "At age 7"],
+  ["about.m1.title", "Aos 7 anos (2013)", "At age 7 (2013)"],
   ["about.m1.text", "Os videogames despertam meu interesse pela tecnologia. A rivalidade entre o meu Xbox 360 e o PlayStation 3 dos meus amigos me leva a pesquisar a fundo sobre hardware, benchmarks e arquitetura de sistemas.", "Video games spark my interest in technology. The rivalry between my Xbox 360 and my friends' PlayStation 3 leads me to research hardware, benchmarks and system architecture in depth."],
   ["about.m2.title", "Hardware na prática", "Hands-on hardware"],
   ["about.m2.text", "Aprendo a montar e formatar computadores por conta própria e transformo o aprendizado no meu serviço autônomo, a Cenerelli Informática.", "I learn to build and format computers on my own and turn what I learn into my freelance business, Cenerelli Informática."],
@@ -67,14 +71,14 @@ const texts = [
   ["about.m3.text", "Descubro a programação e entro no curso Técnico em Desenvolvimento de Sistemas do Senac.", "I discover programming and join the Systems Development Technician course at Senac."],
   ["about.m4.title", "Estágio em TI", "IT internship"],
   ["about.m4.text", "Para aplicar a teoria na prática, conquisto um estágio em uma empresa MSP de TI corporativo, onde atuo com suporte, infraestrutura, nuvem e dashboards em Power BI.", "To put theory into practice, I land an internship at a corporate IT MSP company, where I work with support, infrastructure, cloud and Power BI dashboards."],
-  ["about.m5.title", "CenerelliDesigner", "CenerelliDesigner"],
+  ["about.m5.title", "@CenerelliDesigner", "@CenerelliDesigner"],
   ["about.m5.text", "Em paralelo, exploro o lado criativo criando identidades visuais sob a marca CenerelliDesigner.", "In parallel, I explore my creative side, creating visual identities under the CenerelliDesigner brand."],
   ["about.m6.title", "Desde os 16 anos", "Since age 16"],
   ["about.m6.text", "Desenvolvo soft skills de liderança, oratória e gestão de pessoas através da participação ativa em uma ordem juvenil.", "I develop leadership, public speaking and people management soft skills through active participation in a youth order."],
   ["welcome.kicker", "Bem-vindo(a) ao meu site", "Welcome to my website"],
   ["welcome.role1", "Técnico de Informática", "IT Technician"],
   ["welcome.role2", "Estudante de Desenvolvimento de Sistemas", "Systems Development student"],
-  ["welcome.role3", "Designer | CenerelliDesigner", "Designer | CenerelliDesigner"],
+  ["welcome.role3", "Designer | @CenerelliDesigner", "Designer | @CenerelliDesigner"],
   ["welcome.continue", "Continuar", "Continue"],
   ["welcome.hint", "Passe o mouse para explorar", "Move your mouse to explore"],
   ["nav.portfolios", "Portfólios", "Portfolios"],
