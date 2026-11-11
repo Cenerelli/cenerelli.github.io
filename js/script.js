@@ -24,8 +24,6 @@ const progressBar = document.getElementById("progresso-rolagem");
 const navLinks = document.querySelectorAll(".links-navegacao a");
 const revealItems = document.querySelectorAll(".revelar");
 const parallaxItems = document.querySelectorAll("[data-parallax], [data-speed]");
-const themeButton = document.getElementById("alternar-tema");
-const themeLabel = document.getElementById("rotulo-tema");
 const earthIcons = document.querySelectorAll(".icone-terra");
 const welcome = document.getElementById("boas-vindas");
 const welcomeButton = document.getElementById("continuar-boas-vindas");
@@ -35,13 +33,6 @@ const hSticky = document.querySelector(".fixo-rolagem-horizontal");
 const hViewport = document.querySelector(".janela-rolagem-horizontal");
 const hTrack = document.querySelector(".trilho-rolagem-horizontal");
 const hBar = document.querySelector(".progresso-rolagem-horizontal i");
-let highTechCanvas = null;
-let highTechContext = null;
-let highTechNodes = [];
-let highTechFrame = 0;
-let highTechActive = false;
-let highTechLastFrame = 0;
-let highTechPointer = { x: 0, y: 0, active: false };
 
 /* ---------- Funcoes auxiliares reutilizadas ---------- */
 function listen(nodeList, eventName, handler) {
@@ -149,7 +140,6 @@ function applyTexts() {
     labels[i].setAttribute("aria-label", getText(labels[i].getAttribute("data-i18n-aria")));
     i = i + 1;
   }
-  updateThemeButton();
   i = 0;
   while (i < options.length) {
     if (options[i].getAttribute("data-language") === language) {
@@ -269,167 +259,6 @@ function restartTypers() {
     stepTyper(n, typers[n][4]);
     n = n + 1;
   }
-}
-
-/* ---------- Alternancia entre os temas Dark e HighTech ---------- */
-function updateThemeButton() {
-  const isHighTech = root.getAttribute("data-theme") === "hightech";
-  themeLabel.textContent = getText(isHighTech ? "theme.dark" : "theme.hightech");
-  themeButton.setAttribute("aria-label", getText(isHighTech ? "theme.dark.aria" : "theme.aria"));
-  themeButton.setAttribute("aria-pressed", isHighTech ? "true" : "false");
-}
-
-function resizeHighTechCanvas() {
-  const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  highTechCanvas.width = Math.round(width * ratio);
-  highTechCanvas.height = Math.round(height * ratio);
-  highTechCanvas.style.width = width + "px";
-  highTechCanvas.style.height = height + "px";
-  highTechContext.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-  const count = Math.max(28, Math.min(95, Math.round((width * height) / 25000)));
-  highTechNodes = [];
-  let i = 0;
-  while (i < count) {
-    highTechNodes.push({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.18,
-      vy: (Math.random() - 0.5) * 0.18,
-      phase: Math.random() * Math.PI * 2,
-    });
-    i = i + 1;
-  }
-}
-
-function drawHighTechBackground(timestamp) {
-  if (highTechActive === false) {
-    return;
-  }
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  const elapsed = highTechLastFrame === 0 ? 1 : Math.min((timestamp - highTechLastFrame) / 16.67, 2);
-  highTechLastFrame = timestamp;
-  highTechContext.clearRect(0, 0, width, height);
-  const points = [];
-  let i = 0;
-  while (i < highTechNodes.length) {
-    const node = highTechNodes[i];
-    node.x += node.vx * elapsed;
-    node.y += node.vy * elapsed;
-    if (node.x < -20 || node.x > width + 20) {
-      node.vx *= -1;
-    }
-    if (node.y < -20 || node.y > height + 20) {
-      node.vy *= -1;
-    }
-    let x = node.x;
-    let y = node.y;
-    if (highTechPointer.active) {
-      const dx = highTechPointer.x - x;
-      const dy = highTechPointer.y - y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < 190 && distance > 0) {
-        const influence = (1 - distance / 190) * 0.16;
-        x -= dx * influence;
-        y -= dy * influence;
-      }
-    }
-    points.push({ x: x, y: y, phase: node.phase });
-    i = i + 1;
-  }
-
-  highTechContext.lineWidth = 0.7;
-  highTechContext.setLineDash([2, 8]);
-  highTechContext.lineDashOffset = -timestamp * 0.012;
-  i = 0;
-  while (i < points.length) {
-    let j = i + 1;
-    while (j < points.length) {
-      const dx = points[i].x - points[j].x;
-      const dy = points[i].y - points[j].y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < 155) {
-        const pointerDistance = highTechPointer.active ? Math.hypot(points[i].x - highTechPointer.x, points[i].y - highTechPointer.y) : 1000;
-        const glow = pointerDistance < 190 ? 0.24 : 0;
-        highTechContext.strokeStyle = "rgba(89, 190, 245, " + (0.055 + (1 - distance / 155) * 0.1 + glow) + ")";
-        highTechContext.beginPath();
-        highTechContext.moveTo(points[i].x, points[i].y);
-        highTechContext.lineTo(points[j].x, points[j].y);
-        highTechContext.stroke();
-      }
-      j = j + 1;
-    }
-    i = i + 1;
-  }
-  highTechContext.setLineDash([]);
-
-  i = 0;
-  while (i < points.length) {
-    const point = points[i];
-    const pointerDistance = highTechPointer.active ? Math.hypot(point.x - highTechPointer.x, point.y - highTechPointer.y) : 1000;
-    const radius = pointerDistance < 150 ? 1.7 : 1.1 + (Math.sin(timestamp * 0.001 + point.phase) + 1) * 0.35;
-    highTechContext.beginPath();
-    highTechContext.arc(point.x, point.y, radius, 0, Math.PI * 2);
-    highTechContext.fillStyle = pointerDistance < 150 ? "rgba(143, 222, 255, 0.95)" : "rgba(91, 177, 224, 0.5)";
-    highTechContext.shadowColor = "rgba(75, 186, 246, 0.8)";
-    highTechContext.shadowBlur = pointerDistance < 150 ? 12 : 5;
-    highTechContext.fill();
-    i = i + 1;
-  }
-  highTechContext.shadowBlur = 0;
-
-  highTechFrame = requestAnimationFrame(drawHighTechBackground);
-}
-
-function onHighTechPointerMove(event) {
-  if (event.pointerType !== "mouse") {
-    return;
-  }
-  highTechPointer.x = event.clientX;
-  highTechPointer.y = event.clientY;
-  highTechPointer.active = true;
-}
-
-function onHighTechPointerLeave() {
-  highTechPointer.active = false;
-}
-
-function setHighTechBackground(active) {
-  highTechActive = active;
-  if (active) {
-    if (highTechCanvas === null) {
-      highTechCanvas = document.createElement("canvas");
-      highTechCanvas.id = "hightech-canvas";
-      highTechCanvas.setAttribute("aria-hidden", "true");
-      highTechContext = highTechCanvas.getContext("2d");
-      if (highTechContext === null) {
-        throw new Error("Não foi possível inicializar o fundo interativo HighTech.");
-      }
-      document.body.insertBefore(highTechCanvas, document.body.firstChild);
-    }
-    highTechLastFrame = 0;
-    resizeHighTechCanvas();
-    document.addEventListener("pointermove", onHighTechPointerMove);
-    document.documentElement.addEventListener("pointerleave", onHighTechPointerLeave);
-    window.addEventListener("resize", resizeHighTechCanvas);
-    highTechFrame = requestAnimationFrame(drawHighTechBackground);
-  } else {
-    cancelAnimationFrame(highTechFrame);
-    document.removeEventListener("pointermove", onHighTechPointerMove);
-    document.documentElement.removeEventListener("pointerleave", onHighTechPointerLeave);
-    window.removeEventListener("resize", resizeHighTechCanvas);
-    highTechPointer.active = false;
-  }
-}
-
-function onThemeClick() {
-  const isHighTech = root.getAttribute("data-theme") !== "hightech";
-  root.setAttribute("data-theme", isHighTech ? "hightech" : "dark");
-  setHighTechBackground(isHighTech);
-  updateThemeButton();
 }
 
 /* ---------- Rolagem suave ate uma secao ---------- */
@@ -1014,7 +843,6 @@ listen(document.querySelectorAll("[data-goto]"), "click", onGotoClick);
 document.getElementById("formulario-contato").addEventListener("submit", onFormSubmit);
 listen(earthIcons, "animationend", onEarthEnd);
 listen(document.querySelectorAll("#alternar-idioma, #idioma-boas-vindas"), "click", onLanguageClick);
-document.getElementById("alternar-tema").addEventListener("click", onThemeClick);
 lead.addEventListener("pointermove", onLeadMove);
 lead.addEventListener("pointerleave", onLeadLeave);
 welcome.addEventListener("pointermove", onWelcomeMove);
