@@ -591,10 +591,12 @@ function onKeyDown(event) {
 
 /* ---------- Tela de boas-vindas ---------- */
 function onWelcomeButtonMove(event) {
-  // the button leans toward the mouse
+  if (event.pointerType !== "mouse") {
+    return;
+  }
   const rect = welcomeButton.getBoundingClientRect();
-  welcomeButton.style.setProperty("--bx", ((event.clientX - rect.left - rect.width / 2) * 0.25).toFixed(1) + "px");
-  welcomeButton.style.setProperty("--by", ((event.clientY - rect.top - rect.height / 2) * 0.25).toFixed(1) + "px");
+  welcomeButton.style.setProperty("--bx", ((event.clientX - rect.left - rect.width / 2) * 0.1).toFixed(1) + "px");
+  welcomeButton.style.setProperty("--by", ((event.clientY - rect.top - rect.height / 2) * 0.1).toFixed(1) + "px");
 }
 
 function onWelcomeButtonLeave() {
@@ -630,23 +632,33 @@ let cursorX = 0;
 let cursorY = 0;
 let cursorRendering = false;
 
-function isInteractive(node) {
+function getCursorMode(node) {
   do {
     if (node.nodeType === 1) {
+      if (node.isContentEditable || node.tagName === "TEXTAREA") {
+        return "texto";
+      }
+      if (node.tagName === "INPUT") {
+        const textInputTypes = ["email", "number", "password", "search", "tel", "text", "url"];
+        if (textInputTypes.includes(node.type)) {
+          return "texto";
+        }
+      }
       switch (node.tagName) {
         case "A":
         case "BUTTON":
-          return true;
+        case "SELECT":
+          return "hover";
         default:
           break;
       }
-      if (node.hasAttribute("data-tilt") || node.hasAttribute("tabindex") || node.classList.contains("star") || node.classList.contains("letra")) {
-        return true;
+      if (node.hasAttribute("data-tilt") || node.hasAttribute("tabindex") || node.classList.contains("star") || node.classList.contains("letra") || node.classList.contains("palavra")) {
+        return "hover";
       }
     }
     node = node.parentNode;
   } while (node !== null && node !== document);
-  return false;
+  return "seta";
 }
 
 function cursorRender() {
@@ -684,11 +696,9 @@ function onCursorMove(event) {
 }
 
 function onCursorOver(event) {
-  if (isInteractive(event.target)) {
-    cursor.classList.add("com-ponteiro-sobre");
-  } else {
-    cursor.classList.remove("com-ponteiro-sobre");
-  }
+  const mode = getCursorMode(event.target);
+  cursor.classList.toggle("modo-hover", mode === "hover");
+  cursor.classList.toggle("modo-texto", mode === "texto");
 }
 
 function onCursorDown(event) {
@@ -712,7 +722,7 @@ function startCursor() {
   }
   cursor = document.createElement("div");
   cursor.className = "ponteiro";
-  cursor.innerHTML = '<svg class="seta-ponteiro" viewBox="0 0 32 32"><path class="contorno" d="' + ARROW + '"/><path class="corpo-vetor" d="' + ARROW + '"/></svg>';
+  cursor.innerHTML = '<svg class="icone-cursor cursor-seta" viewBox="0 0 32 32" aria-hidden="true"><path d="' + ARROW + '"/></svg><svg class="icone-cursor cursor-mao" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 14V7a2 2 0 0 1 4 0v5-2a2 2 0 0 1 4 0v2-1a2 2 0 0 1 4 0v6c0 4-2.8 7-7 7h-1c-1.6 0-3-.8-4-2l-3.7-4.5a1.8 1.8 0 0 1 2.8-2.3L11 16z"/></svg><svg class="icone-cursor cursor-texto" viewBox="0 0 12 28" aria-hidden="true"><path d="M2 2h8M6 2v24M2 26h8"/></svg>';
   document.body.appendChild(cursor);
   root.classList.add("ponteiro-personalizado");
   document.addEventListener("pointermove", onCursorMove);
