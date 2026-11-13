@@ -1640,6 +1640,9 @@ body {
   .texto-inicio {
     text-align: center;
   }
+  .texto-inicio .rotulo-secao {
+    justify-content: center;
+  }
   .introducao-inicio {
     margin-inline: auto;
   }
@@ -1663,22 +1666,20 @@ body {
     justify-self: center;
     width: min(100%, 21rem);
   }
-  .visual-inicio {
-    width: min(55vw, 12rem);
-  }
-  .foto-inicio {
-    aspect-ratio: 1;
-    border-radius: 50%;
+  .sobre-conteudo {
+    width: 100%;
+    text-align: center;
   }
   .titulo-destaque-sobre {
     font-size: 1.7rem;
   }
-  .grade-sobre .visual-sobre {
-    grid-row: 1;
+  .introducao-sobre {
+    width: 100%;
   }
   .visual-sobre {
     height: auto;
     aspect-ratio: 4/5;
+    grid-row: auto;
   }
   .cartao-trajetoria {
     width: min(78vw, 22rem);
