@@ -22,17 +22,18 @@ const heroInner = document.getElementById("conteudo-inicio");
 const scrollHint = document.querySelector(".dica-rolagem");
 const progressBar = document.getElementById("progresso-rolagem");
 const navLinks = document.querySelectorAll(".links-navegacao a");
-const revealItems = document.querySelectorAll(".revelar");
-const parallaxItems = document.querySelectorAll("[data-parallax], [data-speed]");
 const earthIcons = document.querySelectorAll(".icone-terra");
 const welcome = document.getElementById("boas-vindas");
 const welcomeButton = document.getElementById("continuar-boas-vindas");
 const lead = document.querySelector(".introducao-sobre");
-const hSection = document.getElementById("trajetoria");
-const hSticky = document.querySelector(".fixo-rolagem-horizontal");
-const hViewport = document.querySelector(".janela-rolagem-horizontal");
-const hTrack = document.querySelector(".trilho-rolagem-horizontal");
-const hBar = document.querySelector(".progresso-rolagem-horizontal i");
+const journeyCards = document.querySelectorAll(".cartao-trajetoria");
+const journeyPrev = document.getElementById("trajetoria-anterior");
+const journeyNext = document.getElementById("trajetoria-proximo");
+const journeyNextLabel = document.getElementById("trajetoria-proximo-texto");
+const journeyCount = document.getElementById("trajetoria-contador");
+const topButton = document.getElementById("voltar-topo");
+const footer = document.querySelector(".rodape");
+let journeyIndex = 0;
 
 /* ---------- Funcoes auxiliares reutilizadas ---------- */
 function listen(nodeList, eventName, handler) {
@@ -161,6 +162,7 @@ function applyTexts() {
     root.lang = "en";
   }
   fillSubjects();
+  updateJourneyControls();
   restartTypers();
 }
 
@@ -322,8 +324,6 @@ function stopSmooth() {
 
 /* ---------- Efeitos de rolagem: progresso, entrada, paralaxe e trajetoria ---------- */
 let scrollTicking = false;
-let hMaxX = 0;
-let revealObserver = null;
 
 function updateProgressBar() {
   const total = document.documentElement.scrollHeight - window.innerHeight;
@@ -354,44 +354,6 @@ function updateHeroLinked() {
   scrollHint.style.pointerEvents = p >= 0.18 ? "none" : "";
 }
 
-function updateParallax() {
-  let i = 0;
-  while (i < parallaxItems.length) {
-    const reference = parallaxItems[i].parentElement.getBoundingClientRect();
-    let speedValue = getComputedStyle(parallaxItems[i]).getPropertyValue("--parallax-speed");
-    if (speedValue === "") {
-      speedValue = parallaxItems[i].getAttribute("data-speed");
-    }
-    const speed = parseFloat(speedValue);
-    const offset = (reference.top + reference.height / 2 - window.innerHeight / 2) * speed;
-    parallaxItems[i].style.translate = "0 " + offset.toFixed(1) + "px";
-    i = i + 1;
-  }
-}
-
-function setupHorizontal() {
-  hMaxX = hTrack.scrollWidth - hViewport.clientWidth;
-  if (hMaxX < 0) {
-    hMaxX = 0;
-  }
-  hSection.style.height = hSticky.offsetHeight + hMaxX + "px"; // vertical scroll distance = sideways distance
-}
-
-function updateHorizontal() {
-  let progress = 0;
-  if (hMaxX > 0) {
-    progress = (navbar.offsetHeight - hSection.getBoundingClientRect().top) / hMaxX;
-  }
-  if (progress < 0) {
-    progress = 0;
-  }
-  if (progress > 1) {
-    progress = 1;
-  }
-  hTrack.style.transform = "translate3d(" + (-progress * hMaxX).toFixed(1) + "px, 0, 0)";
-  hBar.style.transform = "scaleX(" + (0.1 + 0.9 * progress).toFixed(3) + ")";
-}
-
 function updateActiveLink() {
   let currentId = "inicio";
   let i = 0;
@@ -412,48 +374,10 @@ function updateActiveLink() {
   }
 }
 
-function updateReveals() {
-  let i = 0;
-  while (i < revealItems.length) {
-    const bounds = revealItems[i].getBoundingClientRect();
-    const isInViewport = bounds.bottom > 0 && bounds.top < window.innerHeight;
-    if (isInViewport) {
-      revealItems[i].classList.add("visivel");
-    } else {
-      revealItems[i].classList.remove("visivel");
-    }
-    i = i + 1;
-  }
-}
-
-function setupReveals() {
-  if ("IntersectionObserver" in window) {
-    revealObserver = new IntersectionObserver(function (entries) {
-      let i = 0;
-      while (i < entries.length) {
-        entries[i].target.classList.toggle("visivel", entries[i].isIntersecting);
-        i = i + 1;
-      }
-    });
-    let i = 0;
-    while (i < revealItems.length) {
-      revealObserver.observe(revealItems[i]);
-      i = i + 1;
-    }
-  } else {
-    updateReveals();
-  }
-}
-
 function updateScrollEffects() {
   scrollTicking = false;
   updateProgressBar();
   updateHeroLinked();
-  if (revealObserver === null) {
-    updateReveals();
-  }
-  updateParallax();
-  updateHorizontal();
   updateActiveLink();
 }
 
@@ -465,7 +389,6 @@ function onScroll() {
 }
 
 function onResize() {
-  setupHorizontal();
   updateScrollEffects();
 }
 
@@ -531,76 +454,6 @@ function onPageLeave() {
   if (tiltTarget !== null) {
     resetTilt(tiltTarget);
     tiltTarget = null;
-  }
-}
-
-/* ---------- Sobre: destaque das palavras perto do mouse ---------- */
-let lensFrame = 0;
-let lensX = 0;
-let lensY = 0;
-
-function updateLens() {
-  lensFrame = 0;
-  const words = lead.querySelectorAll(".palavra");
-  const strengths = [];
-  const radius = parseFloat(getComputedStyle(root).fontSize) * 5; // 5rem
-  let strongest = 0;
-  let hotIndex = -1;
-  let i = 0;
-  while (i < words.length) {
-    const rect = words[i].getBoundingClientRect();
-    const dx = lensX - (rect.left + rect.width / 2);
-    const dy = (lensY - (rect.top + rect.height / 2)) * 2.6; // lines above/below count as farther
-    strengths.push(Math.exp(-((dx * dx + dy * dy) / (radius * radius)) * 2));
-    if (strengths[i] > strongest) {
-      strongest = strengths[i];
-      hotIndex = i;
-    }
-    i = i + 1;
-  }
-  if (strongest <= 0.25) {
-    hotIndex = -1;
-  }
-  i = 0;
-  while (i < words.length) {
-    if (i === hotIndex) {
-      words[i].style.setProperty("--lens", "1.5");
-      words[i].style.setProperty("--blur", "0px");
-      words[i].style.setProperty("--dim", "1");
-      words[i].classList.add("em-destaque");
-    } else {
-      let nearby = 0;
-      if (hotIndex >= 0) {
-        nearby = strengths[i]; // neighbours blur and fade
-      }
-      words[i].style.setProperty("--lens", "1");
-      words[i].style.setProperty("--blur", (nearby * 2.2).toFixed(2) + "px");
-      words[i].style.setProperty("--dim", (1 - nearby * 0.6).toFixed(2));
-      words[i].classList.remove("em-destaque");
-    }
-    i = i + 1;
-  }
-}
-
-function onLeadMove(event) {
-  lensX = event.clientX;
-  lensY = event.clientY;
-  if (lensFrame === 0) {
-    lensFrame = requestAnimationFrame(updateLens);
-  }
-}
-
-function onLeadLeave() {
-  cancelAnimationFrame(lensFrame);
-  lensFrame = 0;
-  const words = lead.querySelectorAll(".palavra");
-  let i = 0;
-  while (i < words.length) {
-    words[i].style.setProperty("--lens", "1");
-    words[i].style.setProperty("--blur", "0px");
-    words[i].style.setProperty("--dim", "1");
-    words[i].classList.remove("em-destaque");
-    i = i + 1;
   }
 }
 
@@ -676,6 +529,51 @@ function onFormSubmit(event) {
   }
 }
 
+/* ---------- Trajetoria: um card por vez, com botoes ---------- */
+function updateJourneyControls() {
+  const last = journeyIndex === journeyCards.length - 1;
+  journeyPrev.disabled = journeyIndex === 0;
+  journeyCount.textContent = journeyIndex + 1 + " / " + journeyCards.length;
+  journeyNextLabel.textContent = getText(last ? "journey.restart" : "journey.next");
+  journeyNext.classList.toggle("ultimo", last);
+}
+
+function showJourney(index) {
+  journeyIndex = index;
+  let i = 0;
+  while (i < journeyCards.length) {
+    journeyCards[i].classList.toggle("ativo", i === index);
+    i = i + 1;
+  }
+  updateJourneyControls();
+}
+
+function onJourneyNext() {
+  showJourney(journeyIndex === journeyCards.length - 1 ? 0 : journeyIndex + 1);
+}
+
+function onJourneyPrev() {
+  if (journeyIndex > 0) {
+    showJourney(journeyIndex - 1);
+  }
+}
+
+/* ---------- Botao de voltar ao topo (aparece quando o rodape entra na tela) ---------- */
+function onTopClick() {
+  scrollToSection("inicio");
+}
+
+function setupBackToTop() {
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      topButton.classList.toggle("visivel", entries[0].isIntersecting);
+    });
+    observer.observe(footer);
+  } else {
+    topButton.classList.add("visivel");
+  }
+}
+
 /* ---------- Teclado: tecla Enter na tela de boas-vindas ---------- */
 function onKeyDown(event) {
   switch (event.key) {
@@ -692,11 +590,6 @@ function onKeyDown(event) {
 }
 
 /* ---------- Tela de boas-vindas ---------- */
-function onWelcomeMove(event) {
-  welcome.style.setProperty("--px", ((event.clientX / window.innerWidth - 0.5) * 2).toFixed(3)); // parallax of the floating icons
-  welcome.style.setProperty("--py", ((event.clientY / window.innerHeight - 0.5) * 2).toFixed(3));
-}
-
 function onWelcomeButtonMove(event) {
   // the button leans toward the mouse
   const rect = welcomeButton.getBoundingClientRect();
@@ -747,7 +640,7 @@ function isInteractive(node) {
         default:
           break;
       }
-      if (node.hasAttribute("data-tilt") || node.hasAttribute("tabindex") || node.classList.contains("star") || node.classList.contains("bloco-flutuante") || node.classList.contains("letra")) {
+      if (node.hasAttribute("data-tilt") || node.hasAttribute("tabindex") || node.classList.contains("star") || node.classList.contains("letra")) {
         return true;
       }
     }
@@ -841,11 +734,11 @@ document.getElementById("ano-atual").textContent = new Date().getFullYear();
 
 listen(document.querySelectorAll("[data-goto]"), "click", onGotoClick);
 document.getElementById("formulario-contato").addEventListener("submit", onFormSubmit);
+journeyNext.addEventListener("click", onJourneyNext);
+journeyPrev.addEventListener("click", onJourneyPrev);
+topButton.addEventListener("click", onTopClick);
 listen(earthIcons, "animationend", onEarthEnd);
 listen(document.querySelectorAll("#alternar-idioma, #idioma-boas-vindas"), "click", onLanguageClick);
-lead.addEventListener("pointermove", onLeadMove);
-lead.addEventListener("pointerleave", onLeadLeave);
-welcome.addEventListener("pointermove", onWelcomeMove);
 welcome.addEventListener("animationend", onWelcomeEnd);
 welcomeButton.addEventListener("pointermove", onWelcomeButtonMove);
 welcomeButton.addEventListener("pointerleave", onWelcomeButtonLeave);
@@ -867,8 +760,7 @@ window.addEventListener("load", onResize);
 
 startCursor();
 applyTexts();
-setupReveals();
 setupReviewsWidget();
-setupHorizontal();
+setupBackToTop();
 updateScrollEffects();
 welcomeButton.focus({ preventScroll: true });

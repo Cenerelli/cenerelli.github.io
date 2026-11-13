@@ -62,15 +62,6 @@
   --cursor-fill: #087fc6;
   --cursor-outline: #f6fdff;
 
-  /* Icones flutuantes da hero: edite aqui so o tema claro */
-  --hero-icon-background: rgba(255, 243, 232, 0.88);
-  --hero-icon-color: #664930;
-  --hero-icon-border: 0.06rem solid rgba(102, 73, 48, 0.18);
-  --hero-icon-shadow: 0 0.5rem 1.6rem rgba(68, 48, 32, 0.12);
-  --hero-icon-hover-background: #664930;
-  --hero-icon-hover-color: #fff;
-  --hero-icon-radius: 1.2rem;
-  --hero-icon-svg-size: 52%;
 
   /* Contorno padrao dos desenhos SVG */
   --svg-stroke-width: unset;
@@ -83,7 +74,6 @@
   --secondary-button-border: 0.06rem solid var(--hairline);
   --header-button-border: 0 solid transparent;
   --welcome-button-border: 0 solid transparent;
-  --floating-icon-border: 0.06rem solid var(--hairline);
   --navbar-border: 0.06rem solid var(--hairline);
 
   /* Cantos arredondados */
@@ -144,15 +134,6 @@
   --cursor-fill: #62c5ff;
   --cursor-outline: #102b46;
 
-  /* Icones flutuantes da hero: edite aqui so o tema escuro */
-  --hero-icon-background: rgba(50, 45, 39, 0.9);
-  --hero-icon-color: #bf8440;
-  --hero-icon-border: 0.06rem solid rgba(226, 225, 235, 0.16);
-  --hero-icon-shadow: 0 0.5rem 1.6rem rgba(0, 0, 0, 0.24);
-  --hero-icon-hover-background: #a96f30;
-  --hero-icon-hover-color: #fff;
-  --hero-icon-radius: 1.2rem;
-  --hero-icon-svg-size: 52%;
 }
 * {
   box-sizing: border-box;
@@ -269,6 +250,9 @@ img {
 }
 .links-navegacao a.ativo::after {
   transform: scaleX(1);
+}
+.icone-nav {
+  display: none;
 }
 .controles-navegacao {
   display: flex;
@@ -482,156 +466,6 @@ img {
     transform-origin: bottom;
   }
 }
-/* ---------- Estilo base compartilhado pelos icones flutuantes ---------- */
-.bloco-flutuante {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  z-index: var(--depth, 1);
-  display: grid;
-  place-items: center;
-  width: var(--s);
-  height: var(--s);
-  border-radius: var(--radius);
-  background: var(--glass);
-  border: var(--floating-icon-border);
-  color: var(--accent);
-  box-shadow: var(--shadow);
-  -webkit-backdrop-filter: blur(1rem);
-  backdrop-filter: blur(1rem);
-  animation: var(--anim, drift-a) var(--dur, 7s) ease-in-out infinite;
-  animation-delay: var(--d);
-  transition:
-    scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1),
-    rotate 0.3s ease-out,
-    background 0.3s,
-    color 0.3s;
-}
-.bloco-flutuante svg {
-  width: 52%;
-  height: 52%;
-}
-.bloco-flutuante:hover {
-  scale: 1.25;
-  rotate: -8deg;
-  background: var(--accent-strong);
-  color: #fff;
-}
-@keyframes drift-a {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(-2deg);
-  }
-  50% {
-    transform: translate(0.8rem, -1.6rem) rotate(4deg);
-  }
-}
-@keyframes drift-b {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(2deg);
-  }
-  33% {
-    transform: translate(-1rem, -0.8rem) rotate(4deg);
-  }
-  66% {
-    transform: translate(0.8rem, -1.5rem) rotate(-4deg);
-  }
-}
-@keyframes drift-c {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(3deg);
-  }
-  50% {
-    transform: translate(-0.7rem, 1.4rem) rotate(-5deg);
-  }
-}
-
-/* ---------- ICONES SVG FLUTUANTES DA HERO ----------
-   Cada classe abaixo controla um icone: posicao, tamanho, profundidade,
-   animacao e paralaxe ficam reunidos aqui; cores ficam no inicio do arquivo.
-   Para mudar a forma do cartao, edite --hero-icon-radius no tema desejado.
-   Para trocar o desenho, altere o id do <use> correspondente no index.html.
-   -------------------------------------------------- */
-.icones-flutuantes-inicio {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.icones-flutuantes-inicio .bloco-flutuante {
-  background: var(--hero-icon-background);
-  border: var(--hero-icon-border);
-  border-radius: var(--hero-icon-radius);
-  color: var(--hero-icon-color);
-  box-shadow: var(--hero-icon-shadow);
-  pointer-events: auto;
-}
-.icones-flutuantes-inicio .bloco-flutuante svg {
-  width: var(--hero-icon-svg-size);
-  height: var(--hero-icon-svg-size);
-}
-.icones-flutuantes-inicio .bloco-flutuante:hover {
-  background: var(--hero-icon-hover-background);
-  color: var(--hero-icon-hover-color);
-}
-.icone-inicio-codigo {
-  --x: -8%;
-  --y: 8%;
-  --s: 3.6rem;
-  --d: 0s;
-  --anim: drift-a;
-  --dur: 6s;
-  --depth: 22;
-  --parallax-speed: 0.14;
-}
-.icone-inicio-terminal {
-  --x: 88%;
-  --y: 10%;
-  --s: 3.6rem;
-  --d: 1.2s;
-  --anim: drift-b;
-  --dur: 8s;
-  --depth: 22;
-  --parallax-speed: -0.1;
-}
-.icone-inicio-processador {
-  --x: -10%;
-  --y: 58%;
-  --s: 3.6rem;
-  --d: 0.6s;
-  --anim: drift-c;
-  --dur: 7s;
-  --depth: 22;
-  --parallax-speed: -0.16;
-}
-.icone-inicio-chaves {
-  --x: 90%;
-  --y: 62%;
-  --s: 3.6rem;
-  --d: 1.8s;
-  --anim: drift-a;
-  --dur: 9s;
-  --depth: 22;
-  --parallax-speed: 0.12;
-}
-.icone-inicio-caneta {
-  --x: 2%;
-  --y: 92%;
-  --s: 3.2rem;
-  --d: 0.3s;
-  --anim: drift-b;
-  --dur: 7.5s;
-  --depth: 22;
-  --parallax-speed: 0.18;
-}
-.icone-inicio-notebook {
-  --x: 74%;
-  --y: 70%;
-  --s: 3.6rem;
-  --depth: 22;
-}
-
 /* ---------- Cartoes e interacao de inclinacao ---------- */
 [data-tilt] {
   transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
@@ -825,54 +659,14 @@ img {
   box-shadow: var(--shadow);
 }
 .introducao-sobre .palavra {
-  display: inline-block;
-  position: relative;
-  padding: 0 0.3em;
-  margin: 0 -0.3em;
-  border-radius: 0.3rem;
-  transform: scale(var(--lens, 1));
-  transform-origin: 50% 70%;
-  filter: blur(var(--blur, 0px));
-  opacity: var(--dim, 1);
-  transition:
-    transform 0.22s cubic-bezier(0.2, 0.8, 0.3, 1),
-    filter 0.25s,
-    opacity 0.25s,
-    color 0.2s,
-    background 0.2s,
-    box-shadow 0.25s;
+  transition: color 0.2s;
 }
-.introducao-sobre .palavra.em-destaque {
-  color: var(--accent);
-  background: var(--card);
-  box-shadow: 0 0.3rem 1rem rgba(15, 23, 42, 0.22);
-  z-index: 2;
+@media (hover: hover) {
+  .introducao-sobre .palavra:hover {
+    color: var(--accent);
+  }
 }
-/* ---------- Trajetoria com rolagem horizontal ---------- */
-.rolagem-horizontal {
-  position: relative;
-  background: var(--bg-alt);
-}
-.fixo-rolagem-horizontal {
-  position: sticky;
-  top: 4.6rem;
-  height: calc(100vh - 4.6rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.4rem;
-  overflow: hidden;
-}
-.fixo-rolagem-horizontal .cabecalho-secao {
-  margin-bottom: 0;
-}
-.trilho-rolagem-horizontal {
-  display: flex;
-  gap: 1.2rem;
-  width: max-content;
-  padding: 0 max(4rem, calc((100vw - 92rem) / 2));
-  will-change: transform;
-}
+/* ---------- Trajetoria (carrossel no fim do arquivo) ---------- */
 .cartao-trajetoria {
   flex: none;
   width: 22rem;
@@ -925,20 +719,6 @@ img {
 .cartao-trajetoria:hover p,
 .cartao-trajetoria:focus-visible p {
   color: rgba(255, 255, 255, 0.9);
-}
-.progresso-rolagem-horizontal {
-  width: 92rem;
-  max-width: calc(100% - 8rem);
-  height: 0.16rem;
-  margin: 0 auto;
-  background: var(--hairline);
-}
-.progresso-rolagem-horizontal i {
-  display: block;
-  height: 100%;
-  background: var(--accent);
-  transform: scaleX(0.1);
-  transform-origin: left;
 }
 /* ---------- Listas expansivas de competencias e servicos ---------- */
 .lista-competencias,
@@ -1137,23 +917,6 @@ html.trocando-idioma .cartao-boas-vindas {
     filter: blur(14px);
     transform: scale(1.025);
   }
-}
-.bloco-flutuante.sobre-fundo-escuro {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
-  color: #fff;
-  box-shadow: none;
-  translate: calc(var(--px, 0) * var(--depth) * 1px) calc(var(--py, 0) * var(--depth) * 1px);
-  transition:
-    translate 0.35s ease-out,
-    scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1),
-    rotate 0.3s ease-out,
-    background 0.3s,
-    color 0.3s;
-}
-.bloco-flutuante.sobre-fundo-escuro:hover {
-  background: #fff;
-  color: #0b2a5e;
 }
 .idioma-boas-vindas {
   position: absolute;
@@ -1477,9 +1240,6 @@ button:focus-visible {
   font-size: 0.95rem;
   color: var(--muted);
 }
-.revelar {
-  opacity: 0;
-}
 .incorporacao-avaliacoes {
   min-height: 16rem;
   border-radius: var(--radius);
@@ -1490,12 +1250,10 @@ body {
   background-image: var(--bg-gradient);
   background-attachment: fixed;
 }
-.secao-alternada,
-.rolagem-horizontal {
+.secao-alternada {
   background: transparent;
 }
 .secao::before,
-.rolagem-horizontal::before,
 .inicio::before,
 .inicio::after {
   content: none;
@@ -1547,20 +1305,6 @@ body {
   fill: #4285f4;
   color: #4285f4;
 }
-.bloco-flutuante svg {
-  pointer-events: none;
-}
-.bloco-notebook-inicio {
-  z-index: 2;
-  animation: none;
-  pointer-events: auto;
-}
-.bloco-notebook-inicio:hover {
-  scale: 1.25;
-  rotate: -8deg;
-  background: var(--accent-strong);
-  color: #fff;
-}
 .formulario-contato .botao:disabled {
   opacity: 0.65;
   filter: saturate(0.65);
@@ -1588,7 +1332,6 @@ body {
   color: transparent;
 }
 .progresso-rolagem,
-.progresso-rolagem-horizontal i,
 .links-navegacao a::after {
   background: var(--accent-gradient);
 }
@@ -1606,49 +1349,8 @@ body {
   border-color: var(--accent);
   box-shadow: none;
 }
-.introducao-sobre .palavra.em-destaque {
-  box-shadow: none;
-}
 .boas-vindas::before {
   content: none;
-}
-.revelar {
-  opacity: 0;
-  translate: 0 2.4rem;
-  scale: 0.96;
-  filter: blur(0.5rem);
-  transition:
-    opacity 0.9s ease,
-    translate 0.9s var(--hover-ease),
-    scale 0.9s var(--hover-ease),
-    filter 0.9s ease;
-}
-.revelar.visivel {
-  opacity: 1;
-  translate: 0 0;
-  scale: 1;
-  filter: blur(0);
-}
-.selo-servico.revelar {
-  transition:
-    transform 0.9s var(--hover-ease),
-    scale 0.9s var(--hover-ease),
-    background 0.9s var(--hover-ease),
-    color 0.9s var(--hover-ease),
-    border-color 0.9s var(--hover-ease),
-    box-shadow 0.9s var(--hover-ease),
-    flex-grow 0.9s var(--hover-ease),
-    max-height 0.9s var(--hover-ease),
-    opacity 0.9s ease,
-    margin-top 0.9s var(--hover-ease),
-    translate 0.9s var(--hover-ease),
-    filter 0.9s ease;
-}
-.selo-servico.revelar p {
-  transition:
-    max-height 0.85s var(--hover-ease),
-    opacity 0.85s ease,
-    margin-top 0.85s var(--hover-ease);
 }
 ::selection {
   background: var(--accent);
@@ -1674,7 +1376,6 @@ body {
 [data-tilt]:hover {
   scale: 1.02;
 }
-.bloco-flutuante,
 .bloco-icone,
 .botao,
 .botao-cabecalho,
@@ -1685,18 +1386,6 @@ body {
 .botao-boas-vindas svg {
   transition-duration: 0.85s;
   transition-timing-function: var(--hover-ease);
-}
-.bloco-flutuante {
-  transition:
-    transform 0.85s var(--hover-ease),
-    translate 0.85s var(--hover-ease),
-    scale 0.85s var(--hover-ease),
-    rotate 0.85s var(--hover-ease),
-    background 0.85s var(--hover-ease),
-    color 0.85s var(--hover-ease);
-}
-.bloco-notebook-inicio:hover {
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
 }
 .linha-competencia:hover,
 .linha-competencia:focus-visible,
@@ -1727,27 +1416,85 @@ body {
 
 /* ---------- RESPONSIVIDADE: tablet ---------- */
 @media (max-width: 900px) {
+  /* Navbar mobile: barra superior simples + navegacao fixa embaixo */
   .barra-navegacao {
-    height: auto;
-    min-height: 4.4rem;
-    flex-wrap: wrap;
-    gap: 0.1rem 1rem;
-    padding: 0.45rem 1.2rem;
+    height: 3.6rem;
+    gap: 0.6rem;
+    padding: 0 1rem;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
   .links-navegacao {
-    order: 3;
-    flex: 0 0 100%;
+    position: fixed;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
+    z-index: 100;
     gap: 0.1rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding: 0.25rem 0 0.1rem;
-  }
-  .links-navegacao::-webkit-scrollbar {
-    display: none;
+    padding: 0.4rem;
+    border: var(--navbar-border);
+    border-radius: 2.1rem;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(1.4rem) saturate(1.6);
+    backdrop-filter: blur(1.4rem) saturate(1.6);
+    box-shadow: var(--shadow);
   }
   .links-navegacao a {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    height: 3.4rem;
+    padding: 0;
+    border-radius: 1.7rem;
+    transition:
+      flex-grow 0.3s var(--hover-ease),
+      background 0.25s,
+      color 0.25s;
+  }
+  .links-navegacao a::after {
+    display: none;
+  }
+  .links-navegacao a:not(.ativo):hover {
+    color: var(--muted);
+    background: transparent;
+  }
+  .links-navegacao a.ativo {
+    flex-grow: 2.4;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+  .icone-nav {
+    display: block;
     flex: none;
-    padding: 0.5rem 0.75rem;
+    width: 1.55rem;
+    height: 1.55rem;
+  }
+  .links-navegacao a span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .links-navegacao a.ativo span {
+    position: static;
+    width: auto;
+    height: auto;
+    min-width: 0;
+    clip: auto;
+    text-overflow: ellipsis;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .dica-rolagem {
+    bottom: 6.8rem;
+  }
+  .rodape {
+    padding-bottom: calc(6.5rem + env(safe-area-inset-bottom, 0px));
   }
   .conteiner {
     width: auto;
@@ -1782,9 +1529,6 @@ body {
 }
 /* ---------- RESPONSIVIDADE: celular ---------- */
 @media (max-width: 600px) {
-  .barra-navegacao {
-    padding: 0.5rem 0.85rem;
-  }
   .marca {
     gap: 0.5rem;
     font-size: 0.95rem;
@@ -1802,9 +1546,6 @@ body {
   .botao-cabecalho svg {
     width: 1.45rem;
     height: 1.45rem;
-  }
-  .links-navegacao a {
-    font-size: 0.8rem;
   }
   .conteiner {
     max-width: calc(100% - 2rem);
@@ -1852,10 +1593,6 @@ body {
     justify-self: center;
     width: min(100%, 21rem);
   }
-  .bloco-flutuante {
-    width: calc(var(--s) * 0.8);
-    height: calc(var(--s) * 0.8);
-  }
   .titulo-destaque-sobre {
     font-size: 1.7rem;
   }
@@ -1866,19 +1603,9 @@ body {
     height: auto;
     aspect-ratio: 4/5;
   }
-  .fixo-rolagem-horizontal {
-    top: 6.8rem;
-    height: calc(100svh - 6.8rem);
-  }
-  .trilho-rolagem-horizontal {
-    padding: 0 1rem;
-  }
   .cartao-trajetoria {
     width: min(78vw, 22rem);
     min-height: 19rem;
-  }
-  .progresso-rolagem-horizontal {
-    max-width: calc(100% - 2rem);
   }
   .lista-competencias {
     height: auto;
@@ -2279,4 +2006,119 @@ body {
 .selo-servico:hover,
 .selo-servico:focus-visible {
   translate: 0 0;
+}
+
+
+/* ---------- Trajetoria em carrossel (um card por vez) ---------- */
+.trilho-trajetoria {
+  display: grid;
+}
+.trilho-trajetoria .cartao-trajetoria {
+  grid-area: 1 / 1;
+  justify-self: center;
+  width: min(100%, 34rem);
+  min-height: 17rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.trilho-trajetoria .cartao-trajetoria.ativo {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.trilho-trajetoria .cartao-trajetoria[data-tilt] {
+  transition:
+    opacity 0.35s ease,
+    visibility 0s linear 0.35s,
+    box-shadow 0.45s var(--hover-ease),
+    translate 0.45s var(--hover-ease),
+    transform 0.12s ease-out,
+    color 0.35s;
+}
+.trilho-trajetoria .cartao-trajetoria.ativo[data-tilt] {
+  transition:
+    opacity 0.35s ease,
+    box-shadow 0.45s var(--hover-ease),
+    translate 0.45s var(--hover-ease),
+    transform 0.12s ease-out,
+    color 0.35s;
+}
+.controles-trajetoria {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 1.8rem;
+}
+.contador-trajetoria {
+  min-width: 3.6rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.seta-voltar {
+  transform: scaleX(-1);
+}
+.icone-reiniciar {
+  display: none;
+}
+.botao.ultimo .icone-proximo {
+  display: none;
+}
+.botao.ultimo .icone-reiniciar {
+  display: block;
+}
+.botao:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ---------- Botao de voltar ao topo (aparece no rodape) ---------- */
+.voltar-topo {
+  position: fixed;
+  right: 1.6rem;
+  bottom: 1.6rem;
+  z-index: 99;
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  color: #fff;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 0.6rem;
+  transition:
+    opacity 0.25s,
+    translate 0.25s,
+    visibility 0s linear 0.25s,
+    filter 0.2s;
+}
+.voltar-topo.visivel {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+  transition:
+    opacity 0.25s,
+    translate 0.25s,
+    filter 0.2s;
+}
+.voltar-topo:hover {
+  filter: brightness(1.1);
+}
+.voltar-topo svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+@media (max-width: 900px) {
+  .voltar-topo {
+    right: 1rem;
+    bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
 }
