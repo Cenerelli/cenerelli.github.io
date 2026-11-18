@@ -1,8 +1,3 @@
-/* ============================================================
-   TEXTOS DO SITE. Cada linha segue o formato:
-   [chave, texto em portugues, texto em ingles].
-   As chaves sao ligadas aos elementos data-i18n do index.html.
-   ============================================================ */
 const texts = [
   ["page.title", "João Cenerelli | Técnico de Informática", "João Cenerelli | IT Technician"],
   ["profile.role", "Técnico de Informática", "IT Technician"],

@@ -1,19 +1,10 @@
-/* ==========================================================================
-   INTERACOES DA PAGINA
-   Organizacao: dados e elementos > textos > recursos da pagina > inicializacao.
-   Para mudar textos, veja texts.js; para layout e cores, veja css/style.css.
-   ========================================================================== */
-
-/* ---------- Lista de secoes e textos alternados ---------- */
 const sectionIds = ["inicio", "sobre", "trajetoria", "competencias", "servicos", "portfolio", "avaliacoes", "contato"];
 const roleKeys = ["welcome.role1", "welcome.role2", "welcome.role3"];
 
-/* ---------- Estado atual da pagina ---------- */
 let language = "pt";
 let welcomeActive = true;
 let isSwitchingLanguage = false;
 
-/* ---------- Elementos principais do HTML ---------- */
 const root = document.documentElement;
 const site = document.getElementById("conteudo-site");
 const navbar = document.getElementById("barra-navegacao");
@@ -35,7 +26,6 @@ const topButton = document.getElementById("voltar-topo");
 const footer = document.querySelector(".rodape");
 let journeyIndex = 0;
 
-/* ---------- Funcoes auxiliares reutilizadas ---------- */
 function listen(nodeList, eventName, handler) {
   let i = 0;
   while (i < nodeList.length) {
@@ -83,7 +73,6 @@ function preventGestureZoom(event) {
   }
 }
 
-/* ---------- Textos e troca de idioma (portugues / ingles) ---------- */
 function getText(key, forcedLanguage) {
   let chosen = language;
   if (forcedLanguage !== undefined) {
@@ -189,11 +178,11 @@ function onLanguageClick() {
   let i = 0;
   while (i < earthIcons.length) {
     earthIcons[i].classList.remove("girando");
-    earthIcons[i].getBoundingClientRect(); // restarts the animation
+    earthIcons[i].getBoundingClientRect(); 
     earthIcons[i].classList.add("girando");
     i = i + 1;
   }
-  root.classList.add("trocando-idioma"); // fades the texts out
+  root.classList.add("trocando-idioma"); 
   if (language === "pt") {
     setTimeout(finishLanguageChange, 240, "en");
   } else {
@@ -205,7 +194,6 @@ function onEarthEnd(event) {
   event.currentTarget.classList.remove("girando");
 }
 
-/* ---------- Texto digitado: cargo animado nas telas de boas-vindas e inicio ---------- */
 const typers = [
   [document.getElementById("funcao-digitada-boas-vindas"), 0, 0, "typing", 0],
   [document.getElementById("funcao-digitada-inicio"), 0, 0, "typing", 0],
@@ -214,10 +202,10 @@ const typers = [
 function stepTyper(n, runId) {
   const typer = typers[n];
   if (runId !== typer[4]) {
-    return; // an older timer: ignore it
+    return;
   }
   if (n === 0 && welcomeActive === false) {
-    return; // the welcome typewriter stops when the welcome screen closes
+    return;
   }
   const text = getText(roleKeys[typer[1] % roleKeys.length]);
   let delay = 55;
@@ -263,7 +251,6 @@ function restartTypers() {
   }
 }
 
-/* ---------- Rolagem suave ate uma secao ---------- */
 let smoothing = false;
 let smoothFrom = 0;
 let smoothTo = 0;
@@ -299,7 +286,7 @@ function smoothStep(now) {
     progress = 1;
   }
   if (progress < 0.5) {
-    eased = 4 * progress * progress * progress; // ease-in-out cubic
+    eased = 4 * progress * progress * progress;
   } else {
     eased = 1 - Math.pow(-2 * progress + 2, 3) / 2;
   }
@@ -319,10 +306,9 @@ function onGotoClick(event) {
 }
 
 function stopSmooth() {
-  smoothing = false; // the user takes over the scroll
+  smoothing = false;
 }
 
-/* ---------- Efeitos de rolagem: progresso, entrada, paralaxe e trajetoria ---------- */
 let scrollTicking = false;
 
 function updateProgressBar() {
@@ -420,7 +406,6 @@ function setupReviewsWidget() {
   }
 }
 
-/* ---------- Inclinacao 3D dos cartoes ao mover o mouse ---------- */
 let tiltTarget = null;
 
 function resetTilt(element) {
@@ -457,7 +442,6 @@ function onPageLeave() {
   }
 }
 
-/* ---------- Formulario de contato enviado pelo FormSubmit ---------- */
 const subjectKeys = ["form.subject.1", "form.subject.2", "form.subject.3", "form.subject.4"];
 
 function fillSubjects() {
@@ -467,7 +451,7 @@ function fillSubjects() {
   let i = 0;
   while (i < subjectKeys.length) {
     const option = document.createElement("option");
-    option.value = getText(subjectKeys[i], "pt"); // the email always arrives in Portuguese
+    option.value = getText(subjectKeys[i], "pt");
     option.textContent = getText(subjectKeys[i]);
     select.appendChild(option);
     i = i + 1;
@@ -529,7 +513,6 @@ function onFormSubmit(event) {
   }
 }
 
-/* ---------- Trajetoria: um card por vez, com botoes ---------- */
 function updateJourneyControls() {
   const last = journeyIndex === journeyCards.length - 1;
   journeyPrev.disabled = journeyIndex === 0;
@@ -558,7 +541,6 @@ function onJourneyPrev() {
   }
 }
 
-/* ---------- Botao de voltar ao topo (aparece quando o rodape entra na tela) ---------- */
 function onTopClick() {
   scrollToSection("inicio");
 }
@@ -574,7 +556,6 @@ function setupBackToTop() {
   }
 }
 
-/* ---------- Teclado: tecla Enter na tela de boas-vindas ---------- */
 function onKeyDown(event) {
   switch (event.key) {
     case "Enter":
@@ -589,7 +570,6 @@ function onKeyDown(event) {
   }
 }
 
-/* ---------- Tela de boas-vindas ---------- */
 function onWelcomeButtonMove(event) {
   if (event.pointerType !== "mouse") {
     return;
@@ -621,10 +601,9 @@ function onWelcomeEnd(event) {
   }
 }
 
-/* ---------- Cursor personalizado para mouse ---------- */
 const ARROW = "M6 6L28 14L18 18L14 28Z";
-const TIP = 6; // the tip of the arrow is the click point
-const SMOOTHING = 0.5; // base follow speed per frame: lower = smoother, higher = more responsive
+const TIP = 6;
+const SMOOTHING = 0.5;
 let cursor = null;
 let cursorTargetX = 0;
 let cursorTargetY = 0;
@@ -664,7 +643,7 @@ function getCursorMode(node) {
 function cursorRender() {
   const dx = cursorTargetX - cursorX;
   const dy = cursorTargetY - cursorY;
-  let follow = SMOOTHING + Math.sqrt(dx * dx + dy * dy) / 120; // fast movements catch up almost instantly
+  let follow = SMOOTHING + Math.sqrt(dx * dx + dy * dy) / 120;
   if (follow > 1) {
     follow = 1;
   }
@@ -733,13 +712,12 @@ function startCursor() {
   root.addEventListener("mouseleave", onCursorHide);
 }
 
-/* ---------- Inicializacao: eventos e recursos da pagina ---------- */
 if (navigator.language.indexOf("pt") === 0) {
   language = "pt";
 } else {
   language = "en";
 }
-site.inert = true; // nothing behind the welcome screen is reachable
+site.inert = true;
 document.getElementById("ano-atual").textContent = new Date().getFullYear();
 
 listen(document.querySelectorAll("[data-goto]"), "click", onGotoClick);

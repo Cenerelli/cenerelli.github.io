@@ -1,14 +1,4 @@
-/* ==========================================================================
-   GUIA DE EDICAO
-   1. Temas e controles globais: :root (claro) e [data-theme="dark"].
-   2. Cada bloco abaixo corresponde a uma parte do site, na ordem da pagina.
-   3. Icones flutuantes da hero: procure "ICONES SVG FLUTUANTES DA HERO".
-   4. Celular e tablet: procure "RESPONSIVIDADE".
 
-   Dica: use Ctrl+F com o nome da classe que aparece no index.html.
-   Para editar o contorno dos SVGs, procure --svg-stroke-width e
-   --svg-stroke-color.
-   ========================================================================== */
 @font-face {
   font-family: "Bricolage Grotesque";
   src: url("../fonts/BricolageGrotesque-Variable.ttf") format("truetype");
@@ -17,8 +7,6 @@
   font-display: swap;
 }
 :root {
-  /* PALETA CLARA */
-  /* Fundo, textos e cores principais */
   --bg: #ffdbbb;
   --bg-alt: #fff3e8;
   --bg-gradient: radial-gradient(ellipse at 8% 12%, rgba(153, 126, 103, 0.12), transparent 31%), radial-gradient(ellipse at 91% 30%, rgba(204, 190, 177, 0.35), transparent 32%), radial-gradient(ellipse at 56% 88%, rgba(255, 255, 255, 0.28), transparent 35%), linear-gradient(145deg, #ffdbbb 0%, #f6e5d7 48%, #e8d8c8 100%);
@@ -36,21 +24,18 @@
   --accent-highlight: #ffdbbb;
   --accent-gradient: linear-gradient(125deg, #997e67 0%, #7f6250 54%, #664930 100%);
 
-  /* Cartoes, icones internos e sombras */
-  --shadow: 0 0.5rem 1.6rem rgba(68, 48, 32, 0.12);
+   --shadow: 0 0.5rem 1.6rem rgba(68, 48, 32, 0.12);
   --card-ink: #322d27;
   --card-icon-bg: #fff3e8;
   --card-icon-text: #664930;
   --card-shadow: 0 0.18rem 0 rgba(68, 48, 32, 0.14), 0 0.55rem 1rem rgba(68, 48, 32, 0.12), 0 1.1rem 1.8rem rgba(68, 48, 32, 0.09);
   --card-shadow-hover: 0 0.3rem 0 rgba(68, 48, 32, 0.18), 0 1rem 1.6rem rgba(68, 48, 32, 0.16), 0 1.7rem 2.6rem rgba(68, 48, 32, 0.12);
 
-  /* Tela de boas-vindas */
   --welcome-gradient: linear-gradient(125deg, #ffdbbb 0%, #f0dfd0 52%, #ccbeb1 100%);
   --welcome-text: #664930;
   --welcome-button-bg: #fff3e8;
   --welcome-button-text: #664930;
 
-  /* Gradientes dos cartoes coloridos */
   --card-sunrise: linear-gradient(135deg, #ffdbbb 0%, #f6d5b8 52%, #ecc9ab 100%);
   --card-ocean: linear-gradient(135deg, #fff1e2 0%, #e9d8c9 48%, #ccbeb1 100%);
   --card-orchid: linear-gradient(135deg, #f8e9dc 0%, #e6d3c2 52%, #ccbeb1 100%);
@@ -58,16 +43,13 @@
   --card-candy: linear-gradient(135deg, #f7e6d8 0%, #e5d2c1 50%, #cbbbab 100%);
   --card-sky: linear-gradient(135deg, #fff3e8 0%, #eadbcd 50%, #d3c5b9 100%);
 
-  /* Cursor personalizado */
   --cursor-fill: #664930;
   --cursor-outline: #fff3e8;
 
 
-  /* Contorno padrao dos desenhos SVG */
   --svg-stroke-width: unset;
   --svg-stroke-color: unset;
 
-  /* Bordas padrao dos elementos */
   --card-border: 0 solid transparent;
   --field-border: 0.06rem solid var(--hairline);
   --primary-button-border: 0 solid transparent;
@@ -76,21 +58,17 @@
   --welcome-button-border: 0 solid transparent;
   --navbar-border: 0.06rem solid var(--hairline);
 
-  /* Cantos arredondados */
   --card-radius: 2rem 1rem 2rem 1rem;
   --card-radius-mobile: 1.5rem 0.85rem 1.5rem 0.85rem;
   --radius: 1.2rem;
   --radius-sm: 0.8rem;
 
-  /* Espacamentos e velocidade das animacoes */
   --gap: 1.2rem;
   --pad: 1.8rem;
   --section: 6rem;
   --hover-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 [data-theme="dark"] {
-  /* PALETA ESCURA ORIGINAL */
-  /* Fundo, textos e cores principais */
   --bg: #322d27;
   --bg-alt: #292521;
   --bg-gradient: radial-gradient(ellipse at 8% 12%, rgba(191, 132, 64, 0.2), transparent 31%), radial-gradient(ellipse at 91% 30%, rgba(127, 114, 101, 0.22), transparent 32%), radial-gradient(ellipse at 56% 88%, rgba(170, 170, 174, 0.1), transparent 35%), linear-gradient(145deg, #322d27 0%, #292521 48%, #3b342e 100%);
@@ -108,7 +86,6 @@
   --accent-highlight: #e2e1eb;
   --accent-gradient: linear-gradient(125deg, #7f7265 0%, #664930 54%, #322d27 100%);
 
-  /* Cartoes, icones internos e sombras */
   --shadow: 0 0.5rem 1.6rem rgba(0, 0, 0, 0.24);
   --card-ink: #e2e1eb;
   --card-icon-bg: #e2e1eb;
@@ -116,13 +93,11 @@
   --card-shadow: 0 0.18rem 0 rgba(0, 0, 0, 0.2), 0 0.55rem 1rem rgba(0, 0, 0, 0.18), 0 1.1rem 1.8rem rgba(0, 0, 0, 0.14);
   --card-shadow-hover: 0 0.3rem 0 rgba(0, 0, 0, 0.25), 0 1rem 1.6rem rgba(0, 0, 0, 0.22), 0 1.7rem 2.6rem rgba(0, 0, 0, 0.18);
 
-  /* Tela de boas-vindas */
   --welcome-gradient: linear-gradient(125deg, #322d27 0%, #40372e 52%, #4e4031 100%);
   --welcome-text: #e2e1eb;
   --welcome-button-bg: #e2e1eb;
   --welcome-button-text: #322d27;
 
-  /* Gradientes dos cartoes coloridos */
   --card-sunrise: linear-gradient(135deg, #51463c 0%, #4a3c30 52%, #3b342e 100%);
   --card-ocean: linear-gradient(135deg, #4c4743 0%, #484039 48%, #3b342e 100%);
   --card-orchid: linear-gradient(135deg, #514943 0%, #4b4036 52%, #3b342e 100%);
@@ -130,7 +105,6 @@
   --card-candy: linear-gradient(135deg, #514640 0%, #4a3e34 50%, #3b342e 100%);
   --card-sky: linear-gradient(135deg, #4e4945 0%, #49433d 50%, #3b342e 100%);
 
-  /* Cursor personalizado */
   --cursor-fill: #bf8440;
   --cursor-outline: #322d27;
 
@@ -172,7 +146,7 @@ img {
   max-width: calc(100% - 8rem);
   margin: 0 auto;
 }
-/* ---------- Barra de progresso e navegacao fixa ---------- */
+
 .progresso-rolagem {
   position: fixed;
   top: 0;
@@ -290,7 +264,7 @@ img {
 .opcao-idioma.ativo {
   opacity: 1;
 }
-/* ---------- Estrutura e hierarquia dos titulos das secoes ---------- */
+
 .tela {
   position: relative;
 }
@@ -328,7 +302,7 @@ img {
   line-height: 1.5;
   color: var(--muted);
 }
-/* ---------- Inicio / hero ---------- */
+
 .inicio {
   min-height: 100vh;
   display: flex;
@@ -466,7 +440,7 @@ img {
     transform-origin: bottom;
   }
 }
-/* ---------- Cartoes e interacao de inclinacao ---------- */
+
 [data-tilt] {
   transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition:
@@ -619,7 +593,7 @@ img {
   gap: 1.2rem;
   height: 38rem;
 }
-/* ---------- Secao sobre ---------- */
+
 .grade-sobre {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -666,7 +640,7 @@ img {
     color: var(--accent);
   }
 }
-/* ---------- Trajetoria (carrossel no fim do arquivo) ---------- */
+
 .cartao-trajetoria {
   flex: none;
   width: 22rem;
@@ -720,7 +694,7 @@ img {
 .cartao-trajetoria:focus-visible p {
   color: rgba(255, 255, 255, 0.9);
 }
-/* ---------- Listas expansivas de competencias e servicos ---------- */
+
 .lista-competencias,
 .lista-servicos {
   display: flex;
@@ -837,8 +811,7 @@ img {
   opacity: 1;
   margin-top: 0.7rem;
 }
-/* ---------- Estrelas das avaliacoes ---------- */
-/* ---------- Rodape ---------- */
+
 .rodape {
   padding: 1.8rem 0;
   text-align: center;
@@ -851,8 +824,7 @@ img {
   opacity: 0.6;
   margin: 0 0.3rem;
 }
-/* ---------- Animacoes de entrada ao rolar a pagina ---------- */
-/* ---------- Botao e desenho da troca de idioma ---------- */
+
 .icone-terra circle,
 .icone-terra path {
   fill: none;
@@ -868,7 +840,7 @@ img {
     transform: rotate(360deg);
   }
 }
-/* ---------- Transicao ao trocar o idioma ---------- */
+
 main,
 .links-navegacao,
 .texto-rodape,
@@ -881,7 +853,7 @@ html.trocando-idioma .texto-rodape,
 html.trocando-idioma .cartao-boas-vindas {
   opacity: 0;
 }
-/* ---------- Tela de boas-vindas ---------- */
+
 .boas-vindas {
   position: fixed;
   inset: 0;
@@ -1027,7 +999,7 @@ html.trocando-idioma .cartao-boas-vindas {
   font-size: 1rem;
   opacity: 0.7;
 }
-/* ---------- Cursor personalizado criado pelo JavaScript ---------- */
+
 html.ponteiro-personalizado,
 html.ponteiro-personalizado * {
   cursor: none !important;
@@ -1118,7 +1090,7 @@ button:focus-visible {
   outline-offset: 0.2rem;
 }
 
-/* ---------- Grade geral, espacamentos, avaliacoes e formulario ---------- */
+
 .grade {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -1453,9 +1425,8 @@ body {
   transition-timing-function: var(--hover-ease);
 }
 
-/* ---------- RESPONSIVIDADE: tablet ---------- */
 @media (max-width: 900px) {
-  /* Navbar mobile: barra superior simples + navegacao fixa embaixo */
+
   .barra-navegacao {
     height: 3.6rem;
     gap: 0.6rem;
@@ -1566,7 +1537,7 @@ body {
     height: 38rem;
   }
 }
-/* ---------- RESPONSIVIDADE: celular ---------- */
+
 @media (max-width: 600px) {
   .links-navegacao {
     gap: 0.05rem;
@@ -1806,7 +1777,7 @@ body {
     display: none;
   }
 }
-/* ---------- Ajustes para telas sem mouse ---------- */
+
 @media (hover: none) {
   .linha-competencia .corpo-competencia,
   .selo-servico p {
@@ -1820,7 +1791,7 @@ body {
     flex: 1 1 auto;
   }
 }
-/* ---------- Aparencia final dos cartoes coloridos ---------- */
+
 .cartao-link,
 .cartao-trajetoria,
 .linha-competencia,
@@ -2110,7 +2081,7 @@ body {
 }
 
 
-/* ---------- Trajetoria em carrossel (um card por vez) ---------- */
+
 .trilho-trajetoria {
   display: grid;
 }
@@ -2176,7 +2147,6 @@ body {
   pointer-events: none;
 }
 
-/* ---------- Botao de voltar ao topo (aparece no rodape) ---------- */
 .voltar-topo {
   position: fixed;
   right: 1.6rem;
