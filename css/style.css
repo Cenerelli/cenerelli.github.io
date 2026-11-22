@@ -42,6 +42,8 @@
   --card-citrus: linear-gradient(135deg, #ffdbbb 0%, #efd7c2 50%, #d7c6b7 100%);
   --card-candy: linear-gradient(135deg, #f7e6d8 0%, #e5d2c1 50%, #cbbbab 100%);
   --card-sky: linear-gradient(135deg, #fff3e8 0%, #eadbcd 50%, #d3c5b9 100%);
+  --card-pong-hover: linear-gradient(135deg, #fff8f0 0%, #ffebd9 52%, #ffe2c4 100%);
+  --card-primeiro-hover: linear-gradient(135deg, #fff8f0 0%, #ffebd9 52%, #ffe2c4 100%);
 
   --cursor-fill: #664930;
   --cursor-outline: #fff3e8;
@@ -104,6 +106,8 @@
   --card-citrus: linear-gradient(135deg, #55483a 0%, #4c3e30 50%, #3b342e 100%);
   --card-candy: linear-gradient(135deg, #514640 0%, #4a3e34 50%, #3b342e 100%);
   --card-sky: linear-gradient(135deg, #4e4945 0%, #49433d 50%, #3b342e 100%);
+  --card-pong-hover: linear-gradient(135deg, #665746 0%, #62513e 52%, #54483b 100%);
+  --card-primeiro-hover: linear-gradient(135deg, #665746 0%, #62513e 52%, #54483b 100%);
 
   --cursor-fill: #bf8440;
   --cursor-outline: #322d27;
@@ -587,13 +591,15 @@ img {
   gap: 1.2rem;
   height: 19rem;
 }
-.grade-servicos {
-  display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 1.2rem;
-  height: 38rem;
+.grade-projetos {
+  height: auto;
 }
-
+.estado-projetos {
+  grid-column: 1 / -1;
+}
+.projetos-github-link {
+  margin-top: var(--gap);
+}
 .grade-sobre {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -695,18 +701,22 @@ img {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.lista-competencias,
-.lista-servicos {
-  display: flex;
-  flex-direction: column;
+.lista-competencias {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.9rem;
   min-height: 0;
+  height: auto;
 }
-.lista-competencias {
-  height: 34rem;
+.catalogo-servicos {
+  margin-top: 1rem;
 }
-.lista-servicos {
-  height: 100%;
+.grupo-competencias + .grupo-competencias {
+  margin-top: 2.5rem;
+}
+.titulo-grupo-competencias {
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
 }
 .linha-competencia,
 .selo-servico {
@@ -731,7 +741,10 @@ img {
     transform 0.12s ease-out;
 }
 .linha-competencia {
-  padding: 0.2rem 1.8rem;
+  flex: initial;
+  min-height: 6rem;
+  align-content: start;
+  padding: 1rem 1.3rem;
 }
 .selo-servico {
   padding: 0.2rem 2rem;
@@ -747,7 +760,7 @@ img {
 }
 .linha-competencia:hover,
 .linha-competencia:focus-visible {
-  flex-grow: 3.4;
+  flex-grow: 0;
 }
 .selo-servico:hover,
 .selo-servico:focus-visible {
@@ -1146,7 +1159,7 @@ button:focus-visible {
 }
 .links-contato {
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: var(--gap);
 }
 .formulario-contato,
@@ -1659,50 +1672,35 @@ body {
   .lista-competencias {
     height: auto;
   }
+  .grupo-competencias + .grupo-competencias {
+    margin-top: 2rem;
+  }
+  .titulo-grupo-competencias {
+    text-align: center;
+  }
+  .lista-competencias {
+    grid-template-columns: 1fr;
+  }
   .linha-competencia {
-    flex: 1 1 auto;
-    min-height: 5rem;
+    flex: initial;
+    min-height: 4.5rem;
     padding: 1rem;
   }
   .cabecalho-competencia h3 {
     font-size: 1.1rem;
   }
-  .corpo-competencia {
-    max-height: none;
-    opacity: 1;
-    margin-top: 0.7rem;
-    overflow: visible;
+  #competencias .corpo-competencia {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    overflow: hidden;
+  }
+  #competencias .linha-competencia:focus-visible .corpo-competencia {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
   }
   .corpo-competencia p {
-    font-size: 0.9rem;
-  }
-  .grade-servicos {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .grade-servicos > .cartao-link,
-  .grade-servicos > .lista-servicos {
-    grid-column: 1/-1;
-  }
-  .grade-servicos > .cartao-link {
-    min-height: 12rem;
-  }
-  .lista-servicos {
-    height: auto;
-  }
-  .selo-servico {
-    flex: 1 1 auto;
-    min-height: 4.5rem;
-    padding: 1rem;
-  }
-  .selo-servico h4 {
-    font-size: 1.2rem;
-  }
-  .selo-servico p {
-    max-height: none;
-    opacity: 1;
-    margin-top: 0.5rem;
-    overflow: visible;
     font-size: 0.9rem;
   }
   .duas-colunas {
@@ -1985,9 +1983,6 @@ body {
 .selo-servico p {
   color: inherit;
 }
-#servicos .cartao-link {
-  background-image: var(--card-sunrise);
-}
 #portfolio .cartao-link:first-child {
   background-image: var(--card-sky);
 }
@@ -2062,6 +2057,41 @@ body {
   .cartao-link.grande {
     min-height: 14rem;
   }
+  .modal-detalhe {
+    position: fixed;
+    inset: 0;
+    width: calc(100% - 2rem);
+    max-width: 32rem;
+    max-height: 80vh;
+    margin: auto;
+    padding: 1.5rem;
+    overflow: auto;
+    border: 1px solid var(--hairline);
+    border-radius: var(--card-radius-mobile);
+    background: var(--card);
+    color: var(--text);
+    box-shadow: var(--shadow);
+  }
+  .modal-detalhe::backdrop {
+    background: rgba(0, 0, 0, 0.68);
+    backdrop-filter: blur(3px);
+  }
+  .modal-detalhe-fechar {
+    display: block;
+    margin: 0 0 1rem auto;
+  }
+  .modal-detalhe h2 {
+    margin: 0 0 1rem;
+  }
+  .modal-detalhe p {
+    margin: 0;
+  }
+  .modal-detalhe .corpo-competencia {
+    max-height: none;
+    opacity: 1;
+    margin-top: 0;
+    overflow: visible;
+  }
   .cartao-link:hover,
   .cartao-link:focus-visible,
   .cartao-trajetoria:hover,
@@ -2072,6 +2102,61 @@ body {
   .selo-servico:focus-visible {
     translate: 0 -0.15rem;
   }
+}
+
+#competencias .linha-competencia {
+  align-content: center;
+}
+#competencias .cabecalho-competencia {
+  justify-content: center;
+  text-align: center;
+}
+#competencias .cabecalho-competencia h3 {
+  text-align: center;
+}
+#competencias .linha-competencia:hover,
+#competencias .linha-competencia:focus-visible {
+  flex-grow: 0;
+  transform: none;
+  scale: 1;
+  translate: 0;
+}
+#competencias .linha-competencia:hover .bloco-icone,
+#competencias .linha-competencia:focus-visible .bloco-icone {
+  transform: none;
+}
+#portfolio .projeto-pong:hover,
+#portfolio .projeto-pong:focus-visible {
+  background-image: var(--card-pong-hover);
+}
+#avaliacoes .resumo-avaliacoes {
+  position: relative;
+  isolation: isolate;
+}
+#avaliacoes .resumo-avaliacoes .marca-dagua {
+  position: absolute;
+  right: -1.5rem;
+  bottom: -3rem;
+  z-index: 0;
+  width: 13rem;
+  height: 13rem;
+  color: var(--card-icon-text);
+  opacity: 0.08;
+  pointer-events: none;
+}
+#avaliacoes .resumo-avaliacoes > *:not(.marca-dagua) {
+  position: relative;
+  z-index: 1;
+}
+#contato .links-contato .cartao-link .marca-dagua {
+  display: block;
+  opacity: 0.08;
+  transform: none;
+}
+#contato .links-contato .cartao-link:hover .marca-dagua,
+#contato .links-contato .cartao-link:focus-visible .marca-dagua {
+  opacity: 0.16;
+  transform: none;
 }
 .linha-competencia:hover,
 .linha-competencia:focus-visible,
@@ -2145,6 +2230,52 @@ body {
 .botao:disabled {
   opacity: 0.4;
   pointer-events: none;
+}
+
+#competencias .linha-competencia {
+  align-content: start;
+  transition:
+    background-position 0.38s var(--hover-ease),
+    background-color 0.38s var(--hover-ease),
+    color 0.38s var(--hover-ease),
+    border-color 0.38s var(--hover-ease),
+    box-shadow 0.38s var(--hover-ease),
+    translate 0.38s var(--hover-ease);
+}
+#competencias .cabecalho-competencia {
+  min-height: 3rem;
+  justify-content: flex-start;
+  text-align: left;
+}
+#competencias .cabecalho-competencia h3 {
+  text-align: left;
+}
+#competencias .linha-competencia .bloco-icone {
+  transition:
+    background-color 0.38s var(--hover-ease),
+    color 0.38s var(--hover-ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  #competencias .corpo-competencia {
+    height: 0;
+    max-height: none;
+    overflow: hidden;
+    transition:
+      height 0.38s var(--hover-ease),
+      opacity 0.24s ease,
+      margin-top 0.38s var(--hover-ease);
+  }
+  #competencias .linha-competencia:hover .corpo-competencia,
+  #competencias .linha-competencia:focus-visible .corpo-competencia {
+    height: 16rem;
+    max-height: none;
+    margin-top: 1.1rem;
+    overflow-y: auto;
+  }
+}
+#portfolio .projeto-primeiro:hover,
+#portfolio .projeto-primeiro:focus-visible {
+  background-image: var(--card-primeiro-hover);
 }
 
 .voltar-topo {

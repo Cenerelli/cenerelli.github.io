@@ -1,5 +1,5 @@
-const sectionIds = ["inicio", "sobre", "trajetoria", "competencias", "servicos", "portfolio", "avaliacoes", "contato"];
-const roleKeys = ["welcome.role1", "welcome.role2", "welcome.role3"];
+const sectionIds = ["inicio", "sobre", "trajetoria", "competencias", "portfolio", "avaliacoes", "contato"];
+const roleKeys = ["welcome.role1", "welcome.role2"];
 
 let language = "pt";
 let welcomeActive = true;
@@ -23,7 +23,12 @@ const journeyNext = document.getElementById("trajetoria-proximo");
 const journeyNextLabel = document.getElementById("trajetoria-proximo-texto");
 const journeyCount = document.getElementById("trajetoria-contador");
 const topButton = document.getElementById("voltar-topo");
-const footer = document.querySelector(".rodape");
+const githubProjects = document.getElementById("projetos-github");
+const detailDialog = document.getElementById("modal-detalhe-mobile");
+const detailDialogTitle = document.getElementById("titulo-detalhe-mobile");
+const detailDialogText = document.getElementById("texto-detalhe-mobile");
+const detailDialogClose = document.getElementById("fechar-detalhe-mobile");
+const mobileScreen = window.matchMedia("(max-width: 600px)");
 let journeyIndex = 0;
 
 function listen(nodeList, eventName, handler) {
@@ -365,6 +370,7 @@ function updateScrollEffects() {
   updateProgressBar();
   updateHeroLinked();
   updateActiveLink();
+  updateBackToTop();
 }
 
 function onScroll() {
@@ -376,6 +382,7 @@ function onScroll() {
 
 function onResize() {
   updateScrollEffects();
+  updateMobileDetailTriggers();
 }
 
 function setupReviewsWidget() {
@@ -403,6 +410,149 @@ function setupReviewsWidget() {
     observer.observe(embed);
   } else {
     loadWidget();
+  }
+}
+
+function showGithubProjectsMessage(key) {
+  const message = document.createElement("p");
+  message.className = "estado-projetos";
+  message.setAttribute("data-i18n", key);
+  message.textContent = getText(key);
+  githubProjects.append(message);
+}
+
+function getGithubProjectIcon(projectName) {
+  const icons = {
+    "cenerelli": "icone-github",
+    "pong-2-players": "icone-pingpong",
+    "about-me-html-css": "icone-primeiro-projeto",
+    "cenerelli.github.io": "icone-site",
+  };
+  return icons[projectName] || "icone-codigo";
+}
+
+function createGithubProjectCard(project) {
+  const card = document.createElement("a");
+  card.className = "cartao-link grande";
+  if (project.name === "pong-2-players") {
+    card.classList.add("projeto-pong");
+  }
+  if (project.name === "about-me-html-css") {
+    card.classList.add("projeto-primeiro");
+  }
+  card.href = project.html_url;
+  card.target = "_blank";
+  card.rel = "noopener noreferrer";
+
+  const iconBlock = document.createElement("span");
+  iconBlock.className = "bloco-icone";
+  const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  icon.setAttribute("aria-hidden", "true");
+  const iconUse = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  iconUse.setAttribute("href", "assets/icones.svg?v=20261122-3#" + getGithubProjectIcon(project.name));
+  icon.append(iconUse);
+  iconBlock.append(icon);
+
+  const title = document.createElement("h3");
+  if (project.name === "cenerelli.github.io") {
+    title.setAttribute("data-i18n", "projects.landing.title");
+    title.textContent = getText("projects.landing.title");
+  } else {
+    title.textContent = project.name;
+  }
+
+  const description = document.createElement("p");
+  if (project.name === "cenerelli.github.io") {
+    description.setAttribute("data-i18n", "projects.landing.description");
+    description.textContent = getText("projects.landing.description");
+  } else if (project.name === "about-me-html-css") {
+    description.setAttribute("data-i18n", "projects.about.description");
+    description.textContent = getText("projects.about.description");
+  } else if (project.description) {
+    description.textContent = project.description;
+  } else {
+    description.setAttribute("data-i18n", "projects.noDescription");
+    description.textContent = getText("projects.noDescription");
+  }
+
+  card.append(iconBlock, title, description);
+  return card;
+}
+
+async function loadGithubProjects() {
+  if (!githubProjects) {
+    return;
+  }
+
+  try {
+    const response = await fetch("https://api.github.com/users/Cenerelli/repos?sort=updated&per_page=100");
+    if (!response.ok) {
+      throw new Error("GitHub API request failed");
+    }
+
+    const repositories = await response.json();
+    const projects = repositories.filter(function (repository) {
+      return !repository.fork && !repository.archived;
+    }).slice(0, 6);
+
+    if (projects.length === 0) {
+      showGithubProjectsMessage("projects.empty");
+      return;
+    }
+
+    githubProjects.replaceChildren(...projects.map(createGithubProjectCard));
+  } catch (error) {
+    showGithubProjectsMessage("projects.error");
+  } finally {
+    githubProjects.setAttribute("aria-busy", "false");
+  }
+}
+
+function updateMobileDetailTriggers() {
+  const detailCards = document.querySelectorAll(".linha-competencia");
+  let i = 0;
+  while (i < detailCards.length) {
+    if (mobileScreen.matches) {
+      detailCards[i].setAttribute("role", "button");
+      detailCards[i].setAttribute("aria-haspopup", "dialog");
+    } else {
+      detailCards[i].removeAttribute("role");
+      detailCards[i].removeAttribute("aria-haspopup");
+    }
+    i = i + 1;
+  }
+}
+
+function openDetailDialog(card) {
+  const title = card.querySelector(".cabecalho-competencia h3");
+  const description = card.querySelector(".corpo-competencia");
+  if (!title || !description) {
+    return;
+  }
+
+  detailDialogTitle.textContent = title.textContent;
+  detailDialogText.replaceChildren(description.cloneNode(true));
+  detailDialog.showModal();
+}
+
+function onDetailCardClick(event) {
+  if (!mobileScreen.matches) {
+    return;
+  }
+  const card = event.target.closest(".linha-competencia");
+  if (card) {
+    openDetailDialog(card);
+  }
+}
+
+function onDetailCardKeyDown(event) {
+  if (!mobileScreen.matches || (event.key !== "Enter" && event.key !== " ")) {
+    return;
+  }
+  const card = event.target.closest(".linha-competencia");
+  if (card) {
+    event.preventDefault();
+    openDetailDialog(card);
   }
 }
 
@@ -442,7 +592,7 @@ function onPageLeave() {
   }
 }
 
-const subjectKeys = ["form.subject.1", "form.subject.2", "form.subject.3", "form.subject.4"];
+const subjectKeys = ["form.subject.1", "form.subject.2", "form.subject.3"];
 
 function fillSubjects() {
   const select = document.getElementById("campo-assunto");
@@ -546,14 +696,13 @@ function onTopClick() {
 }
 
 function setupBackToTop() {
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(function (entries) {
-      topButton.classList.toggle("visivel", entries[0].isIntersecting);
-    });
-    observer.observe(footer);
-  } else {
-    topButton.classList.add("visivel");
-  }
+  updateBackToTop();
+}
+
+function updateBackToTop() {
+  const aboutTop = document.getElementById("sobre").getBoundingClientRect().top;
+  const navigationBottom = navbar.getBoundingClientRect().bottom;
+  topButton.classList.toggle("visivel", aboutTop <= navigationBottom);
 }
 
 function onKeyDown(event) {
@@ -745,9 +894,21 @@ root.addEventListener("mouseleave", onPageLeave);
 window.addEventListener("scroll", onScroll);
 window.addEventListener("resize", onResize);
 window.addEventListener("load", onResize);
+document.addEventListener("click", onDetailCardClick);
+document.addEventListener("keydown", onDetailCardKeyDown);
+detailDialogClose.addEventListener("click", function () {
+  detailDialog.close();
+});
+detailDialog.addEventListener("click", function (event) {
+  if (event.target === detailDialog) {
+    detailDialog.close();
+  }
+});
 
 startCursor();
 applyTexts();
+updateMobileDetailTriggers();
+loadGithubProjects();
 setupReviewsWidget();
 setupBackToTop();
 updateScrollEffects();
