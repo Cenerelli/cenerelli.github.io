@@ -2135,13 +2135,6 @@ body {
 #competencias .linha-competencia:hover,
 #competencias .linha-competencia:focus-visible {
   flex-grow: 0;
-  transform: none;
-  scale: 1;
-  translate: 0;
-}
-#competencias .linha-competencia:hover .bloco-icone,
-#competencias .linha-competencia:focus-visible .bloco-icone {
-  transform: none;
 }
 #portfolio .projeto-pong:hover,
 #portfolio .projeto-pong:focus-visible {
@@ -2176,8 +2169,6 @@ body {
   opacity: 0.16;
   transform: none;
 }
-.linha-competencia:hover,
-.linha-competencia:focus-visible,
 .selo-servico:hover,
 .selo-servico:focus-visible {
   translate: 0 0;
@@ -2272,11 +2263,6 @@ body {
 }
 #competencias .cabecalho-competencia h3 {
   text-align: left;
-}
-#competencias .linha-competencia .bloco-icone {
-  transition:
-    background-color 0.9s var(--hover-ease),
-    color 0.9s var(--hover-ease);
 }
 @media (hover: hover) and (pointer: fine) and (min-width: 601px) {
   #competencias .corpo-competencia {
