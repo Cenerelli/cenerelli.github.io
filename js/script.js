@@ -2,11 +2,9 @@ const sectionIds = ["inicio", "sobre", "trajetoria", "competencias", "portfolio"
 const roleKeys = ["welcome.role1", "welcome.role2"];
 
 let language = "pt";
-let welcomeActive = true;
 let isSwitchingLanguage = false;
 
 const root = document.documentElement;
-const site = document.getElementById("conteudo-site");
 const navbar = document.getElementById("barra-navegacao");
 const hero = document.getElementById("inicio");
 const heroInner = document.getElementById("conteudo-inicio");
@@ -14,8 +12,6 @@ const scrollHint = document.querySelector(".dica-rolagem");
 const progressBar = document.getElementById("progresso-rolagem");
 const navLinks = document.querySelectorAll(".links-navegacao a");
 const earthIcons = document.querySelectorAll(".icone-terra");
-const welcome = document.getElementById("boas-vindas");
-const welcomeButton = document.getElementById("continuar-boas-vindas");
 const lead = document.querySelector(".introducao-sobre");
 const journeyCards = document.querySelectorAll(".cartao-trajetoria");
 const journeyPrev = document.getElementById("trajetoria-anterior");
@@ -200,16 +196,12 @@ function onEarthEnd(event) {
 }
 
 const typers = [
-  [document.getElementById("funcao-digitada-boas-vindas"), 0, 0, "typing", 0],
   [document.getElementById("funcao-digitada-inicio"), 0, 0, "typing", 0],
 ];
 
 function stepTyper(n, runId) {
   const typer = typers[n];
   if (runId !== typer[4]) {
-    return;
-  }
-  if (n === 0 && welcomeActive === false) {
     return;
   }
   const text = getText(roleKeys[typer[1] % roleKeys.length]);
@@ -305,9 +297,7 @@ function smoothStep(now) {
 
 function onGotoClick(event) {
   event.preventDefault();
-  if (welcomeActive === false) {
-    scrollToSection(event.currentTarget.getAttribute("data-goto"));
-  }
+  scrollToSection(event.currentTarget.getAttribute("data-goto"));
 }
 
 function stopSmooth() {
@@ -512,12 +502,12 @@ function updateMobileDetailTriggers() {
   const detailCards = document.querySelectorAll(".linha-competencia");
   let i = 0;
   while (i < detailCards.length) {
+    detailCards[i].removeAttribute("role");
+    detailCards[i].removeAttribute("aria-haspopup");
     if (mobileScreen.matches) {
-      detailCards[i].setAttribute("role", "button");
-      detailCards[i].setAttribute("aria-haspopup", "dialog");
+      detailCards[i].removeAttribute("tabindex");
     } else {
-      detailCards[i].removeAttribute("role");
-      detailCards[i].removeAttribute("aria-haspopup");
+      detailCards[i].setAttribute("tabindex", "0");
     }
     i = i + 1;
   }
@@ -539,19 +529,12 @@ function onDetailCardClick(event) {
   if (!mobileScreen.matches) {
     return;
   }
-  const card = event.target.closest(".linha-competencia");
-  if (card) {
-    openDetailDialog(card);
-  }
-}
-
-function onDetailCardKeyDown(event) {
-  if (!mobileScreen.matches || (event.key !== "Enter" && event.key !== " ")) {
+  const trigger = event.target.closest(".botao-detalhes-competencia");
+  if (!trigger) {
     return;
   }
-  const card = event.target.closest(".linha-competencia");
+  const card = trigger.closest(".linha-competencia");
   if (card) {
-    event.preventDefault();
     openDetailDialog(card);
   }
 }
@@ -705,51 +688,6 @@ function updateBackToTop() {
   topButton.classList.toggle("visivel", aboutTop <= navigationBottom);
 }
 
-function onKeyDown(event) {
-  switch (event.key) {
-    case "Enter":
-    case " ":
-      if (welcomeActive && document.activeElement !== welcomeButton) {
-        event.preventDefault();
-        welcomeButton.click();
-      }
-      break;
-    default:
-      break;
-  }
-}
-
-function onWelcomeButtonMove(event) {
-  if (event.pointerType !== "mouse") {
-    return;
-  }
-  const rect = welcomeButton.getBoundingClientRect();
-  welcomeButton.style.setProperty("--bx", ((event.clientX - rect.left - rect.width / 2) * 0.1).toFixed(1) + "px");
-  welcomeButton.style.setProperty("--by", ((event.clientY - rect.top - rect.height / 2) * 0.1).toFixed(1) + "px");
-}
-
-function onWelcomeButtonLeave() {
-  welcomeButton.style.setProperty("--bx", "0px");
-  welcomeButton.style.setProperty("--by", "0px");
-}
-
-function onWelcomeContinue() {
-  if (welcomeActive === false) {
-    return;
-  }
-  welcomeActive = false;
-  site.inert = false;
-  document.body.classList.remove("na-tela-boas-vindas");
-  welcome.classList.add("saindo");
-  updateScrollEffects();
-}
-
-function onWelcomeEnd(event) {
-  if (event.animationName === "welcome-out") {
-    welcome.remove();
-  }
-}
-
 const ARROW = "M6 6L28 14L18 18L14 28Z";
 const TIP = 6;
 const SMOOTHING = 0.5;
@@ -866,7 +804,6 @@ if (navigator.language.indexOf("pt") === 0) {
 } else {
   language = "en";
 }
-site.inert = true;
 document.getElementById("ano-atual").textContent = new Date().getFullYear();
 
 listen(document.querySelectorAll("[data-goto]"), "click", onGotoClick);
@@ -875,13 +812,8 @@ journeyNext.addEventListener("click", onJourneyNext);
 journeyPrev.addEventListener("click", onJourneyPrev);
 topButton.addEventListener("click", onTopClick);
 listen(earthIcons, "animationend", onEarthEnd);
-listen(document.querySelectorAll("#alternar-idioma, #idioma-boas-vindas"), "click", onLanguageClick);
-welcome.addEventListener("animationend", onWelcomeEnd);
-welcomeButton.addEventListener("pointermove", onWelcomeButtonMove);
-welcomeButton.addEventListener("pointerleave", onWelcomeButtonLeave);
-welcomeButton.addEventListener("click", onWelcomeContinue);
+listen(document.querySelectorAll("#alternar-idioma"), "click", onLanguageClick);
 document.addEventListener("pointermove", onTiltMove);
-document.addEventListener("keydown", onKeyDown, true);
 document.addEventListener("wheel", stopSmooth, { passive: true, capture: true });
 document.addEventListener("touchstart", stopSmooth);
 document.addEventListener("wheel", preventBrowserZoom, { passive: false, capture: true });
@@ -895,7 +827,6 @@ window.addEventListener("scroll", onScroll);
 window.addEventListener("resize", onResize);
 window.addEventListener("load", onResize);
 document.addEventListener("click", onDetailCardClick);
-document.addEventListener("keydown", onDetailCardKeyDown);
 detailDialogClose.addEventListener("click", function () {
   detailDialog.close();
 });
@@ -912,4 +843,3 @@ loadGithubProjects();
 setupReviewsWidget();
 setupBackToTop();
 updateScrollEffects();
-welcomeButton.focus({ preventScroll: true });

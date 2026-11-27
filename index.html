@@ -10,55 +10,9 @@
     <link rel="shortcut icon" href="assets/favicon.ico" />
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <link rel="preload" href="fonts/BricolageGrotesque-Variable.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="stylesheet" href="css/style.css?v=20261122-25" />
+    <link rel="stylesheet" href="css/style.css?v=20261127-1" />
   </head>
-  <body class="na-tela-boas-vindas">
-    <div id="boas-vindas" class="boas-vindas">
-      <button id="idioma-boas-vindas" class="botao-cabecalho idioma-boas-vindas" type="button" aria-label="Mudar idioma" data-i18n-aria="language.aria">
-        <svg class="icone-terra" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="9.5" />
-          <path d="M2.5 12h19" />
-          <path d="M12 2.5c2.6 2.6 4 5.9 4 9.5s-1.4 6.9-4 9.5c-2.6-2.6-4-5.9-4-9.5s1.4-6.9 4-9.5z" />
-        </svg>
-        <span class="rotulo-idioma">
-          <span class="opcao-idioma" data-language="pt">PT</span>
-          /
-          <span class="opcao-idioma" data-language="en">EN</span>
-        </span>
-      </button>
-      <div class="cartao-boas-vindas">
-        <p class="chamada-inicial-boas-vindas" data-i18n="welcome.kicker">Bem-vindo(a) ao meu site</p>
-        <h1 class="titulo-boas-vindas" aria-label="João Cenerelli">
-          <span class="palavra-boas-vindas">
-            <span class="letra" aria-hidden="true" style="--i:0">J</span>
-            <span class="letra" aria-hidden="true" style="--i:1">o</span>
-            <span class="letra" aria-hidden="true" style="--i:2">ã</span>
-            <span class="letra" aria-hidden="true" style="--i:3">o</span>
-          </span>
-          <span class="palavra-boas-vindas">
-            <span class="letra" aria-hidden="true" style="--i:4">C</span>
-            <span class="letra" aria-hidden="true" style="--i:5">e</span>
-            <span class="letra" aria-hidden="true" style="--i:6">n</span>
-            <span class="letra" aria-hidden="true" style="--i:7">e</span>
-            <span class="letra" aria-hidden="true" style="--i:8">r</span>
-            <span class="letra" aria-hidden="true" style="--i:9">e</span>
-            <span class="letra" aria-hidden="true" style="--i:10">l</span>
-            <span class="letra" aria-hidden="true" style="--i:11">l</span>
-            <span class="letra" aria-hidden="true" style="--i:12">i</span>
-          </span>
-        </h1>
-        <p class="funcao-boas-vindas">
-          <span id="funcao-digitada-boas-vindas"></span>
-          <i class="indicador"></i>
-        </p>
-        <button id="continuar-boas-vindas" class="botao-boas-vindas" type="button">
-          <span data-i18n="welcome.continue">Continuar</span>
-          <svg><use href="assets/icones.svg?v=20261122-3#icone-seta" /></svg>
-        </button>
-        <p class="dica-boas-vindas" data-i18n="welcome.hint">Passe o mouse para explorar</p>
-      </div>
-    </div>
-
+  <body>
     <div id="conteudo-site">
       <div class="progresso-rolagem" id="progresso-rolagem"></div>
 
@@ -185,7 +139,7 @@
                     <span class="indice-trajetoria">01</span>
                   </div>
                   <h3 data-i18n="about.m1.title">Aos 7 anos</h3>
-                  <p data-i18n="about.m1.text">Os videogames despertam meu interesse pela tecnologia. A rivalidade entre o meu Xbox 360 e o PlayStation 3 dos meus amigos me leva a pesquisar a fundo sobre hardware, benchmarks e arquitetura de sistemas.</p>
+                  <p data-i18n="about.m1.text">Os videogames despertaram meu interesse por tecnologia. A diferença entre meu Xbox 360 e o PlayStation 3 dos meus amigos me fazia querer entender como cada um funcionava.</p>
                 </article>
                 <article class="cartao-trajetoria" tabindex="0" data-tilt="3">
                   <div class="topo-trajetoria">
@@ -195,7 +149,7 @@
                     <span class="indice-trajetoria">02</span>
                   </div>
                   <h3 data-i18n="about.m2.title">Hardware na prática</h3>
-                  <p data-i18n="about.m2.text">Aprendo a montar e formatar computadores por conta própria e transformo o aprendizado no meu serviço autônomo, a Cenerelli Informática.</p>
+                  <p data-i18n="about.m2.text">Mais tarde, comecei a pesquisar sobre hardware, benchmarks e arquitetura de computadores. Aprendi a montar e formatar computadores por conta própria e transformei esse conhecimento no meu serviço autônomo, a Cenerelli Informática.</p>
                 </article>
                 <article class="cartao-trajetoria" tabindex="0" data-tilt="3">
                   <div class="topo-trajetoria">
@@ -280,6 +234,7 @@
                   <p data-i18n="skills.software.p1">Modelagem e documentação de sistemas: levantamento de requisitos funcionais e não funcionais, definição de regras de negócio e elaboração de diagramas UML e casos de uso.</p>
                   <p data-i18n="skills.software.p2">Conteúdo estudado e concluído no curso Técnico em Desenvolvimento de Sistemas do Senac, que sigo cursando.</p>
                 </div>
+                <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
               </div>
               <div class="linha-competencia" tabindex="0" data-tilt="3">
                 <svg class="marca-dagua"><use href="assets/icones.svg?v=20261122-3#icone-javascript" /></svg>
@@ -293,6 +248,7 @@
                   <p data-i18n="skills.web.p1">Desenvolvimento de sites e sistemas web com JavaScript, HTML e CSS, com versionamento de código em Git e GitHub e organização de projetos web.</p>
                   <p data-i18n="skills.web.p2">Certificado de 200 horas em programação e desenvolvimento web, em aprofundamento no curso Técnico em Desenvolvimento de Sistemas do Senac.</p>
                 </div>
+                <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
               </div>
               <div class="linha-competencia" tabindex="0" data-tilt="3">
                 <svg class="marca-dagua"><use href="assets/icones.svg?v=20261122-3#icone-banco-dados" /></svg>
@@ -306,6 +262,7 @@
                   <p data-i18n="skills.data.p1">Fundamentos de banco de dados e criação de dashboards em Power BI para análise de dados, aplicados na rotina do meu estágio.</p>
                   <p data-i18n="skills.data.p2">Certificado em fundamentos de banco de dados pela Fundação Bradesco, com módulo de banco de dados em andamento no Senac e evolução contínua em análise de dados.</p>
                 </div>
+                <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
               </div>
                 </div>
                 <div class="coluna-competencias">
@@ -321,6 +278,7 @@
                   <p data-i18n="skills.cloud.p1">Conceitos de computação em nuvem com Amazon Web Services, incluindo a organização da infraestrutura em zonas de disponibilidade e regiões.</p>
                   <p data-i18n="skills.cloud.p2">Curso Amazon sobre computação em nuvem, em andamento.</p>
                 </div>
+                <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
               </div>
               <div class="linha-competencia competencia-destaque" tabindex="0" data-tilt="3">
                 <svg class="marca-dagua"><use href="assets/icones.svg?v=20261122-3#icone-google-tradutor" /></svg>
@@ -331,6 +289,7 @@
                   <h3 data-i18n="skills.languages.title">Idiomas</h3>
                 </div>
                 <div class="corpo-competencia competencia-destaque-descricao competencia-texto-compacto"><p data-i18n="skills.languages.p1">Inglês em nível avançado, com certificado TOEFL ITP, e espanhol em nível básico.</p></div>
+                <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
               </div>
                 </div>
             </div>
@@ -343,16 +302,19 @@
                   <svg class="marca-dagua"><use href="assets/icones.svg?v=20261122-3#icone-ferramenta" /></svg>
                   <div class="cabecalho-competencia"><span class="bloco-icone"><svg><use href="assets/icones.svg?v=20261122-3#icone-ferramenta" /></svg></span><h3 data-i18n="svc.formatting.title">Formatação</h3></div>
                   <div class="corpo-competencia competencia-descricao-reduzida"><p data-i18n="svc.formatting.text">Instalação limpa do Windows 10 ou 11, com drivers atualizados, atualizações de segurança e programas essenciais. Se necessário, seus arquivos podem ser salvos e restaurados pelo serviço de backup.</p></div>
+                  <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
                 </div>
                 <div class="linha-competencia" tabindex="0" data-tilt="3">
                   <svg class="marca-dagua"><use href="assets/icones.svg?v=20261122-3#icone-velocimetro" /></svg>
                   <div class="cabecalho-competencia"><span class="bloco-icone"><svg><use href="assets/icones.svg?v=20261122-3#icone-velocimetro" /></svg></span><h3 data-i18n="svc.optimization.title">Otimização</h3></div>
                   <div class="corpo-competencia competencia-texto-compacto"><p data-i18n="svc.optimization.text">Removo arquivos e programas desnecessários, ajusto a inicialização e reviso o hardware para ajudar o computador a funcionar com mais rapidez.</p></div>
+                  <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
                 </div>
                 <div class="linha-competencia" tabindex="0" data-tilt="3">
                   <svg class="marca-dagua"><use href="assets/icones.svg?v=20261122-3#icone-nuvem" /></svg>
                   <div class="cabecalho-competencia"><span class="bloco-icone"><svg><use href="assets/icones.svg?v=20261122-3#icone-nuvem" /></svg></span><h3 data-i18n="svc.backup.title">Backup</h3></div>
                   <div class="corpo-competencia competencia-texto-compacto"><p data-i18n="svc.backup.text">Cópia de segurança dos seus arquivos importantes em HD externo ou nuvem, para você não perder fotos e documentos.</p></div>
+                  <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
                 </div>
                 </div>
                 <div class="coluna-competencias">
@@ -360,16 +322,19 @@
                   <svg class="marca-dagua"><use href="assets/icones.svg?v=20261122-3#icone-chave" /></svg>
                   <div class="cabecalho-competencia"><span class="bloco-icone"><svg><use href="assets/icones.svg?v=20261122-3#icone-chave" /></svg></span><h3 data-i18n="svc.activation.title">Ativação de Software</h3></div>
                   <div class="corpo-competencia competencia-texto-compacto"><p data-i18n="svc.activation.text">Ativação do Windows e de programas, deixando o sistema regularizado e sem avisos de ativação.</p></div>
+                  <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
                 </div>
                 <div class="linha-competencia" tabindex="0" data-tilt="3">
                   <svg class="marca-dagua"><use href="assets/icones.svg?v=20261122-3#icone-microsoft" /></svg>
                   <div class="cabecalho-competencia"><span class="bloco-icone"><svg><use href="assets/icones.svg?v=20261122-3#icone-microsoft" /></svg></span><h3 data-i18n="svc.office.title">Pacote Office</h3></div>
                   <div class="corpo-competencia competencia-texto-compacto"><p data-i18n="svc.office.text">Instalação e configuração do Word, Excel e PowerPoint, com ajuda para começar a usar e manter tudo atualizado.</p></div>
+                  <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
                 </div>
                 <div class="linha-competencia" tabindex="0" data-tilt="3">
                   <svg class="marca-dagua"><use href="assets/icones.svg?v=20261122-3#icone-faq" /></svg>
                   <div class="cabecalho-competencia"><span class="bloco-icone"><svg><use href="assets/icones.svg?v=20261122-3#icone-faq" /></svg></span><h3 data-i18n="svc.consulting.title">Consultoria</h3></div>
                   <div class="corpo-competencia"><p data-i18n="svc.consulting.text">Tiro dúvidas, ajudo a resolver problemas de TI e oriento na escolha de computadores, peças e softwares conforme sua necessidade e orçamento.</p></div>
+                  <button class="botao botao-secundario botao-detalhes-competencia" type="button" aria-haspopup="dialog" data-i18n="skills.details.cta">Ver descrição</button>
                 </div>
                 </div>
               </div>
@@ -543,7 +508,7 @@
         <span id="ano-atual">2026</span>
       </footer>
     </div>
-    <script src="js/texts.js?v=20261122-1"></script>
-    <script src="js/script.js?v=20261122-2"></script>
+    <script src="js/texts.js?v=20261127-1"></script>
+    <script src="js/script.js?v=20261127-1"></script>
   </body>
 </html>

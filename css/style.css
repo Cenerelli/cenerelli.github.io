@@ -34,11 +34,6 @@
   --card-shadow: 0 0.18rem 0 rgba(68, 48, 32, 0.14), 0 0.55rem 1rem rgba(68, 48, 32, 0.12), 0 1.1rem 1.8rem rgba(68, 48, 32, 0.09);
   --card-shadow-hover: 0 0.3rem 0 rgba(68, 48, 32, 0.18), 0 1rem 1.6rem rgba(68, 48, 32, 0.16), 0 1.7rem 2.6rem rgba(68, 48, 32, 0.12);
 
-  --welcome-gradient: linear-gradient(125deg, #ffdbbb 0%, #f0dfd0 52%, #ccbeb1 100%);
-  --welcome-text: #664930;
-  --welcome-button-bg: #fff3e8;
-  --welcome-button-text: #664930;
-
   --card-sunrise: linear-gradient(135deg, #ffdbbb 0%, #f6d5b8 52%, #ecc9ab 100%);
   --card-ocean: linear-gradient(135deg, #fff1e2 0%, #e9d8c9 48%, #ccbeb1 100%);
   --card-orchid: linear-gradient(135deg, #f8e9dc 0%, #e6d3c2 52%, #ccbeb1 100%);
@@ -59,7 +54,7 @@
   --primary-button-border: 0 solid transparent;
   --secondary-button-border: 0.06rem solid var(--hairline);
   --header-button-border: 0 solid transparent;
-  --welcome-button-border: 0 solid transparent;
+  --card-icon-border: 0 solid transparent;
   --navbar-border: 0.06rem solid var(--hairline);
 
   --card-radius: 2rem 1rem 2rem 1rem;
@@ -97,11 +92,6 @@
   --card-shadow: 0 0.18rem 0 rgba(0, 0, 0, 0.2), 0 0.55rem 1rem rgba(0, 0, 0, 0.18), 0 1.1rem 1.8rem rgba(0, 0, 0, 0.14);
   --card-shadow-hover: 0 0.3rem 0 rgba(0, 0, 0, 0.25), 0 1rem 1.6rem rgba(0, 0, 0, 0.22), 0 1.7rem 2.6rem rgba(0, 0, 0, 0.18);
 
-  --welcome-gradient: linear-gradient(125deg, #322d27 0%, #40372e 52%, #4e4031 100%);
-  --welcome-text: #e2e1eb;
-  --welcome-button-bg: #e2e1eb;
-  --welcome-button-text: #322d27;
-
   --card-sunrise: linear-gradient(135deg, #51463c 0%, #4a3c30 52%, #3b342e 100%);
   --card-ocean: linear-gradient(135deg, #4c4743 0%, #484039 48%, #3b342e 100%);
   --card-orchid: linear-gradient(135deg, #514943 0%, #4b4036 52%, #3b342e 100%);
@@ -132,9 +122,6 @@ body {
   transition:
     background 0.4s,
     color 0.4s;
-}
-body.na-tela-boas-vindas {
-  overflow: hidden;
 }
 svg {
   fill: currentColor;
@@ -719,6 +706,9 @@ img {
 .catalogo-servicos {
   margin-top: 1rem;
 }
+.botao-detalhes-competencia {
+  display: none;
+}
 .grupo-competencias + .grupo-competencias {
   margin-top: 2.5rem;
 }
@@ -864,115 +854,15 @@ img {
 
 main,
 .links-navegacao,
-.texto-rodape,
-.cartao-boas-vindas {
+.texto-rodape {
   transition: opacity 0.24s ease;
-}
-.cartao-boas-vindas {
-  transition: opacity 0.9s ease;
 }
 html.trocando-idioma main,
 html.trocando-idioma .links-navegacao,
-html.trocando-idioma .texto-rodape,
-html.trocando-idioma .cartao-boas-vindas {
+html.trocando-idioma .texto-rodape {
   opacity: 0;
 }
 
-.boas-vindas {
-  position: fixed;
-  inset: 0;
-  z-index: 9000;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  color: var(--welcome-text);
-  background: var(--welcome-gradient);
-  background-size: 200% 200%;
-  animation: welcome-bg 16s ease infinite;
-}
-@keyframes welcome-bg {
-  50% {
-    background-position: 100% 50%;
-  }
-}
-.boas-vindas::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(26rem 26rem at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.14), transparent 70%);
-}
-.boas-vindas.saindo {
-  animation: welcome-out 0.8s ease-in-out forwards;
-  pointer-events: none;
-  will-change: opacity, filter, transform;
-}
-@keyframes welcome-out {
-  to {
-    opacity: 0;
-    filter: blur(14px);
-    transform: scale(1.025);
-  }
-}
-.idioma-boas-vindas {
-  position: absolute;
-  top: 1.6rem;
-  right: 2.4rem;
-  color: var(--welcome-text);
-}
-.idioma-boas-vindas:hover {
-  background: rgba(127, 114, 101, 0.14);
-}
-.cartao-boas-vindas {
-  position: relative;
-  display: grid;
-  justify-items: center;
-  gap: 1.5rem;
-  padding: 3rem;
-  text-align: center;
-}
-.chamada-inicial-boas-vindas {
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.85;
-}
-.titulo-boas-vindas {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0 2.2rem;
-  font-size: 8rem;
-  font-weight: 800;
-  line-height: 1.05;
-}
-.palavra-boas-vindas {
-  display: inline-flex;
-}
-.letra {
-  display: inline-block;
-  animation: letter-in 0.45s both;
-  animation-delay: calc(var(--i) * 35ms);
-  transition:
-    transform 0.25s ease,
-    color 0.25s ease;
-}
-.letra:hover {
-  transform: translateY(-0.25rem) scale(1.04);
-  color: var(--accent);
-}
-@keyframes letter-in {
-  from {
-    opacity: 0;
-    translate: 0 1rem;
-  }
-}
-.funcao-boas-vindas {
-  min-height: 3.2rem;
-  font-size: 2.1rem;
-  font-weight: 600;
-}
 .indicador {
   display: inline-block;
   width: 0.2em;
@@ -986,42 +876,6 @@ html.trocando-idioma .cartao-boas-vindas {
   50% {
     opacity: 0;
   }
-}
-.botao-boas-vindas {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 0.8rem;
-  padding: 1.2rem 2.8rem;
-  border: 0;
-  border-radius: var(--radius-sm);
-  background: var(--welcome-button-bg);
-  color: var(--welcome-button-text);
-  font:
-    800 1.6rem "Bricolage Grotesque",
-    sans-serif;
-  translate: var(--bx, 0) var(--by, 0);
-  transition:
-    translate 0.2s ease-out,
-    scale 0.25s,
-    background 0.3s;
-}
-.botao-boas-vindas svg {
-  width: 1.8rem;
-  height: 1.8rem;
-  transition: translate 0.25s;
-}
-.botao-boas-vindas:hover {
-  scale: 1.06;
-  filter: brightness(1.06);
-}
-.botao-boas-vindas:hover svg {
-  translate: 0.4rem 0;
-}
-.dica-boas-vindas {
-  font-size: 1rem;
-  opacity: 0.7;
 }
 
 html.ponteiro-personalizado,
@@ -1383,9 +1237,6 @@ body {
   border-color: var(--accent);
   box-shadow: none;
 }
-.boas-vindas::before {
-  content: none;
-}
 ::selection {
   background: var(--accent);
   color: #fff;
@@ -1415,10 +1266,8 @@ body {
 .botao,
 .botao-cabecalho,
 .links-navegacao a,
-.botao-boas-vindas,
 .chamada-acao,
-.botao svg,
-.botao-boas-vindas svg {
+.botao svg {
   transition-duration: 0.9s;
   transition-timing-function: var(--hover-ease);
 }
@@ -1743,47 +1592,6 @@ body {
     align-items: flex-start;
     flex-direction: column;
   }
-  .titulo-boas-vindas {
-    font-size: clamp(3rem, 13vw, 4.6rem);
-    gap: 0 0.45rem;
-  }
-  .cartao-boas-vindas {
-    width: min(100%, 30rem);
-    gap: 0.85rem;
-    padding: 1.25rem 0.5rem;
-  }
-  .chamada-inicial-boas-vindas {
-    font-size: 0.8rem;
-  }
-  .boas-vindas {
-    background-size: cover;
-    animation: none;
-  }
-  .boas-vindas.saindo {
-    animation: welcome-out-mobile 0.35s ease forwards;
-  }
-  @keyframes welcome-out-mobile {
-    to {
-      opacity: 0;
-    }
-  }
-  .letra {
-    animation: none;
-  }
-  .letra:hover {
-    transform: translateY(-0.12rem);
-  }
-  .funcao-boas-vindas {
-    min-height: 2rem;
-    font-size: 1.35rem;
-  }
-  .botao-boas-vindas {
-    font-size: 1.25rem;
-    padding: 1rem 1.8rem;
-  }
-  .dica-boas-vindas {
-    display: none;
-  }
 }
 
 @media (hover: none) {
@@ -1916,7 +1724,7 @@ body {
 .linha-competencia .bloco-icone {
   background: var(--card-icon-bg);
   color: var(--card-icon-text);
-  border: var(--welcome-button-border);
+  border: var(--card-icon-border);
   box-shadow: 0 0.3rem 0.8rem rgba(50, 45, 39, 0.14);
   transition:
     transform 0.9s var(--hover-ease),
@@ -2427,6 +2235,14 @@ body {
   #competencias .lista-competencias {
     grid-template-columns: 1fr;
     row-gap: 0.9rem;
+  }
+  #competencias .linha-competencia .corpo-competencia {
+    display: none;
+  }
+  #competencias .linha-competencia .botao-detalhes-competencia {
+    display: inline-flex;
+    justify-self: start;
+    margin-top: 0.65rem;
   }
   #competencias .competencia-destaque .cabecalho-competencia h3 {
     font-size: 1.4rem;
